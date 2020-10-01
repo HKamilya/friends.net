@@ -12,32 +12,33 @@
     <title>User Page</title>
 </head>
 <% //In case, if User session is not set, redirect to Login page.
-    if((request.getSession(false).getAttribute("User")== null) )
-    {
+    if ((request.getSession(false).getAttribute("User") == null)) {
 %>
 <jsp:forward page="/Login.jsp"></jsp:forward>
 <%} %>
 <body>
 <header>
-    <nav>
-        <a href="AddEvent.jsp">Создать мероприятие</a>
-        <a href="">Поиск</a>
-        <a href="">Все мероприятия</a>
-        <a href="">Случайное мероприятие</a>
-        <a href="Register.jsp">Регистрация</a>
-        <%
-            if(session.getAttribute("User")!=null){
-                out.println("<a href=\"#\">" + (String)session.getAttribute("User")+"</a>");
-            }
-            else{
-                out.println("<a href=\"/LoginServlet\">Login</a>");
-            }
-        %>    </nav>
+    <% if (session.getAttribute("User") != null) {%>
+    <a href="AddEvent.jsp">Создать мероприятие</a>
+    <%}%>
+    <a href="">Поиск</a>
+    <a href="${pageContext.request.contextPath}/AllEventsServlet">Все мероприятия</a>
+    <a href="${pageContext.request.contextPath}/RandomEventServlet">Случайное мероприятие</a>
+    <% if (session.getAttribute("User") == null) {%>
+    <a href="Register.jsp">Регистрация</a>
+    <%}%>
+    <%
+        if (session.getAttribute("User") != null) {
+            out.println("<a href=\"#\">" + (String) session.getAttribute("User") + "</a>");
+        } else {
+            out.println("<a href=\"Login.jsp\">Войти</a>");
+        }
+        if (session.getAttribute("User") != null) {%>
+    <a href="<%=request.getContextPath()%>/LogoutServlet">Выйти</a>
+    <%}%>
 </header>
-<center><h2>User's Home</h2></center>
-Welcome <%=request.getAttribute("username") %>
-
-<div style="text-align: right"><a href="<%=request.getContextPath()%>/LogoutServlet">Logout</a></div>
-
+<h2>User's Home</h2>
+Welcome
+<%=request.getAttribute("username") %>
 </body>
 </html>

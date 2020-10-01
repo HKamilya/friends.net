@@ -13,6 +13,27 @@
     <title>Login</title>
 </head>
 <body>
+<header>
+    <nav>
+        <% if (session.getAttribute("User") != null) {%>
+        <a href="${pageContext.request.contextPath}/AddEventServlet">Создать мероприятие</a>
+        <%}%>
+        <a href="">Поиск</a>
+        <a href="${pageContext.request.contextPath}/AllEventsServlet">Все мероприятия</a>
+        <a href="${pageContext.request.contextPath}/RandomEventServlet">Случайное мероприятие</a>
+        <a href="Register.jsp">Регистрация</a>
+        <%
+            if (session.getAttribute("User") != null) {
+                out.println("<a href=\"#\">" + (String) session.getAttribute("User") + "</a>");
+            } else {
+                out.println("<a href=\"/LoginServlet\">Войти</a>");
+            }
+        %><a href="<%=request.getContextPath()%>/LogoutServlet">Logout</a>
+        <%
+            if (session.getAttribute("User") != null) {%>
+        <%}%>
+    </nav>
+</header>
 <form name="form" action="<%=request.getContextPath()%>/LoginServlet" method="post">
 
     <table align="center">

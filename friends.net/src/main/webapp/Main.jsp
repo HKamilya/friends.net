@@ -13,21 +13,23 @@
 <body>
 <header>
     <nav>
+        <% if (session.getAttribute("User") != null) {%>
+        <a href="${pageContext.request.contextPath}/AddEventServlet">Создать мероприятие</a>
+        <%}%>
         <a href="">Поиск</a>
-        <a href="">Все мероприятия</a>
+        <a href="${pageContext.request.contextPath}/AllEventsServlet">Все мероприятия</a>
         <a href="${pageContext.request.contextPath}/RandomEventServlet">Случайное мероприятие</a>
         <a href="Register.jsp">Регистрация</a>
         <%
-            if(session.getAttribute("User")!=null){
-                out.println("<a href=\"#\">" + (String)session.getAttribute("User")+"</a>");
-            }
-            else{
+            if (session.getAttribute("User") != null) {
+                out.println("<a href=\"#\">" + (String) session.getAttribute("User") + "</a>");
+            } else {
                 out.println("<a href=\"Login.jsp\">Войти</a>");
             }
-        %>
+            if (session.getAttribute("User") != null) {%>
+        <a href="<%=request.getContextPath()%>/LogoutServlet">Выйти</a>
+        <%}%>
     </nav>
 </header>
-
-</div>
 </body>
 </html>
