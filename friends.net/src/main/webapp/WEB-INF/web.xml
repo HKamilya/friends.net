@@ -71,5 +71,25 @@
         <servlet-name>AllEventsServlet</servlet-name>
         <url-pattern>/AllEventsServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <description></description>
+        <display-name>EventServlet</display-name>
+        <servlet-name>EventServlet</servlet-name>
+        <servlet-class>ru.mvc.controller.EventServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EventServlet</servlet-name>
+        <url-pattern>/EventServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <description></description>
+        <display-name>AddReviewServlet</display-name>
+        <servlet-name>AddReviewServlet</servlet-name>
+        <servlet-class>ru.mvc.controller.AddReviewServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddReviewServlet</servlet-name>
+        <url-pattern>/AddReviewServlet</url-pattern>
+    </servlet-mapping>
 
 </web-app>

@@ -1,16 +1,15 @@
-<%--
+<%@ page import="ru.mvc.bean.Review" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: gipot
-  Date: 27.09.2020
-  Time: 23:09
+  Date: 01.10.2020
+  Time: 21:03
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Login</title>
+    <title>Event</title>
 </head>
 <body>
 <header>
@@ -34,25 +33,17 @@
         <%}%>
     </nav>
 </header>
-<form name="form" action="<%=request.getContextPath()%>/LoginServlet" method="post">
-
-    <table align="center">
-        <tr>
-            <td>Username</td>
-            <td><input type="text" name="username" /></td>
-        </tr>
-        <tr>
-            <td>Password</td>
-            <td><input type="password" name="password" /></td>
-        </tr>
-        <tr>
-            <td><span style="color:red"><%=(request.getAttribute("errMessage") == null) ? "" : request.getAttribute("errMessage")%></span></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td><input type="submit" value="Login"></input><input type="reset" value="Reset"></input></td>
-        </tr>
-    </table>
-</form>
+<p>Name: ${name}</p>
+<p>City: ${city}</p>
+<p>Address: ${street}, ${house}</p>
+<p>image: ${image}</p>
+<p>description: ${description}</p>
+<%--<ul><% List<Review> names = (List<Review>) request.getAttribute("list");--%>
+<%--    if (names != null && !names.isEmpty()) {--%>
+<%--        for (Review s : names) {%>--%>
+<%--   <p><%out.print(s.getReview());%></p>--%>
+<%--    <% }--%>
+<%--    }%>--%>
+<%--</ul>--%>
 </body>
 </html>
