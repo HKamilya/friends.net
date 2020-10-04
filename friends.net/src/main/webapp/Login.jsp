@@ -26,7 +26,7 @@
             if (session.getAttribute("User") != null) {
                 out.println("<a href=\"#\">" + (String) session.getAttribute("User") + "</a>");
             } else {
-                out.println("<a href=\"/LoginServlet\">Войти</a>");
+                out.println("<a href=\"/Login.jsp\">Войти</a>");
             }
         %><%
         if (session.getAttribute("User") != null) {%>

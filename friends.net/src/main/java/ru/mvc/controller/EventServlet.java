@@ -23,6 +23,7 @@ public class EventServlet extends HttpServlet {
         EventDao eventDao = new EventDao();
         Integer id = Integer.parseInt(req.getParameter("id"));
         Events event = eventDao.getEvent(id);
+        req.setAttribute("event_id", id);
         req.setAttribute("name", event.getName());
         req.setAttribute("city", event.getCity());
         req.setAttribute("street", event.getStreet());
@@ -31,9 +32,9 @@ public class EventServlet extends HttpServlet {
         req.setAttribute("description", event.getDescription());
         req.setAttribute("category", event.getCategory());
 
-//        ReviewDao reviewDao = new ReviewDao();
-//        List<Review> reviews = reviewDao.getReviews(id);
-//        req.setAttribute("list", reviews);
+        ReviewDao reviewDao = new ReviewDao();
+        List<Review> reviews = reviewDao.getReviews(id);
+        req.setAttribute("list", reviews);
         getServletContext().getRequestDispatcher("/Event.jsp").forward(req, resp);
 
 

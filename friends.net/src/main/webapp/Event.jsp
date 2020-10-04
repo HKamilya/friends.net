@@ -25,7 +25,7 @@
             if (session.getAttribute("User") != null) {
                 out.println("<a href=\"#\">" + (String) session.getAttribute("User") + "</a>");
             } else {
-                out.println("<a href=\"/LoginServlet\">Войти</a>");
+                out.println("<a href=\"/Login.jsp\">Войти</a>");
             }
         %><%
         if (session.getAttribute("User") != null) {%>
@@ -45,5 +45,29 @@
 <%--    <% }--%>
 <%--    }%>--%>
 <%--</ul>--%>
+<%
+    if (session.getAttribute("User") != null) {%>
+<form name="form" action="AddReviewServlet" method="post" onsubmit="return validate()">
+    <table align="center">
+        <tr>
+            <td>Review</td>
+            <td><label>
+                <input type="text" name="review"/>
+            </label></td>
+            <input type="hidden" name="event_id" value="${event_id}">
+        </tr>
+        <tr>
+            <td><%=(request.getAttribute("errMessage") == null) ? ""
+                    : request.getAttribute("errMessage")%>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Register"></input><input
+                    type="reset" value="Reset"></input></td>
+        </tr>
+    </table>
+</form>
+<%}%>
 </body>
 </html>

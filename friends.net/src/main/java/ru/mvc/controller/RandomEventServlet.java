@@ -20,6 +20,7 @@ public class RandomEventServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         EventDao eventDao = new EventDao();
         Events event = eventDao.getRandomEvent();
+        req.setAttribute("event_id", event.getId());
         req.setAttribute("name", event.getName());
         req.setAttribute("city", event.getCity());
         req.setAttribute("street", event.getStreet());
@@ -27,6 +28,7 @@ public class RandomEventServlet extends HttpServlet {
         req.setAttribute("image", event.getImage());
         req.setAttribute("description", event.getDescription());
         req.setAttribute("category", event.getCategory());
+
         ReviewDao reviewDao = new ReviewDao();
         List<Review> reviews = reviewDao.getReviews(event.getId());
         req.setAttribute("list", reviews);
