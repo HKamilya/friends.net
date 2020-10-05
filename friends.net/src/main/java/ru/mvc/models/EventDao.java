@@ -17,7 +17,7 @@ public class EventDao {
         String house = events.getHouse();
         String image = events.getImage();
         String description = events.getDescription();
-        int category = events.getCategory();
+        int category_id = events.getCategory();
         String status = events.getStatus();
 
 
@@ -37,7 +37,7 @@ public class EventDao {
                 user_id = result.getInt(1);
             }
             System.out.println(user_id);
-            String query = "insert into events(user_id,name,city,street,house,image,description,category,status) values (?,?,?,?,?,?,?,?,?)"; //Insert user details into the table 'USERS'
+            String query = "insert into events(user_id,name,city,street,house,image,description,category_id,status) values (?,?,?,?,?,?,?,?,?)"; //Insert user details into the table 'USERS'
             preparedStatement = con.prepareStatement(query); //Making use of prepared statements here to insert bunch of data
             preparedStatement.setInt(1, user_id);
             preparedStatement.setString(2, name);
@@ -46,7 +46,7 @@ public class EventDao {
             preparedStatement.setString(5, house);
             preparedStatement.setString(6, image);
             preparedStatement.setString(7, description);
-            preparedStatement.setInt(8, category);
+            preparedStatement.setInt(8, category_id);
             preparedStatement.setString(9, status);
 
             int i = preparedStatement.executeUpdate();

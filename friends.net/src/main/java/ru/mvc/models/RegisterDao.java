@@ -20,7 +20,7 @@ public class RegisterDao {
          {
              con = DBConnection.createConnection();
              String query = "insert into users(fullname,email,username,password) values (?,?,?,?)"; //Insert user details into the table 'USERS'
-             preparedStatement = con.prepareStatement(query); //Making use of prepared statements here to insert bunch of data
+             preparedStatement = con.prepareStatement(query);
              preparedStatement.setString(1, fullName);
              preparedStatement.setString(2, email);
              preparedStatement.setString(3, userName);
@@ -35,6 +35,7 @@ public class RegisterDao {
          {
             e.printStackTrace();
          }       
-         return "Oops.. Something went wrong there..!";  // On failure, send a message from here.
+         return "Oops.. Something went wrong there..!";
+
      }
 }

@@ -22,7 +22,7 @@ public class RegisterServlet extends HttpServlet {
          String password = request.getParameter("password");
           
          Users users = new Users();
-        //Using Java Beans - An easiest way to play with group of related data
+
          users.setFullName(fullName);
          users.setEmail(email);
          users.setUserName(username);
@@ -30,10 +30,9 @@ public class RegisterServlet extends HttpServlet {
           
          RegisterDao registerDao = new RegisterDao();
           
-        //The core Logic of the Registration application is present here. We are going to insert user data in to the database.
-         String userRegistered = registerDao.registerUser(users);
+          String userRegistered = registerDao.registerUser(users);
           
-         if(userRegistered.equals("SUCCESS"))   //On success, you can display a message to user on Home page
+         if(userRegistered.equals("SUCCESS"))
          {
              HttpSession session = request.getSession();
              session.setMaxInactiveInterval(10*60);

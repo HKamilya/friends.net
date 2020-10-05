@@ -20,20 +20,18 @@ public class AddReviewServlet extends HttpServlet {
         int event_id = Integer.parseInt(request.getParameter("event_id"));
 
         Review review = new Review();
-        //Using Java Beans - An easiest way to play with group of related data
+
         review.setEvent_id(event_id);
         review.setText(rev);
+        review.setEvent_id(event_id);
 
         ReviewDao reviewDao = new ReviewDao();
 
-        //The core Logic of the Registration application is present here. We are going to insert user data in to the database.
         String reviewAdded = reviewDao.addReview(username, review);
 
-        if (reviewAdded.equals("SUCCESS"))   //On success, you can display a message to user on Home page
-        {
+        if (reviewAdded.equals("SUCCESS")) {
             request.getRequestDispatcher("/Event.jsp").forward(request, response);
-        } else   //On Failure, display a meaningful message to the User.
-        {
+        } else {
             request.setAttribute("errMessage", reviewDao);
             request.getRequestDispatcher("/Event.jsp").forward(request, response);
         }

@@ -53,5 +53,5 @@ public class LoginServlet extends HttpServlet {
         {
             e1.printStackTrace();
         }
-    } //End of doPost()
+    }
 }

@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>AllEvents</title>
 </head>
 <body>
 <header>
@@ -37,7 +37,7 @@
 <ul><% List<Events> names = (List<Events>) request.getAttribute("list");
     if (names != null && !names.isEmpty()) {
         for (Events s : names) {%>
-    <a href="${pageContext.request.contextPath}/EventServlet?id=<%out.println(s.getId());%>"><%out.println(s.getName());%></a>
+    <a href="${pageContext.request.contextPath}/EventServlet?id=<%out.println(s.getId());%>"><%out.println(s.getName());%></a><br>
     <% }
     }%>
 </ul>

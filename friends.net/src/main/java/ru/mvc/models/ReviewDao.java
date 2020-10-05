@@ -60,7 +60,7 @@ public class ReviewDao {
             preparedStatement = con.prepareStatement(query); //Making use of prepared statements here to insert bunch of data
             preparedStatement.setInt(1, user_id);
             preparedStatement.setInt(2, event_id);
-            preparedStatement.setString(2, text);
+            preparedStatement.setString(3, text);
 
 
             int i = preparedStatement.executeUpdate();

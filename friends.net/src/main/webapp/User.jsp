@@ -14,12 +14,12 @@
 <% //In case, if User session is not set, redirect to Login page.
     if ((request.getSession(false).getAttribute("User") == null)) {
 %>
-<jsp:forward page="/Login.jsp"></jsp:forward>
+<jsp:forward page="Login.jsp"></jsp:forward>
 <%} %>
 <body>
 <header>
     <% if (session.getAttribute("User") != null) {%>
-    <a href="AddEvent.jsp">Создать мероприятие</a>
+    <a href="${pageContext.request.contextPath}/AddEventServlet">Создать мероприятие</a>
     <%}%>
     <a href="">Поиск</a>
     <a href="${pageContext.request.contextPath}/AllEventsServlet">Все мероприятия</a>
