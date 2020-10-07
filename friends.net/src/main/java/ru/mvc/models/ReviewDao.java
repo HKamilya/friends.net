@@ -17,7 +17,7 @@ public class ReviewDao {
         ResultSet resultSet = null;
         try {
             con = DBConnection.createConnection();
-            String sql = "SELECT * FROM review where event_id=" + id;
+            String sql = "SELECT * FROM users INNER JOIN review ON users.id=review.user_id where event_id=" + id;
             statement = con.createStatement();
             resultSet = statement.executeQuery(sql);
 
@@ -25,8 +25,9 @@ public class ReviewDao {
                 int user_id = resultSet.getInt("user_id");
                 int event_id = resultSet.getInt("event_id");
                 String text = resultSet.getString("text");
+                String username = resultSet.getString("username");
 
-                Review review = new Review(user_id, event_id, text);
+                Review review = new Review(user_id, event_id, text, username);
                 reviews.add(review);
             }
         } catch (
@@ -72,5 +73,4 @@ public class ReviewDao {
         }
         return "Oops.. Something went wrong there..!";  // On failure, send a message from here.
     }
-
 }

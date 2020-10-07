@@ -28,12 +28,13 @@ public class RandomEventServlet extends HttpServlet {
         req.setAttribute("image", event.getImage());
         req.setAttribute("description", event.getDescription());
         req.setAttribute("category", event.getCategory());
+        req.setAttribute("date", event.getDatetime());
 
         ReviewDao reviewDao = new ReviewDao();
         List<Review> reviews = reviewDao.getReviews(event.getId());
-        req.setAttribute("list", reviews);
-
+        req.setAttribute("reviewsList", reviews);
         getServletContext().getRequestDispatcher("/Event.jsp").forward(req, resp);
+
     }
 
     @Override

@@ -15,6 +15,7 @@ public class EventDao {
         String city = events.getCity();
         String street = events.getStreet();
         String house = events.getHouse();
+        String date = events.getDatetime();
         String image = events.getImage();
         String description = events.getDescription();
         int category_id = events.getCategory();
@@ -37,7 +38,7 @@ public class EventDao {
                 user_id = result.getInt(1);
             }
             System.out.println(user_id);
-            String query = "insert into events(user_id,name,city,street,house,image,description,category_id,status) values (?,?,?,?,?,?,?,?,?)"; //Insert user details into the table 'USERS'
+            String query = "insert into events(user_id,name,city,street,house,image,description,category_id,status,date) values (?,?,?,?,?,?,?,?,?,?)"; //Insert user details into the table 'USERS'
             preparedStatement = con.prepareStatement(query); //Making use of prepared statements here to insert bunch of data
             preparedStatement.setInt(1, user_id);
             preparedStatement.setString(2, name);
@@ -48,7 +49,7 @@ public class EventDao {
             preparedStatement.setString(7, description);
             preparedStatement.setInt(8, category_id);
             preparedStatement.setString(9, status);
-
+            preparedStatement.setString(10, date);
             int i = preparedStatement.executeUpdate();
 
             if (i != 0)  //Just to ensure data has been inserted into the database
@@ -82,8 +83,9 @@ public class EventDao {
                 String description = resultSet.getString("description");
                 int category_id = resultSet.getInt("category_id");
                 String status = resultSet.getString("status");
+                String date = resultSet.getString("date");
 
-                Events event = new Events(id, user_id, name, city, street, house, image, description, category_id, status);
+                Events event = new Events(id, user_id, name, city, street, house, date, image, description, category_id, status);
 
                 events.add(event);
             }
@@ -119,8 +121,9 @@ public class EventDao {
                 String description = resultSet.getString("description");
                 int category_id = resultSet.getInt("category_id");
                 String status = resultSet.getString("status");
+                String date = resultSet.getString("date");
 
-                Events event = new Events(id, user_id, name, city, street, house, image, description, category_id, status);
+                Events event = new Events(id, user_id, name, city, street, house, date, image, description, category_id, status);
 
                 events.add(event);
             }
@@ -152,8 +155,9 @@ public class EventDao {
                 String description = resultSet.getString("description");
                 int category_id = resultSet.getInt("category_id");
                 String status = resultSet.getString("status");
+                String date = resultSet.getString("date");
 
-                Events event = new Events(id, user_id, name, city, street, house, image, description, category_id, status);
+                Events event = new Events(id, user_id, name, city, street, house,date, image, description, category_id, status);
 
                 events.add(event);
             }

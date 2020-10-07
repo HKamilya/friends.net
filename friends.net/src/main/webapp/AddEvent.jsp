@@ -10,6 +10,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>AddEvent</title>
 </head>
 <% //In case, if User session is not set, redirect to Login page.
@@ -17,53 +18,41 @@
 %>
 <jsp:forward page="/Login.jsp"></jsp:forward>
 <%} %>
-<body>
+<body style="background: #6b6b6b">
 <header>
-    <nav>
-        <% if (session.getAttribute("User") != null) {%>
-        <a href="${pageContext.request.contextPath}/AddEventServlet">Создать мероприятие</a>
-        <%}%>
-        <a href="">Поиск</a>
-        <a href="${pageContext.request.contextPath}/AllEventsServlet">Все мероприятия</a>
-        <a href="${pageContext.request.contextPath}/RandomEventServlet">Случайное мероприятие</a>
-        <a href="Register.jsp">Регистрация</a>
-        <%
-            if (session.getAttribute("User") != null) {
-                out.println("<a href=\"#\">" + (String) session.getAttribute("User") + "</a>");
-            } else {
-                out.println("<a href=\"Login.jsp\">Войти</a>");
-            }
-        %><%
-        if (session.getAttribute("User") != null) {%>
-        <a href="<%=request.getContextPath()%>/LogoutServlet">Logout</a>
-        <%}%>
-    </nav>
+    <jsp:include page="Header.jsp" />
 </header>
 
 <form name="form" action="AddEventServlet" method="post" onsubmit="return validate()">
     <table align="center">
         <tr>
-            <td>Name</td>
+            <td>Название</td>
             <td><label>
                 <input type="text" name="name"/>
             </label></td>
         </tr>
         <tr>
-            <td>City</td>
+            <td>Город</td>
             <td><label>
                 <input type="text" name="city"/>
             </label></td>
         </tr>
         <tr>
-            <td>Street</td>
+            <td>Улица</td>
             <td><label>
                 <input type="text" name="street"/>
             </label></td>
         </tr>
         <tr>
-            <td>House</td>
+            <td>Дом</td>
             <td><label>
                 <input type="text" name="house"/>
+            </label></td>
+        </tr>
+        <tr>
+            <td>Дата</td>
+            <td><label>
+                <input type="date" name="date"/>
             </label></td>
         </tr>
         <tr>
@@ -73,13 +62,13 @@
             </label></td>
         </tr>
         <tr>
-            <td>Description</td>
+            <td>Описание</td>
             <td><label>
                 <input type="text" name="description"/>
             </label></td>
         </tr>
         <tr>
-            <td>Category</td>
+            <td>Категория</td>
             <td>
                 <label>
                     <select name="category"><% List<Categories> names = (List<Categories>) request.getAttribute("list");

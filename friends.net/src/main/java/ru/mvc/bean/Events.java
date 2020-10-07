@@ -7,6 +7,7 @@ public class Events {
     private String city;
     private String street;
     private String house;
+    private String datetime;
     private String image;
     private String description;
     private int category;
@@ -22,6 +23,20 @@ public class Events {
         this.city = city;
         this.street = street;
         this.house = house;
+        this.image = image;
+        this.description = description;
+        this.category = category;
+        this.status = status;
+    }
+
+    public Events(int id, int user_id, String name, String city, String street, String house, String datetime, String image, String description, int category, String status) {
+        this.id = id;
+        this.user_id = user_id;
+        this.name = name;
+        this.city = city;
+        this.street = street;
+        this.house = house;
+        this.datetime = datetime;
         this.image = image;
         this.description = description;
         this.category = category;
@@ -106,5 +121,13 @@ public class Events {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getDatetime() {
+        return datetime;
+    }
+
+    public void setDatetime(String datetime) {
+        this.datetime = datetime;
     }
 }

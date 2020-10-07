@@ -4,6 +4,7 @@ public class Review {
     private int event_id;
     private int user_id;
     private String text;
+    private String username;
 
     public Review() {
     }
@@ -12,6 +13,13 @@ public class Review {
         this.event_id = event_id;
         this.user_id = user_id;
         this.text = text;
+    }
+
+    public Review(int event_id, int user_id, String text, String username) {
+        this.event_id = event_id;
+        this.user_id = user_id;
+        this.text = text;
+        this.username = username;
     }
 
     public int getEvent_id() {
@@ -36,5 +44,13 @@ public class Review {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
