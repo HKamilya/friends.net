@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import ru.mvc.bean.Users;
-import ru.mvc.models.RegisterDao;
- 
+import ru.mvc.models.UserDao;
+
 public class RegisterServlet extends HttpServlet {
   
      public RegisterServlet() {
@@ -28,7 +28,7 @@ public class RegisterServlet extends HttpServlet {
          users.setUserName(username);
          users.setPassword(password);
           
-         RegisterDao registerDao = new RegisterDao();
+         UserDao registerDao = new UserDao();
           
           String userRegistered = registerDao.registerUser(users);
           
@@ -42,8 +42,7 @@ public class RegisterServlet extends HttpServlet {
              request.getRequestDispatcher("/User.jsp").forward(request, response);
             request.getRequestDispatcher("/User.jsp").forward(request, response);
          }
-         else   //On Failure, display a meaningful message to the User.
-         {
+         else    {
             request.setAttribute("errMessage", userRegistered);
             request.getRequestDispatcher("/Register.jsp").forward(request, response);
          }

@@ -1,7 +1,7 @@
 package ru.mvc.controller;
 
 import ru.mvc.bean.Users;
-import ru.mvc.models.LoginDao;
+import ru.mvc.models.UserDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -26,7 +26,7 @@ public class LoginServlet extends HttpServlet {
         loginBean.setUserName(username);
         loginBean.setPassword(password);
 
-        LoginDao loginDao = new LoginDao();
+        UserDao loginDao = new UserDao();
         try
         {
             String userValidate = loginDao.authenticateUser(loginBean);

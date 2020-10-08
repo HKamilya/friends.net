@@ -7,12 +7,11 @@ import ru.mvc.models.EventDao;
 import ru.mvc.models.RequestDao;
 import ru.mvc.models.ReviewDao;
 
-import javax.servlet.RequestDispatcher;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.awt.*;
 import java.io.IOException;
 import java.util.List;
 

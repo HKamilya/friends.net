@@ -1,10 +1,9 @@
 package ru.mvc.models;
 
-import ru.mvc.bean.Categories;
+
 import ru.mvc.bean.Events;
 import ru.mvc.util.DBConnection;
 
-import java.awt.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,12 +51,12 @@ public class EventDao {
             preparedStatement.setString(10, date);
             int i = preparedStatement.executeUpdate();
 
-            if (i != 0)  //Just to ensure data has been inserted into the database
+            if (i != 0)
                 return "SUCCESS";
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return "Oops.. Something went wrong there..!";  // On failure, send a message from here.
+        return "Something went wrong";
     }
 
     public Events getRandomEvent() {
@@ -157,7 +156,7 @@ public class EventDao {
                 String status = resultSet.getString("status");
                 String date = resultSet.getString("date");
 
-                Events event = new Events(id, user_id, name, city, street, house,date, image, description, category_id, status);
+                Events event = new Events(id, user_id, name, city, street, house, date, image, description, category_id, status);
 
                 events.add(event);
             }

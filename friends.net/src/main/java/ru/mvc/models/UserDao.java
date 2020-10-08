@@ -1,15 +1,70 @@
 package ru.mvc.models;
 
-import ru.mvc.bean.Events;
+
 import ru.mvc.bean.Users;
 import ru.mvc.util.DBConnection;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class UserDao {
+    public String registerUser(Users users) {
+        String fullName = users.getFullName();
+        String email = users.getEmail();
+        String userName = users.getUserName();
+        String password = users.getPassword();
+
+        Connection con = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            con = DBConnection.createConnection();
+            String query = "insert into \"user\"(fullname,email,username,password) values (?,?,?,?)"; //Insert user details into the table 'USERS'
+            preparedStatement = con.prepareStatement(query);
+            preparedStatement.setString(1, fullName);
+            preparedStatement.setString(2, email);
+            preparedStatement.setString(3, userName);
+            preparedStatement.setString(4, password);
+
+            int i = preparedStatement.executeUpdate();
+
+            if (i != 0)
+                return "SUCCESS";
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "Something went wrong";
+
+    }
+
+    public String authenticateUser(Users loginBean) {
+        String userName = loginBean.getUserName();
+        String password = loginBean.getPassword();
+
+        Connection con = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+
+        String userNameDB = "";
+        String passwordDB = "";
+
+        try {
+            con = DBConnection.createConnection();
+            statement = con.createStatement();
+            resultSet = statement.executeQuery("select username,password from \"user\"");
+
+            while (resultSet.next()) {
+                userNameDB = resultSet.getString("username");
+                passwordDB = resultSet.getString("password");
+
+
+                if (userName.equals(userNameDB) && password.equals(passwordDB))
+                    return "User_Role";
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "Invalid user credentials";
+    }
+
     public Users getInfo(String username) {
         Users user = new Users();
         Connection con = null;

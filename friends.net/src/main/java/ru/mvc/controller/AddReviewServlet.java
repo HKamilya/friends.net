@@ -1,8 +1,6 @@
 package ru.mvc.controller;
 
-import ru.mvc.bean.Events;
 import ru.mvc.bean.Review;
-import ru.mvc.models.EventDao;
 import ru.mvc.models.ReviewDao;
 
 import javax.servlet.ServletException;

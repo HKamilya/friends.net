@@ -1,7 +1,6 @@
 package ru.mvc.controller;
 
 import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import ru.mvc.bean.Categories;
@@ -9,14 +8,12 @@ import ru.mvc.bean.Events;
 import ru.mvc.models.EventDao;
 import ru.mvc.models.CategoriesDao;
 
-import javax.servlet.RequestDispatcher;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Paths;
 import java.util.List;
 
 @MultipartConfig

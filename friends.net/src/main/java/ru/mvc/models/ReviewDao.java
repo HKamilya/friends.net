@@ -57,8 +57,8 @@ public class ReviewDao {
                 user_id = result.getInt(1);
             }
             System.out.println(user_id);
-            String query = "insert into review(user_id,event_id,text) values (?,?,?)"; //Insert user details into the table 'USERS'
-            preparedStatement = con.prepareStatement(query); //Making use of prepared statements here to insert bunch of data
+            String query = "insert into review(user_id,event_id,text) values (?,?,?)";
+            preparedStatement = con.prepareStatement(query);
             preparedStatement.setInt(1, user_id);
             preparedStatement.setInt(2, event_id);
             preparedStatement.setString(3, text);
@@ -66,11 +66,11 @@ public class ReviewDao {
 
             int i = preparedStatement.executeUpdate();
 
-            if (i != 0)  //Just to ensure data has been inserted into the database
+            if (i != 0)
                 return "SUCCESS";
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return "Oops.. Something went wrong there..!";  // On failure, send a message from here.
+        return "Something went wrong";
     }
 }

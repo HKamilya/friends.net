@@ -1,6 +1,6 @@
 package ru.mvc.models;
 
-import ru.mvc.bean.Events;
+
 import ru.mvc.bean.Request;
 import ru.mvc.util.DBConnection;
 
@@ -39,12 +39,12 @@ public class RequestDao {
 
             int i = preparedStatement.executeUpdate();
 
-            if (i != 0)  //Just to ensure data has been inserted into the database
+            if (i != 0)
                 return "SUCCESS";
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return "Oops.. Something went wrong there..!";  // On failure, send a message from here.
+        return "Something went wrong";
     }
 
     public List<Request> getAllRequests(int event_id) {
