@@ -58,6 +58,13 @@
             width: 350px;
         }
 
+        .row{
+            margin: 0;
+        }
+        .helper{
+            margin-left: 0;
+            margin-right: 0;
+        }
         .top {
             height: 150px;
         }
@@ -70,10 +77,10 @@
 </head>
 <body>
 <jsp:include page="Header.jsp"/>
-<div class="container">
+<div class="container" >
     <div class="row align-items-center helper">
         <div class="col-12 top"></div>
-        <div class="col-2">
+        <div class="col-3">
         </div>
         <div class="col-6 login_block">
             <div class="col-12 top2"></div>

@@ -19,7 +19,7 @@ public class RegisterDao {
          try
          {
              con = DBConnection.createConnection();
-             String query = "insert into users(fullname,email,username,password) values (?,?,?,?)"; //Insert user details into the table 'USERS'
+             String query = "insert into \"user\"(fullname,email,username,password) values (?,?,?,?)"; //Insert user details into the table 'USERS'
              preparedStatement = con.prepareStatement(query);
              preparedStatement.setString(1, fullName);
              preparedStatement.setString(2, email);

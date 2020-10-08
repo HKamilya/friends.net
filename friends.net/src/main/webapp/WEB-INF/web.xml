@@ -103,16 +103,6 @@
     </servlet-mapping>
     <servlet>
         <description></description>
-        <display-name>AllRequestsServlet</display-name>
-        <servlet-name>AllRequestsServlet</servlet-name>
-        <servlet-class>ru.mvc.controller.AllRequestsServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>AllRequestsServlet</servlet-name>
-        <url-pattern>/AllRequestsServlet</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <description></description>
         <display-name>ListOfRequestsServlet</display-name>
         <servlet-name>ListOfRequsetsServlet</servlet-name>
         <servlet-class>ru.mvc.controller.ListOfRequsetsServlet</servlet-class>
@@ -120,5 +110,15 @@
     <servlet-mapping>
         <servlet-name>ListOfRequsetsServlet</servlet-name>
         <url-pattern>/ListOfRequsetsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <description></description>
+        <display-name>UpdateProfileServlet</display-name>
+        <servlet-name>UpdateProfileServlet</servlet-name>
+        <servlet-class>ru.mvc.controller.UpdateProfileServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdateProfileServlet</servlet-name>
+        <url-pattern>/UpdateProfileServlet</url-pattern>
     </servlet-mapping>
 </web-app>

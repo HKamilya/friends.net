@@ -23,7 +23,7 @@
     <jsp:include page="Header.jsp" />
 </header>
 
-<form name="form" action="AddEventServlet" method="post" onsubmit="return validate()">
+<form name="form" action="AddEventServlet" method="post" onsubmit="return validate()" enctype="multipart/form-data">
     <table align="center">
         <tr>
             <td>Название</td>
@@ -58,7 +58,7 @@
         <tr>
             <td>Image</td>
             <td><label>
-                <input type="text" name="image"/>
+                <input type="file" name="file" accept="image/*"/>
             </label></td>
         </tr>
         <tr>

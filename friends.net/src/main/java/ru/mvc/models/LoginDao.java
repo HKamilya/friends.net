@@ -24,7 +24,7 @@ public class LoginDao {
         try {
             con = DBConnection.createConnection();
             statement = con.createStatement();
-            resultSet = statement.executeQuery("select username,password from users");
+            resultSet = statement.executeQuery("select username,password from \"user\"");
 
             while (resultSet.next()) {
                 userNameDB = resultSet.getString("username");

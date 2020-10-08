@@ -58,14 +58,14 @@
         .container_reg {
             display: flex;
             width: 100%;
-            height: 592px;
+            height: 100%;
             background: #FF7373;
         }
 
         .rectangle {
             width: 400px;
             height: 455px;
-            background: black;
+            background: #212529;
             margin: 0 auto;
             margin-top: 100px;
         }
@@ -92,23 +92,23 @@
     <div class="rectangle">
         <div class="register_form" style="text-align: center">
             <form name="form" action="RegisterServlet" method="post" onsubmit="return validate()">
-                <label class="txt" for="fullnm"><b>Full Name</b></label>
+                <label class="txt" for="fullnm"><b>Имя</b></label>
                 <div class="register_line">
                     <input type="text" id="fullnm" name="fullname"/>
                 </div>
-                <label class="txt" for="email"><b>Email</b></label>
+                <label class="txt" for="email"><b>Адрес электронной почты</b></label>
                 <div class="register_line">
                     <input type="text" id="email" name="email"/>
                 </div>
-                <label class="txt" for="usernm"><b>Username</b></label>
+                <label class="txt" for="usernm"><b>Логин</b></label>
                 <div class="register_line">
                     <input type="text" id="usernm" name="username"/>
                 </div>
-                <label class="txt" for="pass"><b>Password</b></label>
+                <label class="txt" for="pass"><b>Пароль</b></label>
                 <div class="register_line">
                     <input type="password" id="pass" name="password"/>
                 </div>
-                <label class="txt" for="confPass"><b>Confirm Password</b></label>
+                <label class="txt" for="confPass"><b>Повторите пароль</b></label>
                 <div class="register_line">
                     <input type="password" id="confPass" name="conpassword"/>
                 </div>

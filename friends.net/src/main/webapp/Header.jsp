@@ -26,6 +26,11 @@
         crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="css/style_menu.css">
+    <style>
+        .nav__link{
+            font-size: 14px;
+        }
+    </style>
 </head>
 <body>
 <header class="header">

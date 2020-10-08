@@ -8,6 +8,7 @@ public class Users {
     private String userName;
     private String password;
     private String image;
+    private String description;
 
     public String getUserName() {
         return userName;
@@ -55,5 +56,13 @@ public class Users {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

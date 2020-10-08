@@ -1,8 +1,10 @@
 package ru.mvc.controller;
 
 import ru.mvc.bean.Events;
+import ru.mvc.bean.Request;
 import ru.mvc.bean.Review;
 import ru.mvc.models.EventDao;
+import ru.mvc.models.RequestDao;
 import ru.mvc.models.ReviewDao;
 
 import javax.servlet.RequestDispatcher;
@@ -29,6 +31,10 @@ public class RandomEventServlet extends HttpServlet {
         req.setAttribute("description", event.getDescription());
         req.setAttribute("category", event.getCategory());
         req.setAttribute("date", event.getDatetime());
+
+        RequestDao requestDao = new RequestDao();
+        List<Request> requests = requestDao.getAllRequests(event.getId());
+        req.setAttribute("numOfReq", requests.size());
 
         ReviewDao reviewDao = new ReviewDao();
         List<Review> reviews = reviewDao.getReviews(event.getId());

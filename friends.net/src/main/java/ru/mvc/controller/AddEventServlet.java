@@ -1,5 +1,9 @@
 package ru.mvc.controller;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import ru.mvc.bean.Categories;
 import ru.mvc.bean.Events;
 import ru.mvc.models.EventDao;
@@ -7,13 +11,15 @@ import ru.mvc.models.CategoriesDao;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.http.*;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Paths;
 import java.util.List;
 
+@MultipartConfig
 public class AddEventServlet extends HttpServlet {
 
     public AddEventServlet() {
@@ -41,9 +47,17 @@ public class AddEventServlet extends HttpServlet {
         String city = request.getParameter("city");
         String street = request.getParameter("street");
         String house = request.getParameter("house");
-        String image = request.getParameter("image");
         String description = request.getParameter("description");
         String status = "актуально";
+        ServletFileUpload sf = new ServletFileUpload(new DiskFileItemFactory());
+        try {
+            List<FileItem> multifiles = sf.parseRequest(request);
+            for (FileItem item : multifiles) {
+            item.write(new File("src/main/webapp/img"+item.getName()));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         Events events = new Events();
 
@@ -51,7 +65,7 @@ public class AddEventServlet extends HttpServlet {
         events.setCity(city);
         events.setStreet(street);
         events.setHouse(house);
-        events.setImage(image);
+//        events.setImage(image);
         events.setDescription(description);
         events.setCategory(categoryId);
         events.setStatus(status);
@@ -60,11 +74,9 @@ public class AddEventServlet extends HttpServlet {
 
         String userRegistered = eventDao.addEvent(username, events);
 
-        if (userRegistered.equals("SUCCESS"))
-        {
-            request.getRequestDispatcher("/Main.jsp").forward(request, response);
-        } else
-        {
+        if (userRegistered.equals("SUCCESS")) {
+            request.getRequestDispatcher("/AllEvents.jsp").forward(request, response);
+        } else {
             request.setAttribute("errMessage", userRegistered);
             request.getRequestDispatcher("/AddEvent.jsp").forward(request, response);
         }

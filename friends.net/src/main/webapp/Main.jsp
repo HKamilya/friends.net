@@ -30,9 +30,8 @@
 </head>
 <body>
 <div class="pages">
-
     <jsp:include page="Header.jsp"/>
-    <div class="information">
+    <div class="information" style="height: 100%">
         <div class="slider_item">
             <div class="text_onslider">
                 Friends.net

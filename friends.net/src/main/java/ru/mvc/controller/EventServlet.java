@@ -1,8 +1,10 @@
 package ru.mvc.controller;
 
 import ru.mvc.bean.Events;
+import ru.mvc.bean.Request;
 import ru.mvc.bean.Review;
 import ru.mvc.models.EventDao;
+import ru.mvc.models.RequestDao;
 import ru.mvc.models.ReviewDao;
 
 import javax.servlet.RequestDispatcher;
@@ -23,6 +25,8 @@ public class EventServlet extends HttpServlet {
         EventDao eventDao = new EventDao();
         Integer id = Integer.parseInt(req.getParameter("id"));
         Events event = eventDao.getEvent(id);
+        RequestDao requestDao = new RequestDao();
+        List<Request> requests = requestDao.getAllRequests(id);
         req.setAttribute("event_id", id);
         req.setAttribute("name", event.getName());
         req.setAttribute("city", event.getCity());
@@ -32,6 +36,7 @@ public class EventServlet extends HttpServlet {
         req.setAttribute("description", event.getDescription());
         req.setAttribute("category", event.getCategory());
         req.setAttribute("date", event.getDatetime());
+        req.setAttribute("numOfReq", requests.size());
 
         ReviewDao reviewDao = new ReviewDao();
         List<Review> reviews = reviewDao.getReviews(id);

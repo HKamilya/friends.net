@@ -38,8 +38,6 @@
     <link rel="stylesheet" href="css/style_menu.css">
     <title>Event</title>
     <style>
-        body {
-        }
 
         .img-sm {
             width: 46px;
@@ -152,7 +150,7 @@
         }
 
         .image {
-            width: 30%;
+            width: 100%;
             height: 100%;
         }
 
@@ -184,6 +182,7 @@
 
         .attend {
             padding: 10px 10px;
+            width: 150px;
         }
 
         .where_when {
@@ -236,48 +235,57 @@
 <body>
 <jsp:include page="Header.jsp"/>
 <div class="event_profile">
-    <div class="image">
-        <img class="picture" src="img/bfr.jpg">${image}
-    </div>
-    <div class="text_block">
-        <div class="name_attend">
-            <div class="name">
-                ${name}
-            </div>
-            <div class="attend">
-                2 человек.
+    <div class="row">
+        <div class="col-4">
+            <div class="image">
+                <img class="picture" src="img/bfr.jpg" alt="">${image}
             </div>
         </div>
-        <div class="where_when">
-            <div class="where">
-                ${city}, ${street}, ${house}
+        <div class="col-8">
+            <div class="text_block">
+                <div class="name_attend">
+                    <div class="name">
+                        ${name}
+                    </div>
+                    <div class="attend">
+                        уже идет
+                        <br>
+                        ${numOfReq}
+                    </div>
+                </div>
+                <div class="where_when">
+                    <div class="where">
+                        ${city}, ${street}, ${house}
+                    </div>
+                    <div class="when">
+                        ${date}
+                    </div>
+                </div>
+                <div class="inform">
+                    <p>${description}</p>
+                </div>
+                <div class="tags">
+                    <div class="tag">
+                        Класс
+                    </div>
+                    <div class="tag">
+                        Супер
+                    </div>
+                    <div class="tag">
+                        Интересно
+                    </div>
+                </div>
+                <div class="but">
+                    <button type="button" name="submit" data-toggle="modal" data-target="#exampleModal">Я пойду!
+                    </button>
+                </div>
             </div>
-            <div class="when">
-                ${date}
-            </div>
-        </div>
-        <div class="inform">
-            <p>${description}</p>
-        </div>
-        <div class="tags">
-            <div class="tag">
-                Класс
-            </div>
-            <div class="tag">
-                Супер
-            </div>
-            <div class="tag">
-                Интересно
-            </div>
-        </div>
-        <div class="but">
-            <button type="button" name="submit" data-toggle="modal" data-target="#exampleModal">Я пойду!</button>
         </div>
     </div>
 </div>
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel"></h5>
@@ -285,19 +293,29 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="text-align: center">
+                <% if (session.getAttribute("User") != null) {%>
                 <form name="form" action="SendRequestServlet" method="post" onsubmit="return validate()">
-                    <label>Комментарий</label>
+                    <label style="font-size: 20px">Комментарий</label>
                     <br>
-                    <textarea type="text" name="comment"></textarea>
+                    <textarea style="width: 200px;" type="text" name="comment"></textarea>
 
                     <input type="hidden" name="event_id" value="${event_id}">
                     <%=(request.getAttribute("errMessage") == null) ? ""
                             : request.getAttribute("errMessage")%>
-
-                    <input type="submit" value="Отправить"></input><input
-                        type="reset" value="Reset"></input>
+                    <br>
+                    <br>
+                    <input type="submit" class="btn btn-dark" value="Отправить"/><input
+                        class="btn btn-dark" type="reset" value="Reset"/>
                 </form>
+                <%} else {%>
+                <label style="font-size: 15px">
+                    К сожалению, откликнуться могут только зарегистрированные пользователи :(
+                    <br>
+                    Пожалуйста, зарегистрируйтесь или авторизуйтесь, если у вас уже есть аккаунт на этом сайте
+                </label>
+                <input type="submit" class="btn btn-dark" onclick="location.href='Login.jsp'" value="Войти"/><input
+                    class="btn btn-dark" type="reset"onclick="location.href='Register.jsp'" value="Зарегистрироваться"/><%}%>
             </div>
         </div>
     </div>

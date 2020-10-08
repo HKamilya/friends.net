@@ -31,14 +31,14 @@ public class EventDao {
         try {
             con = DBConnection.createConnection();
             con1 = DBConnection.createConnection();
-            String query1 = "select id from users where username ='" + username + "'";
+            String query1 = "select id from \"user\" where username ='" + username + "'";
             statement = con1.createStatement();
             result = statement.executeQuery(query1);
             while (result.next()) {
                 user_id = result.getInt(1);
             }
             System.out.println(user_id);
-            String query = "insert into events(user_id,name,city,street,house,image,description,category_id,status,date) values (?,?,?,?,?,?,?,?,?,?)"; //Insert user details into the table 'USERS'
+            String query = "insert into event(user_id,name,city,street,house,image,description,category_id,status,date) values (?,?,?,?,?,?,?,?,?,?)"; //Insert user details into the table 'USERS'
             preparedStatement = con.prepareStatement(query); //Making use of prepared statements here to insert bunch of data
             preparedStatement.setInt(1, user_id);
             preparedStatement.setString(2, name);
@@ -68,7 +68,7 @@ public class EventDao {
         ResultSet resultSet = null;
         try {
             con = DBConnection.createConnection();
-            String sql = "SELECT * FROM events where status='актуально'";
+            String sql = "SELECT * FROM event where status='актуально'";
             statement = con.createStatement();
             resultSet = statement.executeQuery(sql);
 
@@ -106,7 +106,7 @@ public class EventDao {
         ResultSet resultSet = null;
         try {
             con = DBConnection.createConnection();
-            String sql = "SELECT * FROM events where status='актуально'";
+            String sql = "SELECT * FROM event where status='актуально'";
             statement = con.createStatement();
             resultSet = statement.executeQuery(sql);
 
@@ -141,7 +141,7 @@ public class EventDao {
         ResultSet resultSet = null;
         try {
             con = DBConnection.createConnection();
-            String sql = "SELECT * FROM events where id=" + id;
+            String sql = "SELECT * FROM event where id=" + id;
             statement = con.createStatement();
             resultSet = statement.executeQuery(sql);
 

@@ -17,7 +17,7 @@ public class ReviewDao {
         ResultSet resultSet = null;
         try {
             con = DBConnection.createConnection();
-            String sql = "SELECT * FROM users INNER JOIN review ON users.id=review.user_id where event_id=" + id;
+            String sql = "SELECT * FROM \"user\" INNER JOIN review ON \"user\".id=review.user_id where event_id=" + id;
             statement = con.createStatement();
             resultSet = statement.executeQuery(sql);
 
@@ -50,7 +50,7 @@ public class ReviewDao {
         try {
             con = DBConnection.createConnection();
             con1 = DBConnection.createConnection();
-            String query1 = "select id from users where username ='" + username + "'";
+            String query1 = "select id from \"user\" where username ='" + username + "'";
             statement = con1.createStatement();
             result = statement.executeQuery(query1);
             while (result.next()) {

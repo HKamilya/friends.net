@@ -23,7 +23,7 @@ public class RequestDao {
         try {
             con = DBConnection.createConnection();
             con1 = DBConnection.createConnection();
-            String query1 = "select id from users where username ='" + username + "'";
+            String query1 = "select id from \"user\" where username ='" + username + "'";
             statement = con1.createStatement();
             result = statement.executeQuery(query1);
             while (result.next()) {
@@ -60,7 +60,7 @@ public class RequestDao {
             resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
-                int event_id1= resultSet.getInt("event_id");
+                int event_id1 = resultSet.getInt("event_id");
                 int subscriber = resultSet.getInt("subscriber");
                 String comment = resultSet.getString("comment");
 
