@@ -12,7 +12,24 @@ import java.io.IOException;
 
 public class UpdateProfileServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String username = (String) session.getAttribute("User");
+        String fullname = request.getParameter("fullName");
+        String description = request.getParameter("description");
+        UserDao userDao = new UserDao();
+        Users user = new Users();
+        user.setDescription(description);
+        user.setUserName(username);
+        user.setFullName(fullname);
+        String updatedUsersData = userDao.updateUsersData(user);
 
+        if (updatedUsersData.equals("SUCCESS")) {
+
+            request.getRequestDispatcher("/ProfileServlet").forward(request, response);
+        } else {
+            request.setAttribute("errMessage", updatedUsersData);
+            request.getRequestDispatcher("/User.jsp").forward(request, response);
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -20,8 +37,9 @@ public class UpdateProfileServlet extends HttpServlet {
         String username = (String) session.getAttribute("User");
         UserDao userDao = new UserDao();
         Users users = userDao.getInfo(username);
-        request.setAttribute("fullname", users.getFullName());
-        request.setAttribute("AboutUser", users.getDescription());
-        getServletContext().getRequestDispatcher("/User.jsp").forward(request, response);
+        request.setAttribute("password", users.getPassword());
+        request.setAttribute("fullName", users.getFullName());
+        request.setAttribute("description", users.getDescription());
+        getServletContext().getRequestDispatcher("/UpdateProfile.jsp").forward(request, response);
     }
 }

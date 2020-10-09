@@ -24,8 +24,26 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
             integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
             crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="style_menu_alternative.css">
+    <link rel="stylesheet" href="css/style_menu_alternative.css">
     <meta charset="UTF-8">
+    <script>
+        function validate() {
+
+            var password = document.form.password.value;
+            var conpassword = document.form.conpassword.value;
+            var earlpass = document.forms.earlpass.value;
+            if (earlpass !=<%request.getParameter("password");%>) {
+                alert("Старый пароль введен не верно");
+                return false;
+            } else if (password.length < 6) {
+                alert("Пароль должен содержать более 6 символов");
+                return false;
+            } else if (password != conpassword) {
+                alert("Пароли должный совпадать");
+                return false;
+            }
+        }
+    </script>
     <style>
         .container {
             width: 100%;
@@ -98,31 +116,45 @@
 <body>
 <jsp:include page="Header.jsp"/>
 <div class="profile">
-    <div class="container">
-        <div class="photo">
-            <form>
+    <form action="${pageContext.request.contextPath}/UpdateProfileServlet" method="post">
+        <div class="container">
+            <div class="photo">
                 <div class="form-group">
                     <label for="ex">
                         File Input
                     </label>
                     <input type="file" class="form-control-file" id="ex">
                 </div>
-            </form>
-        </div>
-        <div class="inf">
-            <div class="name">
-                <input class="name_text" name="name" value="${fullname}">
-            </div>
-            <div class="space">
-                <h3>О себе:</h3>
-            </div>
-            <div class="about" name="${AboutUser}">
-                <input type="text" class="about_text" name="about">
-            </div>
-        </div>
-    </div>
-    <button type="submit" name="submit">Submit</button>
-</div>
 
+            </div>
+            <div class="inf">
+                <div class="name">
+                    <input class="name_text" name="fullName" value="${fullName}">
+                </div>
+                <div class="space">
+                    <h3>О себе:</h3>
+                </div>
+                <div class="about">
+                    <input type="text" class="about_text" name="description" value="${description}">
+                </div>
+            </div>
+        </div>
+        <button type="submit" name="submit">Сохранить</button>
+    </form>
+    <form method="post" action="">
+        <label class="txt" for="pass"><b>Старый пароль</b></label>
+        <div class="register_line">
+            <input type="password" id="earlpass" name="earlpass"/>
+        </div>
+        <label class="txt" for="pass"><b>Новый пароль</b></label>
+        <div class="register_line">
+            <input type="password" id="pass" name="password"/>
+        </div>
+        <label class="txt" for="confPass"><b>Повторите пароль</b></label>
+        <div class="register_line">
+            <input type="password" id="confPass" name="conpassword"/>
+        </div>
+    </form>
+</div>
 </body>
 </html>

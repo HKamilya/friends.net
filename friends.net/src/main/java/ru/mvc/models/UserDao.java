@@ -72,7 +72,7 @@ public class UserDao {
         ResultSet resultSet = null;
         try {
             con = DBConnection.createConnection();
-            String sql = "SELECT * FROM \"user\" where username=" + username;
+            String sql = "SELECT * FROM \"user\" where username=" + "'" + username + "'";
             statement = con.createStatement();
             resultSet = statement.executeQuery(sql);
 
@@ -82,16 +82,42 @@ public class UserDao {
                 String email = resultSet.getString("email");
                 String password = resultSet.getString("password");
                 String image = resultSet.getString("image");
+                String description = resultSet.getString("description");
 
                 user.setEmail(email);
                 user.setFullName(fullname);
                 user.setImage(image);
                 user.setPassword(password);
+                user.setDescription(description);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return user;
 
+    }
+
+    public String updateUsersData(Users users) {
+        String fullName = users.getFullName();
+        String description = users.getDescription();
+
+        Connection con = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            con = DBConnection.createConnection();
+            String query = "update \"user\" set fullname=?, description=? where username=" + "'" + users.getUserName() + "'";
+            preparedStatement = con.prepareStatement(query);
+            preparedStatement.setString(1, fullName);
+            preparedStatement.setString(2, description);
+
+
+            int i = preparedStatement.executeUpdate();
+
+            if (i != 0)
+                return "SUCCESS";
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "Something went wrong";
     }
 }

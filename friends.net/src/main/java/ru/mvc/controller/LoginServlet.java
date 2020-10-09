@@ -16,41 +16,38 @@ public class LoginServlet extends HttpServlet {
     public LoginServlet() {
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-       Users loginBean = new Users();
+        Users loginBean = new Users();
 
         loginBean.setUserName(username);
         loginBean.setPassword(password);
 
         UserDao loginDao = new UserDao();
-        try
-        {
+        try {
             String userValidate = loginDao.authenticateUser(loginBean);
 
-           if(userValidate.equals("User_Role"))
-            {
+            if (userValidate.equals("User_Role")) {
                 System.out.println("User's Home");
 
                 HttpSession session = request.getSession();
-                session.setMaxInactiveInterval(10*60);
+                session.setMaxInactiveInterval(10 * 60);
                 session.setAttribute("User", username);
                 request.setAttribute("username", username);
-
+                loginBean = loginDao.getInfo(username);
+                System.out.println(loginBean.getDescription());
+                request.setAttribute("description", loginBean.getDescription());
+                request.setAttribute("fullname", loginBean.getFullName());
                 request.getRequestDispatcher("/User.jsp").forward(request, response);
-            }
-            else
-            {
-                System.out.println("Error message = "+userValidate);
+            } else {
+                System.out.println("Error message = " + userValidate);
                 request.setAttribute("errMessage", userValidate);
 
                 request.getRequestDispatcher("/Login.jsp").forward(request, response);
             }
-        } catch (Exception e1)
-        {
+        } catch (Exception e1) {
             e1.printStackTrace();
         }
     }
