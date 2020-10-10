@@ -1,5 +1,5 @@
 <%@ page import="java.util.List" %>
-<%@ page import="ru.mvc.bean.Events" %><%--
+<%@ page import="ru.mvc.model.Events" %><%--
   Created by IntelliJ IDEA.
   User: gipot
   Date: 01.10.2020
@@ -97,6 +97,9 @@
         </div>
         <div class="descr">
             <p><%out.println(s.getDescription());%></p>
+        </div>
+        <div class="descr">
+            <p><%out.println(s.getCategory());%></p>
         </div>
     </div>
     <% }

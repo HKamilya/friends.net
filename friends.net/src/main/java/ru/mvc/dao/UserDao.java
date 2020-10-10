@@ -1,7 +1,7 @@
-package ru.mvc.models;
+package ru.mvc.dao;
 
 
-import ru.mvc.bean.Users;
+import ru.mvc.model.Users;
 import ru.mvc.util.DBConnection;
 
 import java.sql.*;
@@ -84,6 +84,7 @@ public class UserDao {
                 String image = resultSet.getString("image");
                 String description = resultSet.getString("description");
 
+                user.setId(user_id);
                 user.setEmail(email);
                 user.setFullName(fullname);
                 user.setImage(image);

@@ -1,6 +1,6 @@
-<%@ page import="ru.mvc.models.CategoriesDao" %>
+<%@ page import="ru.mvc.dao.CategoriesDao" %>
 <%@ page import="java.util.List" %>
-<%@ page import="ru.mvc.bean.Categories" %><%--
+<%@ page import="ru.mvc.model.Categories" %><%--
   Created by IntelliJ IDEA.
   User: gipot
   Date: 28.09.2020

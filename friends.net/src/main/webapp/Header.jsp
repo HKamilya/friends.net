@@ -42,7 +42,7 @@
                 <a class="nav__link" href="${pageContext.request.contextPath}/AddEventServlet">Организовать <br>
                     мероприятие</a>
                 <%}%>
-                <a class="nav__link" href="">Поиск</a>
+                <a class="nav__link" href="Search.jsp">Поиск</a>
                 <div class="header__logo">
                     <img class="picture" src="img/man.png" alt="">
                 </div>

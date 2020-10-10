@@ -1,7 +1,7 @@
 package ru.mvc.controller;
 
-import ru.mvc.bean.Request;
-import ru.mvc.models.RequestDao;
+import ru.mvc.model.Request;
+import ru.mvc.dao.RequestDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -22,13 +22,11 @@ public class SendRequestServlet extends HttpServlet {
 
         RequestDao requestDao = new RequestDao();
         String requestSended = requestDao.addRequest(username, req);
-        if (requestSended.equals("SUCCESS"))
-        {
+        if (requestSended.equals("SUCCESS")) {
             request.getRequestDispatcher("/AllEvents.jsp").forward(request, response);
-        } else
-        {
+        } else {
             request.setAttribute("errMessage", requestSended);
-              }
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

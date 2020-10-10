@@ -1,7 +1,7 @@
-package ru.mvc.models;
+package ru.mvc.dao;
 
-import ru.mvc.bean.Events;
-import ru.mvc.bean.Review;
+import ru.mvc.model.Events;
+import ru.mvc.model.Review;
 import ru.mvc.util.DBConnection;
 
 import java.sql.*;

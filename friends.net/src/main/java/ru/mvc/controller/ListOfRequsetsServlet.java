@@ -1,9 +1,7 @@
 package ru.mvc.controller;
 
-import ru.mvc.bean.Events;
-import ru.mvc.bean.Request;
-import ru.mvc.models.EventDao;
-import ru.mvc.models.RequestDao;
+import ru.mvc.model.Request;
+import ru.mvc.dao.RequestDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

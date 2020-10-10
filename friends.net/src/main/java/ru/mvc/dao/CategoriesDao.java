@@ -1,7 +1,7 @@
-package ru.mvc.models;
+package ru.mvc.dao;
 
-import ru.mvc.bean.Categories;
-import ru.mvc.bean.Events;
+import ru.mvc.model.Categories;
+import ru.mvc.model.Events;
 import ru.mvc.util.DBConnection;
 
 import java.sql.*;
@@ -37,26 +37,30 @@ public class CategoriesDao {
         return categories;
     }
 
-    public String getName(int id) {
-        String name = null;
+    public Categories getCategoryById(int id) {
+        Categories categories = new Categories();
         Connection con = null;
         Statement statement = null;
         ResultSet resultSet = null;
         try {
             con = DBConnection.createConnection();
-            String sql = "SELECT name FROM categories where id=" + id;
+            String sql = "SELECT * FROM categories where id=" + id;
             statement = con.createStatement();
             resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
-                name = resultSet.getString(1);
+                String name = resultSet.getString("name");
+                String description = resultSet.getString("description");
+                categories.setId(id);
+                categories.setDescription(description);
+                categories.setName(name);
 
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return name;
+        return categories;
     }
 }
 

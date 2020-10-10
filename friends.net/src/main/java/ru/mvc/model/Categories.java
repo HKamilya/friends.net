@@ -1,4 +1,6 @@
-package ru.mvc.bean;
+package ru.mvc.model;
+
+import java.util.Objects;
 
 public class Categories {
     private int id;
@@ -9,6 +11,9 @@ public class Categories {
         this.id = id;
         this.name = name;
         this.description = description;
+    }
+
+    public Categories() {
     }
 
     public int getId() {
@@ -33,5 +38,25 @@ public class Categories {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Categories that = (Categories) o;
+        return id == that.id &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(description, that.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, description);
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

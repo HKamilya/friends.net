@@ -1,4 +1,4 @@
-package ru.mvc.bean;
+package ru.mvc.model;
 
 public class Users {
 

@@ -1,7 +1,9 @@
 package ru.mvc.controller;
 
-import ru.mvc.bean.Users;
-import ru.mvc.models.UserDao;
+import ru.mvc.model.Events;
+import ru.mvc.model.Users;
+import ru.mvc.dao.EventDao;
+import ru.mvc.dao.UserDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -9,9 +11,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 public class ProfileServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String status = null;
+        int status_id = Integer.parseInt(request.getParameter("status"));
+        if (status_id == 1) {
+            status = "актуально";
+        } else {
+            status = "неактуально";
+        }
+        int event_id = Integer.parseInt(request.getParameter("event_id"));
+
+        EventDao eventDao = new EventDao();
+        eventDao.updateStatus(event_id, status);
 
     }
 
@@ -19,12 +33,16 @@ public class ProfileServlet extends HttpServlet {
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("User");
         System.out.println(username);
+        EventDao eventDao = new EventDao();
+
         UserDao userDao = new UserDao();
         Users user = userDao.getInfo(username);
+        List<Events> events = eventDao.getAllUsersEvents(user.getId());
         request.setAttribute("username", username);
         request.setAttribute("fullname", user.getFullName());
         request.setAttribute("description", user.getDescription());
         request.setAttribute("image", user.getImage());
+        request.setAttribute("eventsList", events);
         request.getRequestDispatcher("/User.jsp").forward(request, response);
 
     }

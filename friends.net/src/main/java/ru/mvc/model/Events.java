@@ -1,4 +1,4 @@
-package ru.mvc.bean;
+package ru.mvc.model;
 
 public class Events {
     private int id;
@@ -10,13 +10,13 @@ public class Events {
     private String datetime;
     private String image;
     private String description;
-    private int category;
+    private Categories category;
     private String status;
 
     public Events() {
     }
 
-    public Events(int id, int user_id, String name, String city, String street, String house, String image, String description, int category, String status) {
+    public Events(int id, int user_id, String name, String city, String street, String house, String image, String description, Categories category, String status) {
         this.id = id;
         this.user_id = user_id;
         this.name = name;
@@ -29,7 +29,7 @@ public class Events {
         this.status = status;
     }
 
-    public Events(int id, int user_id, String name, String city, String street, String house, String datetime, String image, String description, int category, String status) {
+    public Events(int id, int user_id, String name, String city, String street, String house, String datetime, String image, String description, Categories category, String status) {
         this.id = id;
         this.user_id = user_id;
         this.name = name;
@@ -107,13 +107,7 @@ public class Events {
         this.description = description;
     }
 
-    public int getCategory() {
-        return category;
-    }
 
-    public void setCategory(int category) {
-        this.category = category;
-    }
 
     public String getStatus() {
         return status;
@@ -129,5 +123,13 @@ public class Events {
 
     public void setDatetime(String datetime) {
         this.datetime = datetime;
+    }
+
+    public Categories getCategory() {
+        return category;
+    }
+
+    public void setCategory(Categories category) {
+        this.category = category;
     }
 }

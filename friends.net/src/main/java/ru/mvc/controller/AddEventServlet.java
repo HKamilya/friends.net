@@ -3,10 +3,10 @@ package ru.mvc.controller;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import ru.mvc.bean.Categories;
-import ru.mvc.bean.Events;
-import ru.mvc.models.EventDao;
-import ru.mvc.models.CategoriesDao;
+import ru.mvc.model.Categories;
+import ru.mvc.model.Events;
+import ru.mvc.dao.EventDao;
+import ru.mvc.dao.CategoriesDao;
 
 
 import javax.servlet.ServletException;
@@ -50,21 +50,22 @@ public class AddEventServlet extends HttpServlet {
         try {
             List<FileItem> multifiles = sf.parseRequest(request);
             for (FileItem item : multifiles) {
-            item.write(new File("src/main/webapp/img"+item.getName()));
+                item.write(new File("src/main/webapp/img" + item.getName()));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         Events events = new Events();
-
+        Categories categories = new Categories();
+        categories.setId(categoryId);
         events.setName(name);
         events.setCity(city);
         events.setStreet(street);
         events.setHouse(house);
 //        events.setImage(image);
         events.setDescription(description);
-        events.setCategory(categoryId);
+        events.setCategory(categories);
         events.setStatus(status);
 
         EventDao eventDao = new EventDao();

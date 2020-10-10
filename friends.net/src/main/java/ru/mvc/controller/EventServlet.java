@@ -1,13 +1,7 @@
 package ru.mvc.controller;
 
-import ru.mvc.bean.Events;
-import ru.mvc.bean.Request;
-import ru.mvc.bean.Review;
-import ru.mvc.bean.Users;
-import ru.mvc.models.EventDao;
-import ru.mvc.models.RequestDao;
-import ru.mvc.models.ReviewDao;
-import ru.mvc.models.UserDao;
+import ru.mvc.model.*;
+import ru.mvc.dao.*;
 
 
 import javax.servlet.ServletException;
@@ -29,6 +23,7 @@ public class EventServlet extends HttpServlet {
         Events event = eventDao.getEvent(id);
         RequestDao requestDao = new RequestDao();
         UserDao userDao = new UserDao();
+
         Users user = userDao.findById(id);
         List<Request> requests = requestDao.getAllRequests(id);
         req.setAttribute("event_id", event.getUser_id());
@@ -38,7 +33,7 @@ public class EventServlet extends HttpServlet {
         req.setAttribute("house", event.getHouse());
         req.setAttribute("image", event.getImage());
         req.setAttribute("description", event.getDescription());
-        req.setAttribute("category", event.getCategory());
+        req.setAttribute("category", event.getCategory().getName().toString());
         req.setAttribute("date", event.getDatetime());
         req.setAttribute("numOfReq", requests.size());
         req.setAttribute("author", user.getUserName());

@@ -1,7 +1,8 @@
-package ru.mvc.models;
+package ru.mvc.dao;
 
 
-import ru.mvc.bean.Events;
+import ru.mvc.model.Categories;
+import ru.mvc.model.Events;
 import ru.mvc.util.DBConnection;
 
 import java.sql.*;
@@ -17,7 +18,7 @@ public class EventDao {
         String date = events.getDatetime();
         String image = events.getImage();
         String description = events.getDescription();
-        int category_id = events.getCategory();
+        Categories category = events.getCategory();
         String status = events.getStatus();
 
 
@@ -46,7 +47,7 @@ public class EventDao {
             preparedStatement.setString(5, house);
             preparedStatement.setString(6, image);
             preparedStatement.setString(7, description);
-            preparedStatement.setInt(8, category_id);
+            preparedStatement.setInt(8, category.getId());
             preparedStatement.setString(9, status);
             preparedStatement.setString(10, date);
             int i = preparedStatement.executeUpdate();
@@ -83,8 +84,10 @@ public class EventDao {
                 int category_id = resultSet.getInt("category_id");
                 String status = resultSet.getString("status");
                 String date = resultSet.getString("date");
+                CategoriesDao categoriesDao = new CategoriesDao();
+                Categories category = categoriesDao.getCategoryById(category_id);
 
-                Events event = new Events(id, user_id, name, city, street, house, date, image, description, category_id, status);
+                Events event = new Events(id, user_id, name, city, street, house, date, image, description, category, status);
 
                 events.add(event);
             }
@@ -121,8 +124,47 @@ public class EventDao {
                 int category_id = resultSet.getInt("category_id");
                 String status = resultSet.getString("status");
                 String date = resultSet.getString("date");
+                CategoriesDao categoriesDao = new CategoriesDao();
+                Categories category = categoriesDao.getCategoryById(category_id);
 
-                Events event = new Events(id, user_id, name, city, street, house, date, image, description, category_id, status);
+                Events event = new Events(id, user_id, name, city, street, house, date, image, description, category, status);
+
+                events.add(event);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return events;
+    }
+
+    public List<Events> getAllUsersEvents(int id) {
+        List<Events> events = new ArrayList<>();
+        Events res = null;
+        Connection con = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        try {
+            con = DBConnection.createConnection();
+            String sql = "SELECT * FROM event where user_id=" + id;
+            statement = con.createStatement();
+            resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                int event_id = resultSet.getInt("id");
+                int user_id = resultSet.getInt("user_id");
+                String name = resultSet.getString("name");
+                String city = resultSet.getString("city");
+                String street = resultSet.getString("street");
+                String house = resultSet.getString("house");
+                String image = resultSet.getString("image");
+                String description = resultSet.getString("description");
+                int category_id = resultSet.getInt("category_id");
+                String status = resultSet.getString("status");
+                String date = resultSet.getString("date");
+                CategoriesDao categoriesDao = new CategoriesDao();
+                Categories category = categoriesDao.getCategoryById(category_id);
+
+                Events event = new Events(event_id, user_id, name, city, street, house, date, image, description, category, status);
 
                 events.add(event);
             }
@@ -155,8 +197,10 @@ public class EventDao {
                 int category_id = resultSet.getInt("category_id");
                 String status = resultSet.getString("status");
                 String date = resultSet.getString("date");
+                CategoriesDao categoriesDao = new CategoriesDao();
+                Categories category = categoriesDao.getCategoryById(category_id);
 
-                Events event = new Events(id, user_id, name, city, street, house, date, image, description, category_id, status);
+                Events event = new Events(id, user_id, name, city, street, house, date, image, description, category, status);
 
                 events.add(event);
             }
@@ -167,5 +211,22 @@ public class EventDao {
             e.printStackTrace();
         }
         return res;
+    }
+
+    public void updateStatus(int id, String status) {
+
+        Connection con = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            con = DBConnection.createConnection();
+            String query = "update event set status=? where id=" + id;
+            preparedStatement = con.prepareStatement(query);
+            preparedStatement.setString(1, status);
+
+            int i = preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

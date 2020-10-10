@@ -1,7 +1,9 @@
 package ru.mvc.controller;
 
-import ru.mvc.bean.Users;
-import ru.mvc.models.UserDao;
+import ru.mvc.model.Events;
+import ru.mvc.model.Users;
+import ru.mvc.dao.EventDao;
+import ru.mvc.dao.UserDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -21,6 +24,7 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        boolean rememberMe = "true".equals(request.getParameter("rememberMe"));
 
         Users loginBean = new Users();
 
@@ -33,7 +37,7 @@ public class LoginServlet extends HttpServlet {
         }
         byte[] bytes = md5.digest(password.getBytes());
         StringBuilder builder = new StringBuilder();
-        for (byte b:bytes) {
+        for (byte b : bytes) {
             builder.append(b);
         }
         loginBean.setUserName(username);
@@ -50,7 +54,9 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("User", username);
                 request.setAttribute("username", username);
                 loginBean = loginDao.getInfo(username);
-                System.out.println(loginBean.getDescription());
+                EventDao eventDao = new EventDao();
+                List<Events> events = eventDao.getAllUsersEvents(loginBean.getId());
+                request.setAttribute("eventsList", events);
                 request.setAttribute("description", loginBean.getDescription());
                 request.setAttribute("fullname", loginBean.getFullName());
                 request.getRequestDispatcher("/User.jsp").forward(request, response);
@@ -61,7 +67,7 @@ public class LoginServlet extends HttpServlet {
                 request.getRequestDispatcher("/Login.jsp").forward(request, response);
             }
         } catch (Exception e1) {
-            e1.printStackTrace();
+            throw new IllegalStateException();
         }
     }
 }

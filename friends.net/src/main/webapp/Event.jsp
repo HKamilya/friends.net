@@ -1,4 +1,4 @@
-<%@ page import="ru.mvc.bean.Review" %>
+<%@ page import="ru.mvc.model.Review" %>
 <%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: gipot
@@ -263,6 +263,9 @@
                 </div>
                 <div class="inform">
                     <p>${description}</p>
+                </div>
+                <div class="inform">
+                    <p>${category}</p>
                 </div>
                 <div class="inform">
                     <a href="${pageContext.request.contextPath}/AnProfileServlet?username=${author}">${author}</a>

@@ -99,7 +99,7 @@
                         <input type="password" class="form-control" id="pass" name="password">
                         <br>
                         <br>
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1" name="rememberMe" value="true">
                         <label class="form-check-label" for="exampleCheck1">Запомнить меня</label>
                         <br>
                         <span

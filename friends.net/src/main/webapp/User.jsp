@@ -1,4 +1,5 @@
-<%--
+<%@ page import="ru.mvc.model.Events" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: gipot
   Date: 27.09.2020
@@ -127,6 +128,44 @@
         <button>Редактировать профиль</button>
     </form>
     <%}%>
+
+    <% List<Events> names = (List<Events>) request.getAttribute("eventsList");
+        if (names != null && !names.isEmpty()) {
+            for (Events s : names) {%>
+    <a class="name" href="${pageContext.request.contextPath}/EventServlet?id=<%out.println(s.getId());%>"><%
+        out.println(s.getName());%></a>
+    <div class="event">
+        <div class="h_p">
+            <div class="img">
+                <%out.println("<img class=\"photo\" src=\"" + s.getImage() + "\"" + ">");%>
+            </div>
+        </div>
+        <div class="descr">
+            <p><%out.println(s.getDescription());%></p>
+        </div>
+        <div class="descr">
+            <p><%out.println(s.getCategory());%></p>
+        </div>
+        <div class="descr">
+            <p><%out.println(s.getStatus());%></p>
+        </div>
+        <% if
+        (session.getAttribute("User") == request.getAttribute("username")) {%>
+
+        <form action="${pageContext.request.contextPath}/ProfileServlet" method="post">
+
+            <input type="hidden" name="event_id" value="<%out.print(s.getId());%>">
+            <select name="status">
+                <option name="status_name" value="1">актуально</option>
+                <option name="status_name" value="2">неактуально</option>
+            </select>
+            <button type="submit" name="submit">Сохранить</button>
+        </form>
+        <%}%>
+    </div>
+
+    <% }
+    }%>
 </div>
 </body>
 </html>

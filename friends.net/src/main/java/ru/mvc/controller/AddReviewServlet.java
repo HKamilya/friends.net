@@ -1,7 +1,7 @@
 package ru.mvc.controller;
 
-import ru.mvc.bean.Review;
-import ru.mvc.models.ReviewDao;
+import ru.mvc.model.Review;
+import ru.mvc.dao.ReviewDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

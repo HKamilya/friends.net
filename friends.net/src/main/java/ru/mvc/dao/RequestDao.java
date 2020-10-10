@@ -1,7 +1,7 @@
-package ru.mvc.models;
+package ru.mvc.dao;
 
 
-import ru.mvc.bean.Request;
+import ru.mvc.model.Request;
 import ru.mvc.util.DBConnection;
 
 import java.sql.*;

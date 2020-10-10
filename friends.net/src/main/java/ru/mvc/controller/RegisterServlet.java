@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import ru.mvc.bean.Users;
-import ru.mvc.models.UserDao;
+import ru.mvc.model.Users;
+import ru.mvc.dao.UserDao;
 
 public class RegisterServlet extends HttpServlet {
 
@@ -34,7 +34,6 @@ public class RegisterServlet extends HttpServlet {
         for (byte b : bytes) {
             builder.append(b);
         }
-
 
         Users users = new Users();
 

@@ -1,7 +1,7 @@
 package ru.mvc.controller;
 
-import ru.mvc.bean.Users;
-import ru.mvc.models.UserDao;
+import ru.mvc.model.Users;
+import ru.mvc.dao.UserDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
