@@ -8,7 +8,7 @@ public class DBConnection {
         Connection con = null;
         String url = "jdbc:postgresql://localhost:5432/sem3";
         String username = "postgres";
-        String password = "qwerty1";
+        String password = "abc";
 
         try {
             try {

@@ -131,4 +131,14 @@
         <servlet-name>ProfileServlet</servlet-name>
         <url-pattern>/ProfileServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <description></description>
+        <display-name>AnProfileServlet</display-name>
+        <servlet-name>AnProfileServlet</servlet-name>
+        <servlet-class>ru.mvc.controller.AnProfileServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AnProfileServlet</servlet-name>
+        <url-pattern>/AnProfileServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

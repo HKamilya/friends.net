@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -22,9 +24,20 @@ public class LoginServlet extends HttpServlet {
 
         Users loginBean = new Users();
 
-        loginBean.setUserName(username);
-        loginBean.setPassword(password);
 
+        MessageDigest md5 = null;
+        try {
+            md5 = MessageDigest.getInstance("MD5");
+        } catch (NoSuchAlgorithmException e) {
+            throw new IllegalStateException();
+        }
+        byte[] bytes = md5.digest(password.getBytes());
+        StringBuilder builder = new StringBuilder();
+        for (byte b:bytes) {
+            builder.append(b);
+        }
+        loginBean.setUserName(username);
+        loginBean.setPassword(builder.toString());
         UserDao loginDao = new UserDao();
         try {
             String userValidate = loginDao.authenticateUser(loginBean);

@@ -264,16 +264,19 @@
                 <div class="inform">
                     <p>${description}</p>
                 </div>
+                <div class="inform">
+                    <a href="${pageContext.request.contextPath}/AnProfileServlet?username=${author}">${author}</a>
+                </div>
                 <div class="tags">
-                    <div class="tag">
-                        Класс
-                    </div>
-                    <div class="tag">
-                        Супер
-                    </div>
-                    <div class="tag">
-                        Интересно
-                    </div>
+                    <%--                    <div class="tag">--%>
+                    <%--                        Класс--%>
+                    <%--                    </div>--%>
+                    <%--                    <div class="tag">--%>
+                    <%--                        Супер--%>
+                    <%--                    </div>--%>
+                    <%--                    <div class="tag">--%>
+                    <%--                        Интересно--%>
+                    <%--                    </div>--%>
                 </div>
                 <div class="but">
                     <button type="button" name="submit" data-toggle="modal" data-target="#exampleModal">Я пойду!
@@ -315,7 +318,8 @@
                     Пожалуйста, зарегистрируйтесь или авторизуйтесь, если у вас уже есть аккаунт на этом сайте
                 </label>
                 <input type="submit" class="btn btn-dark" onclick="location.href='Login.jsp'" value="Войти"/><input
-                    class="btn btn-dark" type="reset"onclick="location.href='Register.jsp'" value="Зарегистрироваться"/><%}%>
+                    class="btn btn-dark" type="reset" onclick="location.href='Register.jsp'"
+                    value="Зарегистрироваться"/><%}%>
             </div>
         </div>
     </div>

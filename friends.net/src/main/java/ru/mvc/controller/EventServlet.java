@@ -3,9 +3,11 @@ package ru.mvc.controller;
 import ru.mvc.bean.Events;
 import ru.mvc.bean.Request;
 import ru.mvc.bean.Review;
+import ru.mvc.bean.Users;
 import ru.mvc.models.EventDao;
 import ru.mvc.models.RequestDao;
 import ru.mvc.models.ReviewDao;
+import ru.mvc.models.UserDao;
 
 
 import javax.servlet.ServletException;
@@ -26,8 +28,10 @@ public class EventServlet extends HttpServlet {
         Integer id = Integer.parseInt(req.getParameter("id"));
         Events event = eventDao.getEvent(id);
         RequestDao requestDao = new RequestDao();
+        UserDao userDao = new UserDao();
+        Users user = userDao.findById(id);
         List<Request> requests = requestDao.getAllRequests(id);
-        req.setAttribute("event_id", id);
+        req.setAttribute("event_id", event.getUser_id());
         req.setAttribute("name", event.getName());
         req.setAttribute("city", event.getCity());
         req.setAttribute("street", event.getStreet());
@@ -37,7 +41,8 @@ public class EventServlet extends HttpServlet {
         req.setAttribute("category", event.getCategory());
         req.setAttribute("date", event.getDatetime());
         req.setAttribute("numOfReq", requests.size());
-
+        req.setAttribute("author", user.getUserName());
+        System.out.println(user.getUserName());
         ReviewDao reviewDao = new ReviewDao();
         List<Review> reviews = reviewDao.getReviews(id);
         req.setAttribute("reviewsList", reviews);

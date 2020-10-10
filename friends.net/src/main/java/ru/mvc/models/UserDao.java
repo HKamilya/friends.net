@@ -42,7 +42,7 @@ public class UserDao {
         Connection con = null;
         Statement statement = null;
         ResultSet resultSet = null;
-
+        System.out.println(password);
         String userNameDB = "";
         String passwordDB = "";
 
@@ -119,5 +119,37 @@ public class UserDao {
             e.printStackTrace();
         }
         return "Something went wrong";
+    }
+
+    public Users findById(int id) {
+        Users user = new Users();
+        Connection con = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        try {
+            con = DBConnection.createConnection();
+            String sql = "SELECT * FROM \"user\" where id=" + id;
+            statement = con.createStatement();
+            resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                String username = resultSet.getString("username");
+                String fullname = resultSet.getString("fullname");
+                String email = resultSet.getString("email");
+                String password = resultSet.getString("password");
+                String image = resultSet.getString("image");
+                String description = resultSet.getString("description");
+
+                user.setEmail(email);
+                user.setUserName(username);
+                user.setFullName(fullname);
+                user.setImage(image);
+                user.setPassword(password);
+                user.setDescription(description);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
     }
 }

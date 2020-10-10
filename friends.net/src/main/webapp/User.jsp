@@ -121,9 +121,12 @@
             </div>
         </div>
     </div>
+    <% if
+    (session.getAttribute("User") == request.getAttribute("username")) {%>
     <form action="${pageContext.request.contextPath}/UpdateProfileServlet">
         <button>Редактировать профиль</button>
     </form>
+    <%}%>
 </div>
 </body>
 </html>
