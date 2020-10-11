@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoriesDao {
+public class CategoriesDao implements DaoInterface<Categories> {
 
     public List<Categories> getAllCategories() {
         List<Categories> categories = new ArrayList<>();
@@ -32,12 +32,32 @@ public class CategoriesDao {
                 categories.add(category);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new IllegalStateException(e);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException ignore) {
+                }
+            }
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ignore) {
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ignore) {
+                }
+            }
         }
+
         return categories;
     }
 
-    public Categories getCategoryById(int id) {
+    public Categories findById(int id) {
         Categories categories = new Categories();
         Connection con = null;
         Statement statement = null;
@@ -56,10 +76,29 @@ public class CategoriesDao {
                 categories.setName(name);
 
             }
-
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new IllegalStateException(e);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException ignore) {
+                }
+            }
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ignore) {
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ignore) {
+                }
+            }
         }
+
         return categories;
     }
 }

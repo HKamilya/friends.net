@@ -31,6 +31,14 @@ public class UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ignore) {
+                }
+            }
+        }
         return "Something went wrong";
 
     }
@@ -60,8 +68,28 @@ public class UserDao {
                     return "User_Role";
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new IllegalStateException(e);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException ignore) {
+                }
+            }
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ignore) {
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ignore) {
+                }
+            }
         }
+
         return "Invalid user credentials";
     }
 
@@ -92,8 +120,28 @@ public class UserDao {
                 user.setDescription(description);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new IllegalStateException(e);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException ignore) {
+                }
+            }
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ignore) {
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ignore) {
+                }
+            }
         }
+
         return user;
 
     }
@@ -118,6 +166,14 @@ public class UserDao {
                 return "SUCCESS";
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+        finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ignore) {
+                }
+            }
         }
         return "Something went wrong";
     }
@@ -149,8 +205,27 @@ public class UserDao {
                 user.setDescription(description);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new IllegalStateException(e);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException ignore) {
+                }
+            }
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ignore) {
+                }
+            } if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ignore) {
+                }
+            }
         }
+
         return user;
     }
 }

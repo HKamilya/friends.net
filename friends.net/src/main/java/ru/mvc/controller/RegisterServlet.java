@@ -18,7 +18,7 @@ public class RegisterServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //Copying all the input parameters in to local variables
+        request.setCharacterEncoding("UTF-8");
         String fullName = request.getParameter("fullname");
         String email = request.getParameter("email");
         String username = request.getParameter("username");
@@ -55,8 +55,7 @@ public class RegisterServlet extends HttpServlet {
             request.setAttribute("fullName", fullName);
 
             request.getRequestDispatcher("/User.jsp").forward(request, response);
-            request.getRequestDispatcher("/User.jsp").forward(request, response);
-        } else {
+                } else {
             request.setAttribute("errMessage", userRegistered);
             request.getRequestDispatcher("/Register.jsp").forward(request, response);
         }

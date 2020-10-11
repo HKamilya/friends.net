@@ -9,7 +9,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventDao {
+public class EventDao implements DaoInterface<Events> {
     public String addEvent(String username, Events events) {
         String name = events.getName();
         String city = events.getCity();
@@ -55,8 +55,29 @@ public class EventDao {
             if (i != 0)
                 return "SUCCESS";
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new IllegalStateException(e);
+        } finally {
+
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ignore) {
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ignore) {
+                }
+            }
+            if (con1 != null) {
+                try {
+                    con1.close();
+                } catch (SQLException ignore) {
+                }
+            }
         }
+
         return "Something went wrong";
     }
 
@@ -85,7 +106,7 @@ public class EventDao {
                 String status = resultSet.getString("status");
                 String date = resultSet.getString("date");
                 CategoriesDao categoriesDao = new CategoriesDao();
-                Categories category = categoriesDao.getCategoryById(category_id);
+                Categories category = categoriesDao.findById(category_id);
 
                 Events event = new Events(id, user_id, name, city, street, house, date, image, description, category, status);
 
@@ -95,8 +116,28 @@ public class EventDao {
 
             res = events.get(a);
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new IllegalStateException(e);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException ignore) {
+                }
+            }
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ignore) {
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ignore) {
+                }
+            }
         }
+
         return res;
     }
 
@@ -125,15 +166,33 @@ public class EventDao {
                 String status = resultSet.getString("status");
                 String date = resultSet.getString("date");
                 CategoriesDao categoriesDao = new CategoriesDao();
-                Categories category = categoriesDao.getCategoryById(category_id);
+                Categories category = categoriesDao.findById(category_id);
 
                 Events event = new Events(id, user_id, name, city, street, house, date, image, description, category, status);
 
                 events.add(event);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new IllegalStateException(e);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException ignore) {}
+            }
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ignore) {}
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ignore) {
+                }
+            }
         }
+
         return events;
     }
 
@@ -162,19 +221,37 @@ public class EventDao {
                 String status = resultSet.getString("status");
                 String date = resultSet.getString("date");
                 CategoriesDao categoriesDao = new CategoriesDao();
-                Categories category = categoriesDao.getCategoryById(category_id);
+                Categories category = categoriesDao.findById(category_id);
 
                 Events event = new Events(event_id, user_id, name, city, street, house, date, image, description, category, status);
 
                 events.add(event);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new IllegalStateException(e);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException ignore) {}
+            }
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ignore) {}
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ignore) {
+                }
+            }
         }
+
         return events;
     }
 
-    public Events getEvent(int id) {
+    public Events findById(int id) {
         List<Events> events = new ArrayList<>();
         Events res = null;
         Connection con = null;
@@ -198,7 +275,7 @@ public class EventDao {
                 String status = resultSet.getString("status");
                 String date = resultSet.getString("date");
                 CategoriesDao categoriesDao = new CategoriesDao();
-                Categories category = categoriesDao.getCategoryById(category_id);
+                Categories category = categoriesDao.findById(category_id);
 
                 Events event = new Events(id, user_id, name, city, street, house, date, image, description, category, status);
 
@@ -208,8 +285,26 @@ public class EventDao {
 
             res = events.get(a);
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new IllegalStateException(e);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException ignore) {}
+            }
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ignore) {}
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ignore) {
+                }
+            }
         }
+
         return res;
     }
 
@@ -227,6 +322,10 @@ public class EventDao {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+        try {
+            con.close();
+        } catch (SQLException ignore) {
         }
     }
 }

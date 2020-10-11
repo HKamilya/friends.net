@@ -12,6 +12,7 @@ import java.io.IOException;
 
 public class UpdateProfileServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("User");
         String fullname = request.getParameter("fullName");
@@ -25,7 +26,7 @@ public class UpdateProfileServlet extends HttpServlet {
 
         if (updatedUsersData.equals("SUCCESS")) {
 
-            request.getRequestDispatcher("/ProfileServlet").forward(request, response);
+            request.getRequestDispatcher("/User.jsp").forward(request, response);
         } else {
             request.setAttribute("errMessage", updatedUsersData);
             request.getRequestDispatcher("/User.jsp").forward(request, response);

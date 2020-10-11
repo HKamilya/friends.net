@@ -59,4 +59,8 @@ public class Categories {
     public String toString() {
         return name;
     }
+
+    public String getDescString() {
+        return description;
+    }
 }

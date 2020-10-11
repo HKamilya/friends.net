@@ -20,13 +20,13 @@ public class EventServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         EventDao eventDao = new EventDao();
         Integer id = Integer.parseInt(req.getParameter("id"));
-        Events event = eventDao.getEvent(id);
+        Events event = eventDao.findById(id);
         RequestDao requestDao = new RequestDao();
         UserDao userDao = new UserDao();
 
         Users user = userDao.findById(id);
         List<Request> requests = requestDao.getAllRequests(id);
-        req.setAttribute("event_id", event.getUser_id());
+        req.setAttribute("event_id", event.getId());
         req.setAttribute("name", event.getName());
         req.setAttribute("city", event.getCity());
         req.setAttribute("street", event.getStreet());
@@ -40,6 +40,9 @@ public class EventServlet extends HttpServlet {
         System.out.println(user.getUserName());
         ReviewDao reviewDao = new ReviewDao();
         List<Review> reviews = reviewDao.getReviews(id);
+        for (Review r : reviews) {
+            System.out.println(r.getUser().getUserName());
+        }
         req.setAttribute("reviewsList", reviews);
         getServletContext().getRequestDispatcher("/Event.jsp").forward(req, resp);
 

@@ -99,7 +99,7 @@
             <p><%out.println(s.getDescription());%></p>
         </div>
         <div class="descr">
-            <p><%out.println(s.getCategory());%></p>
+            <p><%out.println(s.getCategory().getName());%></p>
         </div>
     </div>
     <% }

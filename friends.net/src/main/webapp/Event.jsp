@@ -282,14 +282,14 @@
                     <%--                    </div>--%>
                 </div>
                 <div class="but">
-                    <button type="button" name="submit" data-toggle="modal" data-target="#exampleModal">Я пойду!
+                    <button type="button" name="submit" data-toggle="modal" data-target="#requestModal">Я пойду!
                     </button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="requestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -364,7 +364,7 @@
                             <div class="media-body">
                                 <div class="mar-btm">
                                     <a href="#" class="btn-link text-semibold media-heading box-inline"><%
-                                        out.print(s.getUsername());%></a>
+                                        out.print(s.getUser().getUserName());%></a>
                                 </div>
                                 <p><%out.print(s.getText());%></p>
                                 <div class="pad-ver">

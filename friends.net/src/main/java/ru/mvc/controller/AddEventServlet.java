@@ -35,6 +35,7 @@ public class AddEventServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         int categoryId = Integer.parseInt(request.getParameter("category"));
 
@@ -73,7 +74,7 @@ public class AddEventServlet extends HttpServlet {
         String userRegistered = eventDao.addEvent(username, events);
 
         if (userRegistered.equals("SUCCESS")) {
-            request.getRequestDispatcher("/AllEvents.jsp").forward(request, response);
+            request.getRequestDispatcher("/AddEvent.jsp").forward(request, response);
         } else {
             request.setAttribute("errMessage", userRegistered);
             request.getRequestDispatcher("/AddEvent.jsp").forward(request, response);

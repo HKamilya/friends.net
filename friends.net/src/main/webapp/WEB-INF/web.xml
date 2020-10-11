@@ -141,4 +141,14 @@
         <servlet-name>AnProfileServlet</servlet-name>
         <url-pattern>/AnProfileServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <description></description>
+        <display-name>SupportMessServlet</display-name>
+        <servlet-name>SupportMessServlet</servlet-name>
+        <servlet-class>ru.mvc.controller.SupportMessServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SupportMessServlet</servlet-name>
+        <url-pattern>/SupportMessServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

@@ -1,34 +1,20 @@
 package ru.mvc.model;
 
+import java.awt.*;
+
 public class Request {
-    private int event_id;
-    private int subscriber;
+    private Events event;
+    private Users subscriber;
     private String comment;
 
     public Request() {
 
     }
 
-    public Request(int event_id, int subscriber, String comment) {
-        this.event_id = event_id;
+    public Request(Events event,Users subscriber, String comment) {
+        this.event = event;
         this.subscriber = subscriber;
         this.comment = comment;
-    }
-
-    public int getEvent_id() {
-        return event_id;
-    }
-
-    public void setEvent_id(int event_id) {
-        this.event_id = event_id;
-    }
-
-    public int getSubscriber() {
-        return subscriber;
-    }
-
-    public void setSubscriber(int subscriber) {
-        this.subscriber = subscriber;
     }
 
     public String getComment() {
@@ -37,5 +23,21 @@ public class Request {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public Users getSubscriber() {
+        return subscriber;
+    }
+
+    public void setSubscriber(Users subscriber) {
+        this.subscriber = subscriber;
+    }
+
+    public Events getEvent() {
+        return event;
+    }
+
+    public void setEvent(Events event) {
+        this.event = event;
     }
 }

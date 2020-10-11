@@ -1,39 +1,47 @@
 package ru.mvc.dao;
 
 
+import ru.mvc.model.Events;
 import ru.mvc.model.Request;
+import ru.mvc.model.Users;
 import ru.mvc.util.DBConnection;
+
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class RequestDao {
-    public String addRequest(String username, Request request) {
-        int event_id = request.getEvent_id();
+    public String addRequest(Request request) {
+        Events event = request.getEvent();
         String comment = request.getComment();
+        Users user = request.getSubscriber();
 
 
         Connection con = null;
         Connection con1 = null;
-        PreparedStatement preparedStatement = null;
         Statement statement = null;
-        ResultSet result = null;
-        int user_id = 0;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+
         try {
             con = DBConnection.createConnection();
             con1 = DBConnection.createConnection();
-            String query1 = "select id from \"user\" where username ='" + username + "'";
+            String sql = "SELECT * FROM request where event_id=" + event.getId();
             statement = con1.createStatement();
-            result = statement.executeQuery(query1);
-            while (result.next()) {
-                user_id = result.getInt(1);
+            resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                int subscriber = resultSet.getInt("subscriber");
+                int event_id = resultSet.getInt("event_id");
+                if (event.getId() == event_id & user.getId() == subscriber) {
+                    return "вы уже участвуете в этом мероприятии";
+                }
             }
-            System.out.println(user_id);
-            String query = "insert into request(event_id, subscriber, comment) values (?,?,?)"; //Insert user details into the table 'USERS'
-            preparedStatement = con.prepareStatement(query); //Making use of prepared statements here to insert bunch of data
-            preparedStatement.setInt(1, event_id);
-            preparedStatement.setInt(2, user_id);
+            String query = "insert into request(event_id, subscriber, comment) values (?,?,?)";
+            preparedStatement = con.prepareStatement(query);
+            preparedStatement.setInt(1, event.getId());
+            preparedStatement.setInt(2, user.getId());
             preparedStatement.setString(3, comment);
 
 
@@ -43,6 +51,12 @@ public class RequestDao {
                 return "SUCCESS";
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+        if (con != null) {
+            try {
+                con.close();
+            } catch (SQLException ignore) {
+            }
         }
         return "Something went wrong";
     }
@@ -60,16 +74,40 @@ public class RequestDao {
             resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
-                int event_id1 = resultSet.getInt("event_id");
                 int subscriber = resultSet.getInt("subscriber");
                 String comment = resultSet.getString("comment");
 
-                Request request = new Request(event_id1, subscriber, comment);
+                UserDao userDao = new UserDao();
+                Users user = userDao.findById(subscriber);
+                EventDao eventDao = new EventDao();
+                Events events = eventDao.findById(event_id);
+                Request request = new Request(events, user, comment);
                 requests.add(request);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new IllegalStateException(e);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException ignore) {
+                }
+            }
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ignore) {
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ignore) {
+                }
+            }
+
         }
+
         return requests;
     }
 }
