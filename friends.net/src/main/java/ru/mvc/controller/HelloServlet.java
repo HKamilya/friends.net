@@ -1,17 +1,14 @@
 package ru.mvc.controller;
 
-import ru.mvc.model.Events;
-import ru.mvc.dao.EventDao;
-
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.List;
 
-public class AllEventsServlet extends HttpServlet {
+public class HelloServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
@@ -20,9 +17,10 @@ public class AllEventsServlet extends HttpServlet {
         HttpSession session = request.getSession();
         String user = (String) session.getAttribute("User");
         request.setAttribute("user", user);
-        EventDao eventDao = new EventDao();
-        List<Events> eventsList = eventDao.getAllEvents();
-        request.setAttribute("list", eventsList);
-        getServletContext().getRequestDispatcher("/allEvents.ftl").forward(request, response);
+
+
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/main.ftl");
+        requestDispatcher.forward(request, response);
+
     }
 }

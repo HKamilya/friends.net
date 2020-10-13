@@ -27,7 +27,12 @@ public class CategoriesDao implements DaoInterface<Categories> {
                 String name = resultSet.getString("name");
                 String description = resultSet.getString("description");
 
-                Categories category = new Categories(id, name, description);
+
+                Categories category = new Categories();
+                category.setDescription(description);
+                category.setId(id);
+                category.setName(name);
+
 
                 categories.add(category);
             }

@@ -5,20 +5,49 @@ import ru.mvc.model.Users;
 import ru.mvc.dao.EventDao;
 import ru.mvc.dao.UserDao;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
+
 public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     public LoginServlet() {
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Cookie[] cookies = request.getCookies();     // request is an instance of type
+        //HttpServletRequest
+        boolean foundCookie = false;
+        String username = null;
+        String password = null;
+        for (int i = 0; i < cookies.length; i++) {
+            Cookie c = cookies[i];
+            Cookie p = cookies[i];
+            if (c.getName().equals("username")) {
+                username = c.getValue();
+            }
+            if (p.getName().equals("password")) {
+                password = p.getValue();
+            }
+        }
+        if (username != null & password != null) {
+            request.setAttribute("username", username);
+            request.setAttribute("password", password);
+        }
+        HttpSession session = request.getSession();
+        String user = (String) session.getAttribute("User");
+        request.setAttribute("user", user);
+
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/login.ftl");
+        requestDispatcher.forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -49,23 +78,32 @@ public class LoginServlet extends HttpServlet {
 
             if (userValidate.equals("User_Role")) {
                 System.out.println("User's Home");
+                if (rememberMe) {
+                    Cookie c = new Cookie("username", username);
+                    Cookie p = new Cookie("password", password);
+                    c.setMaxAge(24 * 60 * 60);
+                    p.setMaxAge(24 * 60 * 60);
+                    response.addCookie(c);
+                    response.addCookie(p);
+                }
 
                 HttpSession session = request.getSession();
                 session.setMaxInactiveInterval(10 * 60);
                 session.setAttribute("User", username);
                 request.setAttribute("username", username);
+                request.setAttribute("user", username);
                 loginBean = loginDao.getInfo(username);
                 EventDao eventDao = new EventDao();
                 List<Events> events = eventDao.getAllUsersEvents(loginBean.getId());
                 request.setAttribute("eventsList", events);
                 request.setAttribute("description", loginBean.getDescription());
-                request.setAttribute("fullname", loginBean.getFullName());
-                request.getRequestDispatcher("/User.jsp").forward(request, response);
+                request.setAttribute("fullName", loginBean.getFullName());
+                request.getRequestDispatcher("/user.ftl").forward(request, response);
             } else {
                 System.out.println("Error message = " + userValidate);
                 request.setAttribute("errMessage", userValidate);
 
-                request.getRequestDispatcher("/Login.jsp").forward(request, response);
+                request.getRequestDispatcher("/login.ftl").forward(request, response);
             }
         } catch (Exception e1) {
             throw new IllegalStateException();

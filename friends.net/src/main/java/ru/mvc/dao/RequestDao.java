@@ -81,7 +81,11 @@ public class RequestDao {
                 Users user = userDao.findById(subscriber);
                 EventDao eventDao = new EventDao();
                 Events events = eventDao.findById(event_id);
-                Request request = new Request(events, user, comment);
+                Request request = new Request();
+                request.setSubscriber(user);
+                request.setComment(comment);
+                request.setEvent(events);
+
                 requests.add(request);
             }
         } catch (SQLException e) {

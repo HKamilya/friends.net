@@ -34,14 +34,16 @@ public class SendRequestServlet extends HttpServlet {
         RequestDao requestDao = new RequestDao();
         String requestSended = requestDao.addRequest( req);
         if (requestSended.equals("SUCCESS")) {
-            request.getRequestDispatcher("/Event.jsp").forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/EventServlet?id=" + event_id);
         } else {
             request.setAttribute("errMessage", requestSended);
-            request.getRequestDispatcher("/Event.jsp").forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/EventServlet?id=" + event_id);
         }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        HttpSession session = request.getSession();
+        String user = (String) session.getAttribute("User");
+        request.setAttribute("user", user);
     }
 }

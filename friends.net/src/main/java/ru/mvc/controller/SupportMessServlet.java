@@ -18,7 +18,8 @@ public class SupportMessServlet extends HttpServlet {
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("User");
         String text = request.getParameter("text");
-        System.out.println(text);
+        String date = request.getParameter("date");
+        System.out.println(date);
         String title = request.getParameter("title");
         String email = request.getParameter("email");
         if (email.equals("email")) {
@@ -35,6 +36,8 @@ public class SupportMessServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        HttpSession session = request.getSession();
+        String user = (String) session.getAttribute("User");
+        request.setAttribute("user", user);
     }
 }

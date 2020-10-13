@@ -1,5 +1,13 @@
 package ru.mvc.model;
 
+
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+
 public class Users {
 
     private int id;
@@ -10,59 +18,7 @@ public class Users {
     private String image;
     private String description;
 
-    public String getUserName() {
-        return userName;
-    }
+    public Users() {
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 }

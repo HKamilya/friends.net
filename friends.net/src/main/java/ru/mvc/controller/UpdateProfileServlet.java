@@ -26,21 +26,22 @@ public class UpdateProfileServlet extends HttpServlet {
 
         if (updatedUsersData.equals("SUCCESS")) {
 
-            request.getRequestDispatcher("/User.jsp").forward(request, response);
+            request.getRequestDispatcher("/user.ftl").forward(request, response);
         } else {
             request.setAttribute("errMessage", updatedUsersData);
-            request.getRequestDispatcher("/User.jsp").forward(request, response);
+            request.getRequestDispatcher("/user.ftl").forward(request, response);
         }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("User");
+        request.setAttribute("user", username);
         UserDao userDao = new UserDao();
         Users users = userDao.getInfo(username);
         request.setAttribute("password", users.getPassword());
         request.setAttribute("fullName", users.getFullName());
         request.setAttribute("description", users.getDescription());
-        getServletContext().getRequestDispatcher("/UpdateProfile.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/updateProfile.ftl").forward(request, response);
     }
 }

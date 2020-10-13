@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -19,10 +20,14 @@ public class RandomEventServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
+        HttpSession session = req.getSession();
+        String usernm = (String) session.getAttribute("User");
+        req.setAttribute("user", usernm);
+
         EventDao eventDao = new EventDao();
         Events event = eventDao.getRandomEvent();
         UserDao userDao = new UserDao();
-        Users user = userDao.findById(event.getUser_id());
+        Users user = userDao.findById(event.getUser().getId());
         req.setAttribute("event_id", event.getId());
         req.setAttribute("name", event.getName());
         req.setAttribute("city", event.getCity());
@@ -40,7 +45,7 @@ public class RandomEventServlet extends HttpServlet {
         ReviewDao reviewDao = new ReviewDao();
         List<Review> reviews = reviewDao.getReviews(event.getId());
         req.setAttribute("reviewsList", reviews);
-        getServletContext().getRequestDispatcher("/Event.jsp").forward(req, resp);
+        getServletContext().getRequestDispatcher("/event.ftl").forward(req, resp);
 
     }
 

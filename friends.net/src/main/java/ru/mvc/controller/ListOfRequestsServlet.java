@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-public class ListOfRequsetsServlet extends HttpServlet {
+public class ListOfRequestsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
@@ -25,7 +25,7 @@ public class ListOfRequsetsServlet extends HttpServlet {
         RequestDao requestDao = new RequestDao();
         List<Request> requestsList = requestDao.getAllRequests(event_id);
         request.setAttribute("list", requestsList);
-        getServletContext().getRequestDispatcher("/User.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/user.ftl").forward(request, response);
 
     }
 }

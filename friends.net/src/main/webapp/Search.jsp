@@ -126,7 +126,7 @@
     </style>
 </head>
 <body>
-<jsp:include page="Header.jsp"/>
+<jsp:include page="header.ftl"/>
 <form>
     <input type="text" placeholder="Найдите мероприятие...">
     <button type="submit"></button>

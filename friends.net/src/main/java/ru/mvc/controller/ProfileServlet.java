@@ -33,18 +33,19 @@ public class ProfileServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("User");
-        System.out.println(username);
+
+        request.setAttribute("user", username);
         EventDao eventDao = new EventDao();
 
         UserDao userDao = new UserDao();
         Users user = userDao.getInfo(username);
         List<Events> events = eventDao.getAllUsersEvents(user.getId());
         request.setAttribute("username", username);
-        request.setAttribute("fullname", user.getFullName());
+        request.setAttribute("fullName", user.getFullName());
         request.setAttribute("description", user.getDescription());
         request.setAttribute("image", user.getImage());
         request.setAttribute("eventsList", events);
-        request.getRequestDispatcher("/User.jsp").forward(request, response);
+        request.getRequestDispatcher("/user.ftl").forward(request, response);
 
     }
 }

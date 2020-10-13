@@ -39,15 +39,17 @@ public class AddReviewServlet extends HttpServlet {
         String reviewAdded = reviewDao.addReview(review);
 
         if (reviewAdded.equals("SUCCESS")) {
-            request.getRequestDispatcher("/Event.jsp").forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/EventServlet?id=" + event_id);
         } else {
             request.setAttribute("errMessage", reviewDao);
-            request.getRequestDispatcher("/Event.jsp").forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/EventServlet?id=" + event_id);
         }
     }
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        HttpSession session = request.getSession();
+        String user = (String) session.getAttribute("User");
+        request.setAttribute("user", user);
     }
 }

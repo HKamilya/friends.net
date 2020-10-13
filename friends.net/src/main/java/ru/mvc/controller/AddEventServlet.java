@@ -3,10 +3,12 @@ package ru.mvc.controller;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import ru.mvc.dao.UserDao;
 import ru.mvc.model.Categories;
 import ru.mvc.model.Events;
 import ru.mvc.dao.EventDao;
 import ru.mvc.dao.CategoriesDao;
+import ru.mvc.model.Users;
 
 
 import javax.servlet.ServletException;
@@ -24,13 +26,16 @@ public class AddEventServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        String user = (String) session.getAttribute("User");
+        req.setAttribute("user", user);
         CategoriesDao categoriesDao = new CategoriesDao();
         List<Categories> catList = categoriesDao.getAllCategories();
         req.setAttribute("list", catList);
         for (Categories cat : catList) {
             System.out.println(cat.getName());
         }
-        getServletContext().getRequestDispatcher("/AddEvent.jsp").forward(req, resp);
+        getServletContext().getRequestDispatcher("/addEvent.ftl").forward(req, resp);
 
     }
 
@@ -45,17 +50,10 @@ public class AddEventServlet extends HttpServlet {
         String city = request.getParameter("city");
         String street = request.getParameter("street");
         String house = request.getParameter("house");
+        String date = request.getParameter("date");
         String description = request.getParameter("description");
         String status = "актуально";
-        ServletFileUpload sf = new ServletFileUpload(new DiskFileItemFactory());
-        try {
-            List<FileItem> multifiles = sf.parseRequest(request);
-            for (FileItem item : multifiles) {
-                item.write(new File("src/main/webapp/img" + item.getName()));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
 
         Events events = new Events();
         Categories categories = new Categories();
@@ -68,16 +66,19 @@ public class AddEventServlet extends HttpServlet {
         events.setDescription(description);
         events.setCategory(categories);
         events.setStatus(status);
-
+        events.setDate(date);
+        UserDao userDao = new UserDao();
+        Users user = userDao.getInfo(username);
         EventDao eventDao = new EventDao();
+        events.setUser(user);
 
-        String userRegistered = eventDao.addEvent(username, events);
+        String userRegistered = eventDao.addEvent(events);
 
         if (userRegistered.equals("SUCCESS")) {
-            request.getRequestDispatcher("/AddEvent.jsp").forward(request, response);
+            request.getRequestDispatcher("/addEvent.ftl").forward(request, response);
         } else {
             request.setAttribute("errMessage", userRegistered);
-            request.getRequestDispatcher("/AddEvent.jsp").forward(request, response);
+            request.getRequestDispatcher("/addEvent.ftl").forward(request, response);
         }
     }
 

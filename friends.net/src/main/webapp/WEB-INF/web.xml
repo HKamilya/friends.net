@@ -8,9 +8,9 @@
     <session-config>
         <session-timeout>10</session-timeout>
     </session-config>
-    <welcome-file-list>
-        <welcome-file>Main.jsp</welcome-file>
-    </welcome-file-list>
+<!--    <welcome-file-list>-->
+<!--        <welcome-file>Main.jsp</welcome-file>-->
+<!--    </welcome-file-list>-->
     <servlet>
         <description></description>
         <display-name>RegisterServlet</display-name>
@@ -19,7 +19,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
-        <url-pattern>/RegisterServlet</url-pattern>
+        <url-pattern>/Registration</url-pattern>
     </servlet-mapping>
     <servlet>
         <description></description>
@@ -29,7 +29,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/LoginServlet</url-pattern>
+        <url-pattern>/Login</url-pattern>
     </servlet-mapping>
     <servlet>
         <description></description>
@@ -39,7 +39,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
-        <url-pattern>/LogoutServlet</url-pattern>
+        <url-pattern>/Logout</url-pattern>
     </servlet-mapping>
     <servlet>
         <description></description>
@@ -49,7 +49,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>AddEventServlet</servlet-name>
-        <url-pattern>/AddEventServlet</url-pattern>
+        <url-pattern>/AddEvent</url-pattern>
     </servlet-mapping>
     <servlet>
         <description></description>
@@ -59,7 +59,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>RandomEventServlet</servlet-name>
-        <url-pattern>/RandomEventServlet</url-pattern>
+        <url-pattern>/RandomEvent</url-pattern>
     </servlet-mapping>
     <servlet>
         <description></description>
@@ -69,7 +69,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>AllEventsServlet</servlet-name>
-        <url-pattern>/AllEventsServlet</url-pattern>
+        <url-pattern>/AllEvents</url-pattern>
     </servlet-mapping>
     <servlet>
         <description></description>
@@ -79,7 +79,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>EventServlet</servlet-name>
-        <url-pattern>/EventServlet</url-pattern>
+        <url-pattern>/Event</url-pattern>
     </servlet-mapping>
     <servlet>
         <description></description>
@@ -89,7 +89,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>AddReviewServlet</servlet-name>
-        <url-pattern>/AddReviewServlet</url-pattern>
+        <url-pattern>/AddReview</url-pattern>
     </servlet-mapping>
     <servlet>
         <description></description>
@@ -99,17 +99,17 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>SendRequestServlet</servlet-name>
-        <url-pattern>/SendRequestServlet</url-pattern>
+        <url-pattern>/SendRequest</url-pattern>
     </servlet-mapping>
     <servlet>
         <description></description>
         <display-name>ListOfRequestsServlet</display-name>
-        <servlet-name>ListOfRequsetsServlet</servlet-name>
-        <servlet-class>ru.mvc.controller.ListOfRequsetsServlet</servlet-class>
+        <servlet-name>ListOfRequestsServlet</servlet-name>
+        <servlet-class>ru.mvc.controller.ListOfRequestsServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>ListOfRequsetsServlet</servlet-name>
-        <url-pattern>/ListOfRequsetsServlet</url-pattern>
+        <servlet-name>ListOfRequestsServlet</servlet-name>
+        <url-pattern>/ListOfRequests</url-pattern>
     </servlet-mapping>
     <servlet>
         <description></description>
@@ -119,7 +119,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>UpdateProfileServlet</servlet-name>
-        <url-pattern>/UpdateProfileServlet</url-pattern>
+        <url-pattern>/UpdateProfile</url-pattern>
     </servlet-mapping>
     <servlet>
         <description></description>
@@ -129,7 +129,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>ProfileServlet</servlet-name>
-        <url-pattern>/ProfileServlet</url-pattern>
+        <url-pattern>/Profile</url-pattern>
     </servlet-mapping>
     <servlet>
         <description></description>
@@ -139,7 +139,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>AnProfileServlet</servlet-name>
-        <url-pattern>/AnProfileServlet</url-pattern>
+        <url-pattern>/AnProfile</url-pattern>
     </servlet-mapping>
     <servlet>
         <description></description>
@@ -149,6 +149,67 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>SupportMessServlet</servlet-name>
-        <url-pattern>/SupportMessServlet</url-pattern>
+        <url-pattern>/SupportMess</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>freemarker</servlet-name>
+        <servlet-class>freemarker.ext.servlet.FreemarkerServlet</servlet-class>
+
+        <init-param>
+            <param-name>TemplatePath</param-name>
+            <param-value>/</param-value>
+        </init-param>
+        <init-param>
+            <param-name>NoCache</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <init-param>
+            <param-name>ContentType</param-name>
+            <param-value>text/html; charset=UTF-8</param-value>
+        </init-param>
+
+
+        <init-param>
+            <param-name>template_update_delay</param-name>
+            <param-value>0</param-value>
+        </init-param>
+        <init-param>
+            <param-name>default_encoding</param-name>
+            <param-value>ISO-8859-1</param-value>
+        </init-param>
+        <init-param>
+            <param-name>number_format</param-name>
+            <param-value>0.##########</param-value>
+        </init-param>
+
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>freemarker</servlet-name>
+        <url-pattern>*.ftl</url-pattern>
+        <url-pattern>*.ftlh</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>hello_servlet</servlet-name>
+        <servlet-class>ru.mvc.controller.HelloServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>hello_servlet</servlet-name>
+        <url-pattern/>
+    </servlet-mapping>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>FreeMarker MVC Views</web-resource-name>
+            <url-pattern>*.ftl</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+
+        </auth-constraint>
+    </security-constraint>
 </web-app>
