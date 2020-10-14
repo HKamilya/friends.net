@@ -1,5 +1,6 @@
-<%@ page import="ru.mvc.model.Events" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="ru.mvc.model.Event" %>
+<%@ page import="java.util.List" %>
+<%@ page import="ru.mvc.model.Event" %><%--
   Created by IntelliJ IDEA.
   User: gipot
   Date: 10.10.2020
@@ -132,9 +133,9 @@
     <button type="submit"></button>
 </form>
 <div class="main">
-    <% List<Events> names = (List<Events>) request.getAttribute("list");
+    <% List<Event> names = (List<Event>) request.getAttribute("list");
         if (names != null && !names.isEmpty()) {
-            for (Events s : names) {%>
+            for (Event s : names) {%>
     <a class="name" href="${pageContext.request.contextPath}/EventServlet?id=<%out.println(s.getId());%>"><%
         out.println(s.getName());%></a>
     <div class="event">

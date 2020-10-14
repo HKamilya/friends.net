@@ -1,6 +1,6 @@
 package ru.mvc.controller;
 
-import ru.mvc.model.Events;
+import ru.mvc.model.Event;
 import ru.mvc.dao.EventDao;
 
 import javax.servlet.ServletException;
@@ -21,8 +21,8 @@ public class AllEventsServlet extends HttpServlet {
         String user = (String) session.getAttribute("User");
         request.setAttribute("user", user);
         EventDao eventDao = new EventDao();
-        List<Events> eventsList = eventDao.getAllEvents();
-        request.setAttribute("list", eventsList);
+        List<Event> eventList = eventDao.getAllEvents();
+        request.setAttribute("list", eventList);
         getServletContext().getRequestDispatcher("/allEvents.ftl").forward(request, response);
     }
 }

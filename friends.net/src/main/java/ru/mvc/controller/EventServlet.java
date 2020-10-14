@@ -25,11 +25,11 @@ public class EventServlet extends HttpServlet {
 
         EventDao eventDao = new EventDao();
         Integer id = Integer.parseInt(req.getParameter("id"));
-        Events event = eventDao.findById(id);
+        Event event = eventDao.findById(id);
         RequestDao requestDao = new RequestDao();
         UserDao userDao = new UserDao();
 
-        Users user = userDao.findById(id);
+        User user = userDao.findById(id);
         List<Request> requests = requestDao.getAllRequests(id);
         req.setAttribute("event_id", event.getId());
         req.setAttribute("name", event.getName());
@@ -39,7 +39,7 @@ public class EventServlet extends HttpServlet {
         req.setAttribute("image", event.getImage());
         req.setAttribute("description", event.getDescription());
         req.setAttribute("category", event.getCategory().getName().toString());
-        req.setAttribute("date", event.getDatetime());
+        req.setAttribute("date", event.getDate());
         req.setAttribute("numOfReq", requests.size());
         req.setAttribute("author", user.getUserName());
         System.out.println(user.getUserName());

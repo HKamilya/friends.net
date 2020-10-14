@@ -221,7 +221,7 @@
                         </div>
                         <div class="when">
                             <#if date??>
-                            ${date}
+                                ${date}
                             </#if>
                         </div>
                     </div>
@@ -235,32 +235,31 @@
                         <a href="/AnProfile?username=${author}">${author}</a>
                     </div>
                     <div class="tags">
-                        <%--
-                        <div class="tag">--%>
-                            <%-- Класс--%>
-                            <%--
-                        </div>
-                        --%>
-                        <%--
-                        <div class="tag">--%>
-                            <%-- Супер--%>
-                            <%--
-                        </div>
-                        --%>
-                        <%--
-                        <div class="tag">--%>
-                            <%-- Интересно--%>
-                            <%--
-                        </div>
-                        --%>
+                        <#--                        <%---->
+                        <#--                        <div class="tag">--%>-->
+                        <#--                            <%-- Класс--%>-->
+                        <#--                            <%---->
+                        <#--                        </div>-->
+                        <#--                        --%>-->
+                        <#--                        <%---->
+                        <#--                        <div class="tag">--%>-->
+                        <#--                            <%-- Супер--%>-->
+                        <#--                            <%---->
+                        <#--                        </div>-->
+                        <#--                        --%>-->
+                        <#--                        <%---->
+                        <#--                        <div class="tag">--%>-->
+                        <#--                            <%-- Интересно--%>-->
+                        <#--                            <%---->
                     </div>
-                    <div class="but">
-                        <button type="button" name="submit" data-toggle="modal" data-target="#requestModal">Я пойду!
-                        </button>
-                    </div>
+                </div>
+                <div class="but">
+                    <button type="button" name="submit" data-toggle="modal" data-target="#requestModal">Я пойду!
+                    </button>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <div class="modal fade" id="requestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
@@ -273,29 +272,33 @@
                     </button>
                 </div>
                 <div class="modal-body" style="text-align: center">
-                    <% if (session.getAttribute("User") != null) {%>
-                    <form name="form" action="SendRequestServlet" method="post" onsubmit="return validate()">
-                        <label style="font-size: 20px">Комментарий</label>
-                        <br>
-                        <textarea style="width: 200px;" type="text" name="comment"></textarea>
+                    <#if user??>
+                        <form name="form" action="SendRequestServlet" method="post" onsubmit="return validate()">
+                            <label style="font-size: 20px">Комментарий</label>
+                            <br>
+                            <textarea style="width: 200px;" type="text" name="comment"></textarea>
 
-                        <input type="hidden" name="event_id" value="${event_id}">
-                        <%=(request.getAttribute("errMessage") == null) ? ""
-                        : request.getAttribute("errMessage")%>
-                        <br>
-                        <br>
-                        <input type="submit" class="btn btn-dark" value="Отправить"/><input
-                                class="btn btn-dark" type="reset" value="Reset"/>
-                    </form>
-                    <%} else {%>
-                    <label style="font-size: 15px">
-                        К сожалению, откликнуться могут только зарегистрированные пользователи :(
-                        <br>
-                        Пожалуйста, зарегистрируйтесь или авторизуйтесь, если у вас уже есть аккаунт на этом сайте
-                    </label>
-                    <input type="submit" class="btn btn-dark" onclick="location.href='login.ftl'" value="Войти"/><input
-                            class="btn btn-dark" type="reset" onclick="location.href='register.ftl'"
-                            value="Зарегистрироваться"/><%}%>
+                            <input type="hidden" name="event_id" value="${event_id}">
+                            <#if errMessage??>
+                                ${errMessage}
+                            </#if>
+                            <br>
+                            <br>
+                            <input type="submit" class="btn btn-dark" value="Отправить"/><input
+                                    class="btn btn-dark" type="reset" value="Reset"/>
+                        </form>
+                    <#else >
+
+                        <label style="font-size: 15px">
+                            К сожалению, откликнуться могут только зарегистрированные пользователи :(
+                            <br>
+                            Пожалуйста, зарегистрируйтесь или авторизуйтесь, если у вас уже есть аккаунт на этом сайте
+                        </label>
+                        <input type="submit" class="btn btn-dark" onclick="location.href='login.ftl'" value="Войти"/>
+                        <input
+                                class="btn btn-dark" type="reset" onclick="location.href='register.ftl'"
+                                value="Зарегистрироваться"/>
+                    </#if>
                 </div>
             </div>
         </div>
@@ -307,27 +310,28 @@
                 <div class="panel">
                     <div class="panel-body">
                         <#if user??>
-                        <form action="AddReviewServlet" method="post" onsubmit="return validate()">
+                            <form action="AddReviewServlet" method="post" onsubmit="return validate()">
                         <textarea class="form-control" rows="2" placeholder="Добавьте Ваш комментарий"
                                   name="review"></textarea>
-                            <div class="mar-top clearfix">
-                                <input type="hidden" name="event_id" value="${event_id}">
-<#--                                <%=(request.getAttribute("errMessage") == null) ? ""-->
-<#--                                : request.getAttribute("errMessage")%>-->
-                                <button class="btn btn-sm btn-primary pull-right" type="submit"><i
-                                            class="fa fa-pencil fa-fw"></i> Добавить
-                                </button>
-                                <a class="btn btn-trans btn-icon fa fa-video-camera add-tooltip" href="#"></a>
-                                <a class="btn btn-trans btn-icon fa fa-camera add-tooltip" href="#"></a>
-                                <a class="btn btn-trans btn-icon fa fa-file add-tooltip" href="#"></a>
-                            </div>
-                        </form>
+                                <div class="mar-top clearfix">
+                                    <input type="hidden" name="event_id" value="${event_id}">
+                                    <#if errMessage??>
+                                        ${errMessage}
+                                    </#if>
+                                    <button class="btn btn-sm btn-primary pull-right" type="submit"><i
+                                                class="fa fa-pencil fa-fw"></i> Добавить
+                                    </button>
+                                    <a class="btn btn-trans btn-icon fa fa-video-camera add-tooltip" href="#"></a>
+                                    <a class="btn btn-trans btn-icon fa fa-camera add-tooltip" href="#"></a>
+                                    <a class="btn btn-trans btn-icon fa fa-file add-tooltip" href="#"></a>
+                                </div>
+                            </form>
                         </#if>
                     </div>
                 </div>
                 <div class="panel">
                     <div class="panel-body">
-                        <ul><#list reviewsList as reviev>
+                        <ul><#list reviewsList as review>
                                 <div class="media-block">
                                     <a class="media-left" href="#"><img class="img-circle img-sm"
                                                                         alt="Профиль пользователя"
@@ -335,9 +339,9 @@
                                     <div class="media-body">
                                         <div class="mar-btm">
                                             <a href="#"
-                                               class="btn-link text-semibold media-heading box-inline">${reviev.name}</a>
+                                               class="btn-link text-semibold media-heading box-inline">${review.user.fullName}</a>
                                         </div>
-                                        <p>${reviev.name}</p>
+                                        <p>${review.text}</p>
                                         <div class="pad-ver">
                                             <div class="btn-group">
                                                 <a class="btn btn-sm btn-default btn-hover-success" href="#"><i

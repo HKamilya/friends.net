@@ -84,7 +84,9 @@
                 </div>
                 <div class="about">
                     <div class="about_user">
-                        ${description}
+                        <#if description??>
+                            ${description}
+                        </#if>
                     </div>
                 </div>
             </div>
@@ -94,37 +96,39 @@
                 <button>Редактировать профиль</button>
             </form>
         </#if>
-        <#list eventsList as eventsList>
+        <#if  eventList??>
+            <#list eventList as eventList>
 
-            <a class="name" href="/EventServlet?id=${eventsList.id}">${eventsList.id}</a>
-            <div class="event">
-                <div class="h_p">
-                    <div class="img">
-                        <#if eventsList.image??>
-                            <img class="photo" src="${eventsList.image}">
-                        </#if>
+                <a class="name" href="/EventServlet?id=${eventList.id}">${eventList.id}</a>
+                <div class="event">
+                    <div class="h_p">
+                        <div class="img">
+                            <#if eventList.image??>
+                                <img class="photo" src="${eventList.image}">
+                            </#if>
+                        </div>
                     </div>
+                    <div class="descr">
+                        <p>${eventList.description}</p>
+                    </div>
+                    <div class="descr">
+                        <p>${eventList.category.name}</p>
+                    </div>
+                    <div class="descr">
+                        <p>${eventList.status}</p>
+                    </div>
+                    <#if user==username>
+                        <form action="/Profile" method="post">
+                            <input type="hidden" name="event_id" value="${eventList.id}">
+                            <select name="status">
+                                <option name="status_name" value="1">актуально</option>
+                                <option name="status_name" value="2">неактуально</option>
+                            </select>
+                            <button type="submit" name="submit">Сохранить</button>
+                        </form>
+                    </#if>
                 </div>
-                <div class="descr">
-                    <p>${eventsList.description}</p>
-                </div>
-                <div class="descr">
-                    <p>${eventsList.category.name}</p>
-                </div>
-                <div class="descr">
-                    <p>${eventsList.status}</p>
-                </div>
-                <#if user==username>
-                    <form action="/Profile" method="post">
-                        <input type="hidden" name="event_id" value="${eventsList.id}">
-                        <select name="status">
-                            <option name="status_name" value="1">актуально</option>
-                            <option name="status_name" value="2">неактуально</option>
-                        </select>
-                        <button type="submit" name="submit">Сохранить</button>
-                    </form>
-                </#if>
-            </div>
-        </#list>
+            </#list>
+        </#if>
     </div>
 </@base.main>

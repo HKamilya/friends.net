@@ -2,26 +2,26 @@ package ru.mvc.dao;
 
 
 import ru.mvc.model.Categories;
-import ru.mvc.model.Events;
-import ru.mvc.model.Users;
+import ru.mvc.model.Event;
+import ru.mvc.model.User;
 import ru.mvc.util.DBConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventDao implements DaoInterface<Events> {
-    public String addEvent(Events events) {
-        String name = events.getName();
-        String city = events.getCity();
-        String street = events.getStreet();
-        String house = events.getHouse();
-        String date = events.getDate();
-        String image = events.getImage();
-        String description = events.getDescription();
-        Categories category = events.getCategory();
-        String status = events.getStatus();
-        Users user = events.getUser();
+public class EventDao implements DaoInterface<Event> {
+    public String addEvent(Event event) {
+        String name = event.getName();
+        String city = event.getCity();
+        String street = event.getStreet();
+        String house = event.getHouse();
+        String date = event.getDate();
+        String image = event.getImage();
+        String description = event.getDescription();
+        Categories category = event.getCategory();
+        String status = event.getStatus();
+        User user = event.getUser();
 
 
         Connection con = null;
@@ -62,9 +62,9 @@ public class EventDao implements DaoInterface<Events> {
         return "Something went wrong";
     }
 
-    public Events getRandomEvent() {
-        List<Events> events = new ArrayList<>();
-        Events res = null;
+    public Event getRandomEvent() {
+        List<Event> events = new ArrayList<>();
+        Event res = null;
         Connection con = null;
         Statement statement = null;
         ResultSet resultSet = null;
@@ -91,9 +91,10 @@ public class EventDao implements DaoInterface<Events> {
                 Categories category = categoriesDao.findById(category_id);
 
                 UserDao userDao = new UserDao();
-                Users user = userDao.findById(user_id);
+                User user = userDao.findById(user_id);
 
-                Events event = new Events();
+                Event event = new Event();
+                event.setId(id);
                 event.setUser(user);
                 event.setCategory(category);
                 event.setCity(city);
@@ -138,9 +139,9 @@ public class EventDao implements DaoInterface<Events> {
         return res;
     }
 
-    public List<Events> getAllEvents() {
-        List<Events> events = new ArrayList<>();
-        Events res = null;
+    public List<Event> getAllEvents() {
+        List<Event> events = new ArrayList<>();
+        Event res = null;
         Connection con = null;
         Statement statement = null;
         ResultSet resultSet = null;
@@ -167,9 +168,10 @@ public class EventDao implements DaoInterface<Events> {
 
 
                 UserDao userDao = new UserDao();
-                Users user = userDao.findById(user_id);
+                User user = userDao.findById(user_id);
 
-                Events event = new Events();
+                Event event = new Event();
+                event.setId(id);
                 event.setUser(user);
                 event.setCategory(category);
                 event.setCity(city);
@@ -208,9 +210,9 @@ public class EventDao implements DaoInterface<Events> {
         return events;
     }
 
-    public List<Events> getAllUsersEvents(int id) {
-        List<Events> events = new ArrayList<>();
-        Events res = null;
+    public List<Event> getAllUsersEvents(int id) {
+        List<Event> events = new ArrayList<>();
+        Event res = null;
         Connection con = null;
         Statement statement = null;
         ResultSet resultSet = null;
@@ -237,9 +239,9 @@ public class EventDao implements DaoInterface<Events> {
 
 
                 UserDao userDao = new UserDao();
-                Users user = userDao.findById(user_id);
+                User user = userDao.findById(user_id);
 
-                Events event = new Events();
+                Event event = new Event();
                 event.setUser(user);
                 event.setCategory(category);
                 event.setCity(city);
@@ -278,9 +280,9 @@ public class EventDao implements DaoInterface<Events> {
         return events;
     }
 
-    public Events findById(int id) {
-        List<Events> events = new ArrayList<>();
-        Events res = null;
+    public Event findById(int id) {
+        List<Event> events = new ArrayList<>();
+        Event res = null;
         Connection con = null;
         Statement statement = null;
         ResultSet resultSet = null;
@@ -306,9 +308,9 @@ public class EventDao implements DaoInterface<Events> {
 
 
                 UserDao userDao = new UserDao();
-                Users user = userDao.findById(user_id);
+                User user = userDao.findById(user_id);
 
-                Events event = new Events();
+                Event event = new Event();
                 event.setUser(user);
                 event.setCategory(category);
                 event.setCity(city);

@@ -1,8 +1,8 @@
 package ru.mvc.dao;
 
-import ru.mvc.model.Events;
+import ru.mvc.model.Event;
 import ru.mvc.model.Review;
-import ru.mvc.model.Users;
+import ru.mvc.model.User;
 import ru.mvc.util.DBConnection;
 
 import java.sql.*;
@@ -12,7 +12,7 @@ import java.util.List;
 public class ReviewDao implements DaoInterface<Review> {
     public List<Review> getReviews(int id) {
         List<Review> reviews = new ArrayList<>();
-        Events res = null;
+        Event res = null;
         Connection con = null;
         Statement statement = null;
         ResultSet resultSet = null;
@@ -28,12 +28,12 @@ public class ReviewDao implements DaoInterface<Review> {
                 String text = resultSet.getString("text");
 
                 UserDao userDao = new UserDao();
-                Users user = userDao.findById(user_id);
+                User user = userDao.findById(user_id);
                 EventDao eventDao = new EventDao();
-                Events events = eventDao.findById(event_id);
+                Event event = eventDao.findById(event_id);
 
                 Review review = new Review();
-                review.setEvent(events);
+                review.setEvent(event);
                 review.setUser(user);
                 review.setText(text);
                 reviews.add(review);

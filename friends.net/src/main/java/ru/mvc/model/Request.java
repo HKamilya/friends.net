@@ -1,6 +1,5 @@
 package ru.mvc.model;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,8 +8,8 @@ import lombok.Setter;
 
 
 public class Request {
-    private Events event;
-    private Users subscriber;
+    private Event event;
+    private User subscriber;
     private String comment;
 
     public Request() {

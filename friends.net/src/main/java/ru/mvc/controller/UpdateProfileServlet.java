@@ -1,6 +1,6 @@
 package ru.mvc.controller;
 
-import ru.mvc.model.Users;
+import ru.mvc.model.User;
 import ru.mvc.dao.UserDao;
 
 import javax.servlet.ServletException;
@@ -18,7 +18,7 @@ public class UpdateProfileServlet extends HttpServlet {
         String fullname = request.getParameter("fullName");
         String description = request.getParameter("description");
         UserDao userDao = new UserDao();
-        Users user = new Users();
+        User user = new User();
         user.setDescription(description);
         user.setUserName(username);
         user.setFullName(fullname);
@@ -38,10 +38,10 @@ public class UpdateProfileServlet extends HttpServlet {
         String username = (String) session.getAttribute("User");
         request.setAttribute("user", username);
         UserDao userDao = new UserDao();
-        Users users = userDao.getInfo(username);
-        request.setAttribute("password", users.getPassword());
-        request.setAttribute("fullName", users.getFullName());
-        request.setAttribute("description", users.getDescription());
+        User user = userDao.getInfo(username);
+        request.setAttribute("password", user.getPassword());
+        request.setAttribute("fullName", user.getFullName());
+        request.setAttribute("description", user.getDescription());
         getServletContext().getRequestDispatcher("/updateProfile.ftl").forward(request, response);
     }
 }

@@ -1,7 +1,7 @@
 package ru.mvc.dao;
 
 import ru.mvc.model.Categories;
-import ru.mvc.model.Events;
+import ru.mvc.model.Event;
 import ru.mvc.util.DBConnection;
 
 import java.sql.*;
@@ -12,7 +12,7 @@ public class CategoriesDao implements DaoInterface<Categories> {
 
     public List<Categories> getAllCategories() {
         List<Categories> categories = new ArrayList<>();
-        Events res = null;
+        Event res = null;
         Connection con = null;
         Statement statement = null;
         ResultSet resultSet = null;

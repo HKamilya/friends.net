@@ -1,17 +1,17 @@
 package ru.mvc.dao;
 
 
-import ru.mvc.model.Users;
+import ru.mvc.model.User;
 import ru.mvc.util.DBConnection;
 
 import java.sql.*;
 
 public class UserDao {
-    public String registerUser(Users users) {
-        String fullName = users.getFullName();
-        String email = users.getEmail();
-        String userName = users.getUserName();
-        String password = users.getPassword();
+    public String registerUser(User user) {
+        String fullName = user.getFullName();
+        String email = user.getEmail();
+        String userName = user.getUserName();
+        String password = user.getPassword();
 
         Connection con = null;
         PreparedStatement preparedStatement = null;
@@ -43,7 +43,7 @@ public class UserDao {
 
     }
 
-    public String authenticateUser(Users loginBean) {
+    public String authenticateUser(User loginBean) {
         String userName = loginBean.getUserName();
         String password = loginBean.getPassword();
 
@@ -93,8 +93,8 @@ public class UserDao {
         return "Invalid user credentials";
     }
 
-    public Users getInfo(String username) {
-        Users user = new Users();
+    public User getInfo(String username) {
+        User user = new User();
         Connection con = null;
         Statement statement = null;
         ResultSet resultSet = null;
@@ -146,15 +146,15 @@ public class UserDao {
 
     }
 
-    public String updateUsersData(Users users) {
-        String fullName = users.getFullName();
-        String description = users.getDescription();
+    public String updateUsersData(User user) {
+        String fullName = user.getFullName();
+        String description = user.getDescription();
 
         Connection con = null;
         PreparedStatement preparedStatement = null;
         try {
             con = DBConnection.createConnection();
-            String query = "update \"user\" set fullname=?, description=? where username=" + "'" + users.getUserName() + "'";
+            String query = "update \"user\" set fullname=?, description=? where username=" + "'" + user.getUserName() + "'";
             preparedStatement = con.prepareStatement(query);
             preparedStatement.setString(1, fullName);
             preparedStatement.setString(2, description);
@@ -178,8 +178,8 @@ public class UserDao {
         return "Something went wrong";
     }
 
-    public Users findById(int id) {
-        Users user = new Users();
+    public User findById(int id) {
+        User user = new User();
         Connection con = null;
         Statement statement = null;
         ResultSet resultSet = null;

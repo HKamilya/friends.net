@@ -1,9 +1,9 @@
 package ru.mvc.controller;
 
-import ru.mvc.model.Events;
+import ru.mvc.model.Event;
 import ru.mvc.model.Request;
 import ru.mvc.model.Review;
-import ru.mvc.model.Users;
+import ru.mvc.model.User;
 import ru.mvc.dao.*;
 
 
@@ -25,9 +25,9 @@ public class RandomEventServlet extends HttpServlet {
         req.setAttribute("user", usernm);
 
         EventDao eventDao = new EventDao();
-        Events event = eventDao.getRandomEvent();
+        Event event = eventDao.getRandomEvent();
         UserDao userDao = new UserDao();
-        Users user = userDao.findById(event.getUser().getId());
+        User user = userDao.findById(event.getUser().getId());
         req.setAttribute("event_id", event.getId());
         req.setAttribute("name", event.getName());
         req.setAttribute("city", event.getCity());
@@ -36,8 +36,8 @@ public class RandomEventServlet extends HttpServlet {
         req.setAttribute("image", event.getImage());
         req.setAttribute("description", event.getDescription());
         req.setAttribute("category", event.getCategory().getName());
-        req.setAttribute("date", event.getDatetime());
-        req.setAttribute("author", user.getUserName());
+        req.setAttribute("date", event.getDate());
+        req.setAttribute("author", event.getUser().getUserName());
         RequestDao requestDao = new RequestDao();
         List<Request> requests = requestDao.getAllRequests(event.getId());
         req.setAttribute("numOfReq", requests.size());

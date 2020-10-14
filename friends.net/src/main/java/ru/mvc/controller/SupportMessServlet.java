@@ -3,7 +3,7 @@ package ru.mvc.controller;
 import ru.mvc.dao.SupportMessageDao;
 import ru.mvc.dao.UserDao;
 import ru.mvc.model.SupportMessage;
-import ru.mvc.model.Users;
+import ru.mvc.model.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -24,7 +24,7 @@ public class SupportMessServlet extends HttpServlet {
         String email = request.getParameter("email");
         if (email.equals("email")) {
             UserDao userdao = new UserDao();
-            Users user = userdao.getInfo(username);
+            User user = userdao.getInfo(username);
             email = user.getEmail();
         }
         SupportMessageDao supMessDao = new SupportMessageDao();

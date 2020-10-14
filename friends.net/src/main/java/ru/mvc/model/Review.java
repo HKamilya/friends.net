@@ -1,7 +1,6 @@
 package ru.mvc.model;
 
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,8 +8,8 @@ import lombok.Setter;
 @Setter
 
 public class Review {
-    private Events event;
-    private Users user;
+    private Event event;
+    private User user;
     private String text;
 
     public Review(){}

@@ -1,7 +1,7 @@
 package ru.mvc.controller;
 
-import ru.mvc.model.Events;
-import ru.mvc.model.Users;
+import ru.mvc.model.Event;
+import ru.mvc.model.User;
 import ru.mvc.dao.EventDao;
 import ru.mvc.dao.UserDao;
 
@@ -26,8 +26,8 @@ public class AnProfileServlet extends HttpServlet {
 
         EventDao eventDao = new EventDao();
         UserDao userDao = new UserDao();
-        Users user = userDao.getInfo(username);
-        List<Events> events = eventDao.getAllUsersEvents(user.getId());
+        User user = userDao.getInfo(username);
+        List<Event> events = eventDao.getAllUsersEvents(user.getId());
 
 
         request.setAttribute("username", user.getUserName());

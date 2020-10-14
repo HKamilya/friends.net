@@ -2,17 +2,16 @@ package ru.mvc.controller;
 
 import ru.mvc.dao.EventDao;
 import ru.mvc.dao.UserDao;
-import ru.mvc.model.Events;
+import ru.mvc.model.Event;
 import ru.mvc.model.Review;
 import ru.mvc.dao.ReviewDao;
-import ru.mvc.model.Users;
+import ru.mvc.model.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.awt.*;
 import java.io.IOException;
 
 public class AddReviewServlet extends HttpServlet {
@@ -24,10 +23,10 @@ public class AddReviewServlet extends HttpServlet {
         int event_id = Integer.parseInt(request.getParameter("event_id"));
 
         UserDao userDao = new UserDao();
-        Users user = userDao.getInfo(username);
+        User user = userDao.getInfo(username);
         Review review = new Review();
         EventDao eventDao = new EventDao();
-        Events event = eventDao.findById(event_id);
+        Event event = eventDao.findById(event_id);
 
         review.setEvent(event);
         review.setText(rev);

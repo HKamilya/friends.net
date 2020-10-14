@@ -1,13 +1,12 @@
 package ru.mvc.controller;
 
-import ru.mvc.model.Events;
-import ru.mvc.model.Users;
+import ru.mvc.model.Event;
+import ru.mvc.model.User;
 import ru.mvc.dao.EventDao;
 import ru.mvc.dao.UserDao;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.security.MessageDigest;
@@ -56,7 +55,7 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
         boolean rememberMe = "true".equals(request.getParameter("rememberMe"));
 
-        Users loginBean = new Users();
+        User loginBean = new User();
 
 
         MessageDigest md5 = null;
@@ -94,7 +93,7 @@ public class LoginServlet extends HttpServlet {
                 request.setAttribute("user", username);
                 loginBean = loginDao.getInfo(username);
                 EventDao eventDao = new EventDao();
-                List<Events> events = eventDao.getAllUsersEvents(loginBean.getId());
+                List<Event> events = eventDao.getAllUsersEvents(loginBean.getId());
                 request.setAttribute("eventsList", events);
                 request.setAttribute("description", loginBean.getDescription());
                 request.setAttribute("fullName", loginBean.getFullName());

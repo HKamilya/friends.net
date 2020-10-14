@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 
-public class Users {
+public class User {
 
     private int id;
     private String fullName;
@@ -18,7 +18,7 @@ public class Users {
     private String image;
     private String description;
 
-    public Users() {
+    public User() {
 
     }
 }

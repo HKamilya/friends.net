@@ -2,10 +2,10 @@ package ru.mvc.controller;
 
 import ru.mvc.dao.EventDao;
 import ru.mvc.dao.UserDao;
-import ru.mvc.model.Events;
+import ru.mvc.model.Event;
 import ru.mvc.model.Request;
 import ru.mvc.dao.RequestDao;
-import ru.mvc.model.Users;
+import ru.mvc.model.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -22,10 +22,10 @@ public class SendRequestServlet extends HttpServlet {
         String comment = request.getParameter("comment");
         int event_id = Integer.parseInt(request.getParameter("event_id"));
         UserDao userDao = new UserDao();
-        Users user = userDao.getInfo(username);
+        User user = userDao.getInfo(username);
         Request req = new Request();
         EventDao eventDao = new EventDao();
-        Events event = eventDao.findById(event_id);
+        Event event = eventDao.findById(event_id);
         req.setEvent(event);
         req.setComment(comment);
         req.setSubscriber(user);

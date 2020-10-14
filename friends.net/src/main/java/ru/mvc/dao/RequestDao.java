@@ -1,9 +1,9 @@
 package ru.mvc.dao;
 
 
-import ru.mvc.model.Events;
+import ru.mvc.model.Event;
 import ru.mvc.model.Request;
-import ru.mvc.model.Users;
+import ru.mvc.model.User;
 import ru.mvc.util.DBConnection;
 
 
@@ -13,9 +13,9 @@ import java.util.List;
 
 public class RequestDao {
     public String addRequest(Request request) {
-        Events event = request.getEvent();
+        Event event = request.getEvent();
         String comment = request.getComment();
-        Users user = request.getSubscriber();
+        User user = request.getSubscriber();
 
 
         Connection con = null;
@@ -78,13 +78,13 @@ public class RequestDao {
                 String comment = resultSet.getString("comment");
 
                 UserDao userDao = new UserDao();
-                Users user = userDao.findById(subscriber);
+                User user = userDao.findById(subscriber);
                 EventDao eventDao = new EventDao();
-                Events events = eventDao.findById(event_id);
+                Event event = eventDao.findById(event_id);
                 Request request = new Request();
                 request.setSubscriber(user);
                 request.setComment(comment);
-                request.setEvent(events);
+                request.setEvent(event);
 
                 requests.add(request);
             }

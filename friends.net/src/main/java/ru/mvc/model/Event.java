@@ -1,7 +1,6 @@
 package ru.mvc.model;
 
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,9 +8,9 @@ import lombok.Setter;
 @Setter
 
 
-public class Events {
+public class Event {
     private int id;
-    private Users user;
+    private User user;
     private String name;
     private String city;
     private String street;
@@ -22,6 +21,6 @@ public class Events {
     private Categories category;
     private String status;
 
-    public Events(){}
+    public Event(){}
 
 }

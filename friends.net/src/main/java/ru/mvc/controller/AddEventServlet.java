@@ -1,20 +1,16 @@
 package ru.mvc.controller;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import ru.mvc.dao.UserDao;
 import ru.mvc.model.Categories;
-import ru.mvc.model.Events;
+import ru.mvc.model.Event;
 import ru.mvc.dao.EventDao;
 import ru.mvc.dao.CategoriesDao;
-import ru.mvc.model.Users;
+import ru.mvc.model.User;
 
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -55,24 +51,24 @@ public class AddEventServlet extends HttpServlet {
         String status = "актуально";
 
 
-        Events events = new Events();
+        Event event = new Event();
         Categories categories = new Categories();
         categories.setId(categoryId);
-        events.setName(name);
-        events.setCity(city);
-        events.setStreet(street);
-        events.setHouse(house);
+        event.setName(name);
+        event.setCity(city);
+        event.setStreet(street);
+        event.setHouse(house);
 //        events.setImage(image);
-        events.setDescription(description);
-        events.setCategory(categories);
-        events.setStatus(status);
-        events.setDate(date);
+        event.setDescription(description);
+        event.setCategory(categories);
+        event.setStatus(status);
+        event.setDate(date);
         UserDao userDao = new UserDao();
-        Users user = userDao.getInfo(username);
+        User user = userDao.getInfo(username);
         EventDao eventDao = new EventDao();
-        events.setUser(user);
+        event.setUser(user);
 
-        String userRegistered = eventDao.addEvent(events);
+        String userRegistered = eventDao.addEvent(event);
 
         if (userRegistered.equals("SUCCESS")) {
             request.getRequestDispatcher("/addEvent.ftl").forward(request, response);

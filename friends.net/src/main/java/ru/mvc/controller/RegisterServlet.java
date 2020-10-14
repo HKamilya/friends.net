@@ -3,15 +3,13 @@ package ru.mvc.controller;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import ru.mvc.model.Events;
-import ru.mvc.model.Users;
+import ru.mvc.model.User;
 import ru.mvc.dao.UserDao;
 
 public class RegisterServlet extends HttpServlet {
@@ -42,7 +40,7 @@ public class RegisterServlet extends HttpServlet {
             builder.append(b);
         }
 
-        Users users = new Users();
+        User users = new User();
 
         users.setFullName(fullName);
         users.setEmail(email);
@@ -57,7 +55,7 @@ public class RegisterServlet extends HttpServlet {
         if (userRegistered.equals("SUCCESS")) {
             HttpSession session = request.getSession();
             UserDao userDao = new UserDao();
-            Users user = userDao.getInfo(username);
+            User user = userDao.getInfo(username);
             session.setMaxInactiveInterval(10 * 60);
             session.setAttribute("User", username);
             request.setAttribute("username", username);
