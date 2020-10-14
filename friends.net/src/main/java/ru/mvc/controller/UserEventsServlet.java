@@ -1,7 +1,9 @@
 package ru.mvc.controller;
 
-import ru.mvc.model.Request;
-import ru.mvc.dao.RequestDao;
+import ru.mvc.dao.EventDao;
+import ru.mvc.dao.UserDao;
+import ru.mvc.model.Event;
+import ru.mvc.model.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-public class ListOfRequestsServlet extends HttpServlet {
+public class UserEventsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
@@ -20,11 +22,13 @@ public class ListOfRequestsServlet extends HttpServlet {
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("User");
         request.setAttribute("user", username);
-        int event_id = Integer.parseInt(request.getParameter("event_id"));
+        UserDao userDao = new UserDao();
+        User user = userDao.getInfo(username);
+        EventDao eventDao = new EventDao();
+        List<Event> eventList = eventDao.getAllUsersEvents(user.getId());
+        request.setAttribute("list", eventList);
 
-        RequestDao requestDao = new RequestDao();
-        List<Request> requestsList = requestDao.getAllRequests(event_id);
-        request.setAttribute("reqList", requestsList);
+
         getServletContext().getRequestDispatcher("/userEvents.ftl").forward(request, response);
 
     }

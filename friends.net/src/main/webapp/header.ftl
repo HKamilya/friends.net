@@ -43,7 +43,7 @@
                         <a class="nav__link" href="/AddEvent">Организовать <br>
                             мероприятие</a>
                     </#if>
-                    <a class="nav__link" href="Search.jsp">Поиск</a>
+                    <a class="nav__link" href="/Search">Поиск</a>
                     <div class="header__logo">
                         <img class="picture" src="img/man.png" alt="">
                     </div>
@@ -91,7 +91,6 @@
                                 <input type="text" class="form-control" placeholder="тема" name="title">
                             </div>
                             <br>
-                            label>
                             <input type="date" name="date"/>
                             </label></td>
                             <div class="form-group">

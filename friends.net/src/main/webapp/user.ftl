@@ -91,15 +91,22 @@
                 </div>
             </div>
         </div>
+        <div class="col-2">
         <#if user==username>
-            <form action="/UpdateProfile">
+            <form action="/UpdateProfile" style="float: right">
                 <button>Редактировать профиль</button>
             </form>
         </#if>
+            <div class="col-2">
+                <form action="/UserEvents" style="float: right">
+                    <button>Мои мероприятия</button>
+                </form>
+            </div>
+        </div>
         <#if  eventList??>
             <#list eventList as eventList>
 
-                <a class="name" href="/EventServlet?id=${eventList.id}">${eventList.id}</a>
+                <a class="name" href="/Event?id=${eventList.id}">${eventList.id}</a>
                 <div class="event">
                     <div class="h_p">
                         <div class="img">

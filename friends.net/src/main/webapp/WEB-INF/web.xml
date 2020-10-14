@@ -8,9 +8,9 @@
     <session-config>
         <session-timeout>10</session-timeout>
     </session-config>
-<!--    <welcome-file-list>-->
-<!--        <welcome-file>Main.jsp</welcome-file>-->
-<!--    </welcome-file-list>-->
+    <!--    <welcome-file-list>-->
+    <!--        <welcome-file>Main.jsp</welcome-file>-->
+    <!--    </welcome-file-list>-->
     <servlet>
         <description></description>
         <display-name>RegisterServlet</display-name>
@@ -150,6 +150,26 @@
     <servlet-mapping>
         <servlet-name>SupportMessServlet</servlet-name>
         <url-pattern>/SupportMess</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <description></description>
+        <display-name>SearchServlet</display-name>
+        <servlet-name>SearchServlet</servlet-name>
+        <servlet-class>ru.mvc.controller.SearchServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SearchServlet</servlet-name>
+        <url-pattern>/Search</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <description></description>
+        <display-name>UserEventsServlet</display-name>
+        <servlet-name>UserEventServlet</servlet-name>
+        <servlet-class>ru.mvc.controller.UserEventsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserEventServlet</servlet-name>
+        <url-pattern>/UserEvents</url-pattern>
     </servlet-mapping>
 
     <servlet>

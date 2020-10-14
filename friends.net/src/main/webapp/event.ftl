@@ -217,7 +217,7 @@
                     </div>
                     <div class="where_when">
                         <div class="where">
-                            ${city}, ${street}, ${house}
+                            ${city} ${street} ${house}
                         </div>
                         <div class="when">
                             <#if date??>
@@ -253,7 +253,7 @@
                         <#--                            <%---->
                     </div>
                 </div>
-                <div class="but">
+                <div class="but" style="text-align: center">
                     <button type="button" name="submit" data-toggle="modal" data-target="#requestModal">Я пойду!
                     </button>
                 </div>
