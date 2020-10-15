@@ -26,10 +26,10 @@ public class UpdateProfileServlet extends HttpServlet {
 
         if (updatedUsersData.equals("SUCCESS")) {
 
-            request.getRequestDispatcher("/user.ftl").forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/Profile");
         } else {
             request.setAttribute("errMessage", updatedUsersData);
-            request.getRequestDispatcher("/user.ftl").forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/Profile");
         }
     }
 

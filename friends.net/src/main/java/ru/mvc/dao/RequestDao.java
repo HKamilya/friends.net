@@ -63,13 +63,12 @@ public class RequestDao {
 
     public List<Request> getAllRequests(int event_id) {
         List<Request> requests = new ArrayList<>();
-        Request res = null;
         Connection con = null;
         Statement statement = null;
         ResultSet resultSet = null;
         try {
             con = DBConnection.createConnection();
-            String sql = "SELECT * FROM request where event_id=" + event_id;
+            String sql = "SELECT * FROM request where event_id="+event_id;
             statement = con.createStatement();
             resultSet = statement.executeQuery(sql);
 
@@ -85,6 +84,7 @@ public class RequestDao {
                 request.setSubscriber(user);
                 request.setComment(comment);
                 request.setEvent(event);
+
 
                 requests.add(request);
             }

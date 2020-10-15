@@ -252,6 +252,7 @@ public class EventDao implements DaoInterface<Event> {
                 event.setDescription(description);
                 event.setStreet(street);
                 event.setName(name);
+                event.setId(event_id);
                 events.add(event);
             }
         } catch (SQLException e) {

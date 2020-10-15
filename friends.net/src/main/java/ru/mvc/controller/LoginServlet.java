@@ -23,8 +23,6 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Cookie[] cookies = request.getCookies();     // request is an instance of type
-        //HttpServletRequest
-        boolean foundCookie = false;
         String username = null;
         String password = null;
         for (int i = 0; i < cookies.length; i++) {
@@ -80,8 +78,8 @@ public class LoginServlet extends HttpServlet {
                 if (rememberMe) {
                     Cookie c = new Cookie("username", username);
                     Cookie p = new Cookie("password", password);
-                    c.setMaxAge(24 * 60 * 60);
-                    p.setMaxAge(24 * 60 * 60);
+                    c.setMaxAge(24 * 60 * 60 * 31);
+                    p.setMaxAge(24 * 60 * 60 * 31);
                     response.addCookie(c);
                     response.addCookie(p);
                 }
