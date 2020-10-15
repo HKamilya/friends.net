@@ -41,7 +41,7 @@ public class EventServlet extends HttpServlet {
         req.setAttribute("category", event.getCategory().getName().toString());
         req.setAttribute("date", event.getDate());
         req.setAttribute("numOfReq", requests.size());
-        req.setAttribute("author", user.getUserName());
+        req.setAttribute("author", event.getUser().getUserName());
         System.out.println(user.getUserName());
         ReviewDao reviewDao = new ReviewDao();
         List<Review> reviews = reviewDao.getReviews(id);

@@ -312,6 +312,7 @@ public class EventDao implements DaoInterface<Event> {
                 User user = userDao.findById(user_id);
 
                 Event event = new Event();
+                event.setId(id);
                 event.setUser(user);
                 event.setCategory(category);
                 event.setCity(city);

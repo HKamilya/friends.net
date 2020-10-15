@@ -30,7 +30,7 @@ public class AnProfileServlet extends HttpServlet {
         List<Event> events = eventDao.getAllUsersEvents(user.getId());
 
 
-        request.setAttribute("username", user.getUserName());
+        request.setAttribute("username", username);
         request.setAttribute("fullName", user.getFullName());
         request.setAttribute("description", user.getDescription());
         request.setAttribute("image", user.getImage());

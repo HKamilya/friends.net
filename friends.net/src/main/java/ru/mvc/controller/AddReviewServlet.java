@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class AddReviewServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,17 +33,22 @@ public class AddReviewServlet extends HttpServlet {
         review.setEvent(event);
         review.setText(rev);
         review.setUser(user);
-        System.out.println(user.getId() + " "+ event_id);
+        System.out.println(user.getId() + " " + event_id);
+        Date dateNow = new Date();
+        SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy-MM-dd");
+
+        System.out.println(formatForDateNow.format(dateNow));
+        review.setDate(formatForDateNow.format(dateNow));
 
         ReviewDao reviewDao = new ReviewDao();
 
         String reviewAdded = reviewDao.addReview(review);
 
         if (reviewAdded.equals("SUCCESS")) {
-            response.sendRedirect(request.getContextPath() + "/EventServlet?id=" + event_id);
+            response.sendRedirect(request.getContextPath() + "/Event?id=" + event_id);
         } else {
             request.setAttribute("errMessage", reviewDao);
-            response.sendRedirect(request.getContextPath() + "/EventServlet?id=" + event_id);
+            response.sendRedirect(request.getContextPath() + "/Event?id=" + event_id);
         }
     }
 

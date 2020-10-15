@@ -34,10 +34,10 @@ public class SendRequestServlet extends HttpServlet {
         RequestDao requestDao = new RequestDao();
         String requestSended = requestDao.addRequest( req);
         if (requestSended.equals("SUCCESS")) {
-            response.sendRedirect(request.getContextPath() + "/EventServlet?id=" + event_id);
+            response.sendRedirect(request.getContextPath() + "/Event?id=" + event_id);
         } else {
             request.setAttribute("errMessage", requestSended);
-            response.sendRedirect(request.getContextPath() + "/EventServlet?id=" + event_id);
+            response.sendRedirect(request.getContextPath() + "/Event?id=" + event_id);
         }
     }
 

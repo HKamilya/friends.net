@@ -66,6 +66,19 @@
                 <div class="descr">
                     ${event.description}
                 </div>
+                <div class="descr">-->
+                    <p>${event.status}</p>
+                </div>
+
+                    <form action="/Profile" method="post">
+                        <input type="hidden" name="event_id" value="${event.id}">
+                        <select name="status">
+                            <option name="status_name" value="1">актуально</option>
+                            <option name="status_name" value="2">неактуально</option>
+                        </select>
+                        <button type="submit" name="submit">Сохранить</button>
+                    </form>
+
                 <button type="submit" class="btn btn-primary" data-toggle="modal"
                         data-target="#event${event.id}">
                     Список идущих
@@ -84,13 +97,15 @@
                     </div>
                     <div class="modal-body">
 
-                            <#list request as req>
-                                <a href="/AnProfile?username=${req.subscriber.userName}">${req.subscriber.fullName}</a>
-                                <br>
-                            </#list>
-               
-                            Пока никто не откликнулся на это мероприятие
-                        </#if>
+                        <#list request as req>
+                            <a href="/AnProfile?username=${req.subscriber.userName}">${req.subscriber.fullName}</a>
+                            <br>
+                            <#if req.comment??>
+                                <p>${req.comment}</p>
+                            </#if>
+
+                        </#list>
+
                     </div>
                 </div>
             </div>

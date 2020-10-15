@@ -273,7 +273,7 @@
                 </div>
                 <div class="modal-body" style="text-align: center">
                     <#if user??>
-                        <form name="form" action="SendRequestServlet" method="post" onsubmit="return validate()">
+                        <form name="form" action="SendRequest" method="post" onsubmit="return validate()">
                             <label style="font-size: 20px">Комментарий</label>
                             <br>
                             <textarea style="width: 200px;" type="text" name="comment"></textarea>
@@ -310,7 +310,7 @@
                 <div class="panel">
                     <div class="panel-body">
                         <#if user??>
-                            <form action="AddReviewServlet" method="post" onsubmit="return validate()">
+                            <form action="AddReview" method="post" onsubmit="return validate()">
                         <textarea class="form-control" rows="2" placeholder="Добавьте Ваш комментарий"
                                   name="review"></textarea>
                                 <div class="mar-top clearfix">
@@ -338,8 +338,12 @@
                                                                         src="https://bootstraptema.ru/snippets/icons/2016/mia/1.png"></a>
                                     <div class="media-body">
                                         <div class="mar-btm">
-                                            <a href="#"
-                                               class="btn-link text-semibold media-heading box-inline">${review.user.fullName}</a>
+                                            <div class="mar-btm">
+                                                <a href="/AnProfile?username=${review.user.userName}"
+                                                   class="btn-link text-semibold media-heading box-inline">${review.user.fullName}</a>
+                                                <p class="text-muted text-sm"><i class="fa fa-mobile fa-lg"></i> -
+                                                    ${review.date}</p>
+                                            </div>
                                         </div>
                                         <p>${review.text}</p>
                                         <div class="pad-ver">

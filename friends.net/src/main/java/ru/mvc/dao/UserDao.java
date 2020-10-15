@@ -197,6 +197,7 @@ public class UserDao {
                 String image = resultSet.getString("image");
                 String description = resultSet.getString("description");
 
+                user.setId(id);
                 user.setEmail(email);
                 user.setUserName(username);
                 user.setFullName(fullname);

@@ -27,6 +27,7 @@ public class ProfileServlet extends HttpServlet {
 
         EventDao eventDao = new EventDao();
         eventDao.updateStatus(event_id, status);
+        response.sendRedirect(request.getContextPath() + "/UserEvents");
 
     }
 

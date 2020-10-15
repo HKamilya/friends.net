@@ -26,6 +26,7 @@ public class ReviewDao implements DaoInterface<Review> {
                 int user_id = resultSet.getInt("user_id");
                 int event_id = resultSet.getInt("event_id");
                 String text = resultSet.getString("text");
+                String date = resultSet.getString("date");
 
                 UserDao userDao = new UserDao();
                 User user = userDao.findById(user_id);
@@ -33,6 +34,7 @@ public class ReviewDao implements DaoInterface<Review> {
                 Event event = eventDao.findById(event_id);
 
                 Review review = new Review();
+                review.setDate(date);
                 review.setEvent(event);
                 review.setUser(user);
                 review.setText(text);
@@ -72,15 +74,14 @@ public class ReviewDao implements DaoInterface<Review> {
         PreparedStatement preparedStatement = null;
         Statement statement = null;
 
-        int user_id = 0;
         try {
             con = DBConnection.createConnection();
-            System.out.println(user_id);
-            String query = "insert into review(event_id,user_id,text) values (?,?,?)";
+            String query = "insert into review(user_id,event_id,text,date) values (?,?,?,?)";
             preparedStatement = con.prepareStatement(query);
             preparedStatement.setInt(1, review.getUser().getId());
             preparedStatement.setInt(2, review.getEvent().getId());
             preparedStatement.setString(3, text);
+            preparedStatement.setString(4, review.getDate());
 
 
             int i = preparedStatement.executeUpdate();
