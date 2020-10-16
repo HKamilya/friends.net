@@ -10,13 +10,13 @@
                     <tr>
                         <td>Название</td>
                         <td><label>
-                                <input type="text" name="name"/>
+                                <input type="text" name="name" required/>
                             </label></td>
                     </tr>
                     <tr>
                         <td>Город</td>
                         <td><label>
-                                <input type="text" name="city"/>
+                                <input type="text" name="city" required/>
                             </label></td>
                     </tr>
                     <tr>
@@ -34,19 +34,19 @@
                     <tr>
                         <td>Дата</td>
                         <td><label>
-                                <input type="date" name="date"/>
+                                <input type="date" name="date" required/>
                             </label></td>
                     </tr>
                     <tr>
-                        <td>Image</td>
+                        <td>Фотография</td>
                         <td><label>
-                                <input type="file" name="file" accept="image/*"/>
+                                <input type="file" name="image" accept="image/*" required/>
                             </label></td>
                     </tr>
                     <tr>
                         <td>Описание</td>
                         <td><label>
-                                <input type="text" name="description"/>
+                                <textarea rows="5" type="text" name="description" required/>
                             </label></td>
                     </tr>
                     <tr>
@@ -64,13 +64,13 @@
                     <tr>
                         <td><#if errMessage??>
                                 ${errMessage}
-                        </#if>
+                            </#if>
                         </td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td><input type="submit" value="Register"></input><input
-                                    type="reset" value="Reset"></input></td>
+                        <td><input type="submit" value="Добавить"></input><input
+                                    type="reset" value="Сбросить"></input></td>
                     </tr>
                 </table>
             </form>

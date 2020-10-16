@@ -18,12 +18,13 @@
 
         .photo {
             width: 30%;
-            height: 10%;
+            height: 350px;
         }
 
         .img {
             width: 100%;
             height: 100%;
+            object-fit: contain;
         }
 
         .inf {
@@ -72,7 +73,9 @@
     <div class="profile">
         <div class="container">
             <div class="photo">
-                <img class="img" src="img/man.png">
+                <#if image??>
+                    <img class="img" src="${image}" alt=" ">
+                </#if>
             </div>
             <div class="inf">
                 <div class="name">

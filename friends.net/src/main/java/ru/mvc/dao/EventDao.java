@@ -59,7 +59,7 @@ public class EventDao implements DaoInterface<Event> {
             }
         }
 
-        return "Something went wrong";
+        return "Что-то пошло не так";
     }
 
     public Event getRandomEvent() {

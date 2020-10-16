@@ -51,6 +51,7 @@
 
         .img {
             width: 100%;
+            height: 150px;
         }
     </style>
     <#list evReqList as event, request>
@@ -60,7 +61,9 @@
             <div class="event">
                 <div class="h_p">
                     <div class="img">
-                        <img class="photo" src="img/bfr.jpg">
+                        <#if event.image??>
+                            <img class="photo" src="${event.image}">
+                        </#if>
                     </div>
                 </div>
                 <div class="descr">
@@ -70,14 +73,14 @@
                     <p>${event.status}</p>
                 </div>
 
-                    <form action="/Profile" method="post">
-                        <input type="hidden" name="event_id" value="${event.id}">
-                        <select name="status">
-                            <option name="status_name" value="1">актуально</option>
-                            <option name="status_name" value="2">неактуально</option>
-                        </select>
-                        <button type="submit" name="submit">Сохранить</button>
-                    </form>
+                <form action="/Profile" method="post">
+                    <input type="hidden" name="event_id" value="${event.id}">
+                    <select name="status">
+                        <option name="status_name" value="1">актуально</option>
+                        <option name="status_name" value="2">неактуально</option>
+                    </select>
+                    <button type="submit" name="submit">Сохранить</button>
+                </form>
 
                 <button type="submit" class="btn btn-primary" data-toggle="modal"
                         data-target="#event${event.id}">

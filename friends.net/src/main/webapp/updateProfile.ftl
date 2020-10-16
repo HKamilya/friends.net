@@ -93,14 +93,15 @@
         </style>
 
         <div class="profile">
-            <form action="/UpdateProfile" method="post">
+            <form action="/UpdateProfile" method="post" enctype="multipart/form-data">
                 <div class="container">
                     <div class="photo">
                         <div class="form-group">
                             <label for="ex">
                                 File Input
                             </label>
-                            <input type="file" class="form-control-file" id="ex">
+                            <input type="file" name="image" class="form-control-file" id="ex"
+                                   value="<#if image??>${image}</#if>">
                         </div>
 
                     </div>

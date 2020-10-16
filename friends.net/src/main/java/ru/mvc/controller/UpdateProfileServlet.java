@@ -4,21 +4,45 @@ import ru.mvc.model.User;
 import ru.mvc.dao.UserDao;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.IOException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.http.*;
+import java.io.*;
+import java.nio.file.Paths;
 
+@MultipartConfig
 public class UpdateProfileServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
+
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("User");
+        UserDao userDao = new UserDao();
+        User user = userDao.getInfo(username);
         String fullname = request.getParameter("fullName");
         String description = request.getParameter("description");
-        UserDao userDao = new UserDao();
-        User user = new User();
+        Part filePart = request.getPart("image");
+        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+        InputStream fileContent = filePart.getInputStream();
+        System.out.println("~" + fileName + "~");
+        String imgName = "img\\profileimg" + username + fileName;
+        String pathName = "C:\\Users\\gipot\\Desktop\\inf\\friends.net\\friends.net\\src\\main\\webapp\\img\\profileimg" + username + fileName;
+        if (fileName.length() > 1) {
+            File file = new File(pathName);
+            boolean created = file.createNewFile();
+            OutputStream os = new FileOutputStream(pathName);
+
+            byte[] b = new byte[2048];
+            int length;
+
+            while ((length = fileContent.read(b)) != -1) {
+                os.write(b, 0, length);
+            }
+            os.close();
+            user.setImage(imgName);
+        }
+        fileContent.close();
+
+
         user.setDescription(description);
         user.setUserName(username);
         user.setFullName(fullname);
@@ -39,6 +63,7 @@ public class UpdateProfileServlet extends HttpServlet {
         request.setAttribute("user", username);
         UserDao userDao = new UserDao();
         User user = userDao.getInfo(username);
+        request.setAttribute("image", user.getImage());
         request.setAttribute("password", user.getPassword());
         request.setAttribute("fullName", user.getFullName());
         request.setAttribute("description", user.getDescription());

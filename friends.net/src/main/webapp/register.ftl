@@ -14,19 +14,19 @@
             var conpassword = document.form.conpassword.value;
 
             if (fullname == null || fullname == "") {
-                alert("Full Name can't be blank");
+                alert("Имя не должно быть пустым");
                 return false;
             } else if (email == null || email == "") {
-                alert("Email can't be blank");
+                alert("Введите адрес электронной почты");
                 return false;
             } else if (username == null || username == "") {
-                alert("Username can't be blank");
+                alert("Введите логин");
                 return false;
             } else if (password.length < 6) {
-                alert("Password must be at least 6 characters long.");
+                alert("Пароль должен состоять минимум из 6 символов");
                 return false;
             } else if (password != conpassword) {
-                alert("Confirm Password should match with the Password");
+                alert("Пароли должны совпадать");
                 return false;
             }
         }
@@ -113,7 +113,7 @@
                     <label class="txt" for="pass"><b>Пароль</b></label>
                     <div class="register_line">
                         <input type="password" id="pass"
-                                name="password"/>
+                                name="password" />
                         <span class="form-error">Неправильная форма пароля</span>
                     </div>
                     <label class="txt" for="confPass"><b>Повторите пароль</b></label>
@@ -121,7 +121,7 @@
                         <input type="password" id="confPass"
                                   name="conpassword"/>
                     </div>
-                    <p><#if errMessage??> ${errMessage}</#if>
+                    <p style="color: red"><#if errMessage??> ${errMessage}</#if>
                     </p>
                     <input type="submit" class="btn btn-secondary" value="Зарегистрироваться"/>
                 </form>

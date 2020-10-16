@@ -198,12 +198,12 @@
     </style>
     <div class="event_profile">
         <div class="row">
-            <div class="col-4">
+            <div class="col-5">
                 <div class="image">
-                    <img class="picture" src="img/bfr.jpg" alt="">
+                    <img class="picture" src="<#if image??>${image}<#else>img/plyaj.jpg</#if>" alt="">
                 </div>
             </div>
-            <div class="col-8">
+            <div class="col-7">
                 <div class="text_block">
                     <div class="name_attend">
                         <div class="name">

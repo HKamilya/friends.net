@@ -106,7 +106,7 @@ public class ReviewDao implements DaoInterface<Review> {
 
         }
 
-        return "Something went wrong";
+        return "Что-то пошло не так";
     }
 
     @Override

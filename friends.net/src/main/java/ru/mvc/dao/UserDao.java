@@ -30,8 +30,7 @@ public class UserDao {
                 return "SUCCESS";
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             if (con != null) {
                 try {
                     con.close();
@@ -39,7 +38,7 @@ public class UserDao {
                 }
             }
         }
-        return "Something went wrong";
+        return "Вероятно такой пользователь уже существует";
 
     }
 
@@ -90,7 +89,7 @@ public class UserDao {
             }
         }
 
-        return "Invalid user credentials";
+        return "Введен неверный логин или пароль";
     }
 
     public User getInfo(String username) {
@@ -154,10 +153,11 @@ public class UserDao {
         PreparedStatement preparedStatement = null;
         try {
             con = DBConnection.createConnection();
-            String query = "update \"user\" set fullname=?, description=? where username=" + "'" + user.getUserName() + "'";
+            String query = "update \"user\" set fullname=?, description=?, image=? where username=" + "'" + user.getUserName() + "'";
             preparedStatement = con.prepareStatement(query);
             preparedStatement.setString(1, fullName);
             preparedStatement.setString(2, description);
+            preparedStatement.setString(3, user.getImage());
 
 
             int i = preparedStatement.executeUpdate();
@@ -166,8 +166,7 @@ public class UserDao {
                 return "SUCCESS";
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             if (con != null) {
                 try {
                     con.close();
@@ -175,7 +174,7 @@ public class UserDao {
                 }
             }
         }
-        return "Something went wrong";
+        return "Данные успешно изменены";
     }
 
     public User findById(int id) {
@@ -219,7 +218,8 @@ public class UserDao {
                     statement.close();
                 } catch (SQLException ignore) {
                 }
-            } if (con != null) {
+            }
+            if (con != null) {
                 try {
                     con.close();
                 } catch (SQLException ignore) {

@@ -11,7 +11,9 @@ import ru.mvc.model.User;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 
 @MultipartConfig
@@ -47,6 +49,26 @@ public class AddEventServlet extends HttpServlet {
         String street = request.getParameter("street");
         String house = request.getParameter("house");
         String date = request.getParameter("date");
+        Part filePart = request.getPart("image"); // Retrieves <input type="file" name="file">
+        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
+        InputStream fileContent = filePart.getInputStream();
+        String imgName = "img\\" + username + fileName;
+        String pathName = "C:\\Users\\gipot\\Desktop\\inf\\friends.net\\friends.net\\src\\main\\webapp\\img\\" + username + fileName;
+        File file = new File(pathName);
+        boolean created = file.createNewFile();
+        OutputStream os = new FileOutputStream(pathName);
+
+        byte[] b = new byte[2048];
+        int length;
+
+        while ((length = fileContent.read(b)) != -1) {
+            os.write(b, 0, length);
+        }
+
+        fileContent.close();
+        os.close();
+
+
         String description = request.getParameter("description");
         String status = "актуально";
 
@@ -58,7 +80,7 @@ public class AddEventServlet extends HttpServlet {
         event.setCity(city);
         event.setStreet(street);
         event.setHouse(house);
-//        events.setImage(image);
+        event.setImage(imgName);
         event.setDescription(description);
         event.setCategory(categories);
         event.setStatus(status);
