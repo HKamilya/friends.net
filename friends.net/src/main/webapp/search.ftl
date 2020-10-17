@@ -119,11 +119,15 @@
                                 </td>
                             </tr>
                         </table>
-                        <input class="sub" type="submit" value="Принять" style="margin-bottom: 5px"></form>
+                        <input class="sub" type="submit" value="Принять" style="margin-bottom: 5px">
+                    </form>
                 </div>
-                <div class="col-sm-8" style="border-left: 1px solid black"><input class="search"
-                                                                                  placeholder="Поиск по названию..."
-                                                                                  type="search">
+
+                <div class="col-sm-8" style="border-left: 1px solid black">
+                    <form action="/Search" method="post">
+                        <input class="search" name="search" placeholder="Поиск по названию..." type="text">
+                        <button type="submit">Поиск</button>
+                    </form>
 
                     <div class="main">
                         <#include "allEv.ftl">

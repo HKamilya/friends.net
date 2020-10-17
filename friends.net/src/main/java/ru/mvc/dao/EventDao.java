@@ -282,8 +282,7 @@ public class EventDao implements DaoInterface<Event> {
     }
 
     public Event findById(int id) {
-        List<Event> events = new ArrayList<>();
-        Event res = null;
+        Event event = new Event();
         Connection con = null;
         Statement statement = null;
         ResultSet resultSet = null;
@@ -311,8 +310,76 @@ public class EventDao implements DaoInterface<Event> {
                 UserDao userDao = new UserDao();
                 User user = userDao.findById(user_id);
 
-                Event event = new Event();
+
                 event.setId(id);
+                event.setUser(user);
+                event.setCategory(category);
+                event.setCity(city);
+                event.setHouse(house);
+                event.setStatus(status);
+                event.setDate(date);
+                event.setImage(image);
+                event.setDescription(description);
+                event.setStreet(street);
+                event.setName(name);
+            }
+        } catch (SQLException e) {
+            throw new IllegalStateException(e);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException ignore) {
+                }
+            }
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ignore) {
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ignore) {
+                }
+            }
+        }
+        return event;
+    }
+
+    public List<Event> findByName(String eventName) {
+        List<Event> events = new ArrayList<>();
+        Connection con = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        try {
+            con = DBConnection.createConnection();
+            String sql = "SELECT * FROM event where name =" + "'" + eventName + "'";
+            statement = con.createStatement();
+            resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                int event_id = resultSet.getInt("id");
+                int user_id = resultSet.getInt("user_id");
+                String name = resultSet.getString("name");
+                String city = resultSet.getString("city");
+                String street = resultSet.getString("street");
+                String house = resultSet.getString("house");
+                String image = resultSet.getString("image");
+                String description = resultSet.getString("description");
+                int category_id = resultSet.getInt("category_id");
+                String status = resultSet.getString("status");
+                String date = resultSet.getString("date");
+                CategoriesDao categoriesDao = new CategoriesDao();
+                Categories category = categoriesDao.findById(category_id);
+
+
+                UserDao userDao = new UserDao();
+                User user = userDao.findById(user_id);
+
+                Event event = new Event();
+                event.setId(event_id);
                 event.setUser(user);
                 event.setCategory(category);
                 event.setCity(city);
@@ -325,9 +392,6 @@ public class EventDao implements DaoInterface<Event> {
                 event.setName(name);
                 events.add(event);
             }
-            int a = (int) (Math.random() * events.size());
-
-            res = events.get(a);
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         } finally {
@@ -351,7 +415,7 @@ public class EventDao implements DaoInterface<Event> {
             }
         }
 
-        return res;
+        return events;
     }
 
     public void updateStatus(int id, String status) {

@@ -15,6 +15,19 @@ import java.util.List;
 
 public class SearchServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        HttpSession session = request.getSession();
+        String username = (String) session.getAttribute("User");
+        String search = request.getParameter("search");
+        CategoriesDao categoriesDao = new CategoriesDao();
+        List<Categories> categories = categoriesDao.getAllCategories();
+        request.setAttribute("catList", categories);
+        System.out.println(search);
+        EventDao eventDao = new EventDao();
+        List<Event> events = eventDao.findByName(search);
+        request.setAttribute("list", events);
+        getServletContext().getRequestDispatcher("/search.ftl").forward(request, response);
+
 
     }
 

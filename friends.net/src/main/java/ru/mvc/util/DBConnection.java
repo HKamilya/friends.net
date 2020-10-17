@@ -14,13 +14,13 @@ public class DBConnection {
             try {
                 Class.forName("org.postgresql.Driver");
             } catch (ClassNotFoundException e) {
-                e.printStackTrace();
+                throw new IllegalStateException(e);
             }
             con = DriverManager.getConnection(url, username, password);
 
             System.out.println("Printing connection object " + con);
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new IllegalStateException(e);
         }
         return con;
     }
