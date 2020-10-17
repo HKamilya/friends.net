@@ -22,11 +22,11 @@ public class UpdateProfileServlet extends HttpServlet {
         String description = request.getParameter("description");
         Part filePart = request.getPart("image");
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-        InputStream fileContent = filePart.getInputStream();
-        System.out.println("~" + fileName + "~");
-        String imgName = "img\\profileimg" + username + fileName;
-        String pathName = "C:\\Users\\gipot\\Desktop\\inf\\friends.net\\friends.net\\src\\main\\webapp\\img\\profileimg" + username + fileName;
         if (fileName.length() > 1) {
+            InputStream fileContent = filePart.getInputStream();
+            System.out.println("~" + fileName + "~");
+            String imgName = "img\\profileimg" + username + fileName;
+            String pathName = "C:\\Users\\gipot\\Desktop\\inf\\friends.net\\friends.net\\src\\main\\webapp\\img\\profileimg" + username + fileName;
             File file = new File(pathName);
             boolean created = file.createNewFile();
             OutputStream os = new FileOutputStream(pathName);
@@ -39,8 +39,8 @@ public class UpdateProfileServlet extends HttpServlet {
             }
             os.close();
             user.setImage(imgName);
+            fileContent.close();
         }
-        fileContent.close();
 
 
         user.setDescription(description);

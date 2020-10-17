@@ -11,20 +11,32 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SearchServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
-        String username = (String) session.getAttribute("User");
-        String search = request.getParameter("search");
         CategoriesDao categoriesDao = new CategoriesDao();
         List<Categories> categories = categoriesDao.getAllCategories();
         request.setAttribute("catList", categories);
-        System.out.println(search);
+        String username = (String) session.getAttribute("User");
+        String search = request.getParameter("search");
+        String[] names = request.getParameterValues("category");
+        List<Event> events = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
         EventDao eventDao = new EventDao();
-        List<Event> events = eventDao.findByName(search);
+        if (names.length == 1 & names[0].equals("0")) {
+            events = eventDao.findByName(search);
+        } else {
+            for (int i = 1; i < names.length; i++) {
+                list.add(Integer.parseInt(names[i]));
+            }
+            events = eventDao.findByNameAndCategory(search, list);
+        }
+        System.out.println(list);
         request.setAttribute("list", events);
         getServletContext().getRequestDispatcher("/search.ftl").forward(request, response);
 

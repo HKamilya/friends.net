@@ -66,13 +66,12 @@ public class EventDao implements DaoInterface<Event> {
         List<Event> events = new ArrayList<>();
         Event res = null;
         Connection con = null;
-        Statement statement = null;
         ResultSet resultSet = null;
         try {
             con = DBConnection.createConnection();
-            String sql = "SELECT * FROM event where status='актуально'";
-            statement = con.createStatement();
-            resultSet = statement.executeQuery(sql);
+            PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM event where status=?");
+            preparedStatement.setString(1, "актуально");
+            resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
@@ -122,12 +121,6 @@ public class EventDao implements DaoInterface<Event> {
                 } catch (SQLException ignore) {
                 }
             }
-            if (statement != null) {
-                try {
-                    statement.close();
-                } catch (SQLException ignore) {
-                }
-            }
             if (con != null) {
                 try {
                     con.close();
@@ -147,9 +140,9 @@ public class EventDao implements DaoInterface<Event> {
         ResultSet resultSet = null;
         try {
             con = DBConnection.createConnection();
-            String sql = "SELECT * FROM event where status='актуально'";
-            statement = con.createStatement();
-            resultSet = statement.executeQuery(sql);
+            PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM event where status=? order by date asc");
+            preparedStatement.setString(1, "актуально");
+            resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
@@ -218,9 +211,9 @@ public class EventDao implements DaoInterface<Event> {
         ResultSet resultSet = null;
         try {
             con = DBConnection.createConnection();
-            String sql = "SELECT * FROM event where user_id=" + id;
-            statement = con.createStatement();
-            resultSet = statement.executeQuery(sql);
+            PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM event where user_id=?");
+            preparedStatement.setInt(1, id);
+            resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
                 int event_id = resultSet.getInt("id");
@@ -288,9 +281,9 @@ public class EventDao implements DaoInterface<Event> {
         ResultSet resultSet = null;
         try {
             con = DBConnection.createConnection();
-            String sql = "SELECT * FROM event where id=" + id;
-            statement = con.createStatement();
-            resultSet = statement.executeQuery(sql);
+            PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM event where id=?");
+            preparedStatement.setInt(1, id);
+            resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
                 int user_id = resultSet.getInt("user_id");
@@ -348,16 +341,102 @@ public class EventDao implements DaoInterface<Event> {
         return event;
     }
 
+    public List<Event> findByNameAndCategory(String eventName, List<Integer> categories) {
+        List<Event> events = new ArrayList<>();
+        Connection con = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        String sql = null;
+        System.out.println(categories.size());
+        try {
+            con = DBConnection.createConnection();
+            if (categories.size() > 0 & eventName.length() > 0) {
+                sql = "SELECT * FROM event where name =" + "'" + eventName + "'";
+                sql += " and (";
+                for (int i = 0; i < categories.size() - 2; i++) {
+                    sql += "category_id=" + categories.get(i) + " or ";
+                }
+                sql += "category_id=" + categories.get(categories.size() - 1) + ");";
+            } else if (categories.size() > 0) {
+                sql = "SELECT * FROM event where ";
+                for (int i = 0; i < categories.size() - 2; i++) {
+                    sql += "category_id=" + categories.get(i) + " or ";
+                }
+                sql += "category_id=" + categories.get(categories.size() - 1) + ";";
+            }
+            statement = con.createStatement();
+            resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                int event_id = resultSet.getInt("id");
+                int user_id = resultSet.getInt("user_id");
+                String name = resultSet.getString("name");
+                String city = resultSet.getString("city");
+                String street = resultSet.getString("street");
+                String house = resultSet.getString("house");
+                String image = resultSet.getString("image");
+                String description = resultSet.getString("description");
+                int category_id = resultSet.getInt("category_id");
+                String status = resultSet.getString("status");
+                String date = resultSet.getString("date");
+                CategoriesDao categoriesDao = new CategoriesDao();
+                Categories category = categoriesDao.findById(category_id);
+
+
+                UserDao userDao = new UserDao();
+                User user = userDao.findById(user_id);
+
+                Event event = new Event();
+                event.setId(event_id);
+                event.setUser(user);
+                event.setCategory(category);
+                event.setCity(city);
+                event.setHouse(house);
+                event.setStatus(status);
+                event.setDate(date);
+                event.setImage(image);
+                event.setDescription(description);
+                event.setStreet(street);
+                event.setName(name);
+                events.add(event);
+            }
+        } catch (SQLException e) {
+            throw new IllegalStateException(e);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException ignore) {
+                }
+            }
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ignore) {
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ignore) {
+                }
+            }
+        }
+
+        return events;
+    }
+
     public List<Event> findByName(String eventName) {
         List<Event> events = new ArrayList<>();
+
         Connection con = null;
         Statement statement = null;
         ResultSet resultSet = null;
         try {
             con = DBConnection.createConnection();
-            String sql = "SELECT * FROM event where name =" + "'" + eventName + "'";
-            statement = con.createStatement();
-            resultSet = statement.executeQuery(sql);
+            PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM event where name =?");
+            preparedStatement.setString(1, eventName);
+            resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
                 int event_id = resultSet.getInt("id");
@@ -421,12 +500,11 @@ public class EventDao implements DaoInterface<Event> {
     public void updateStatus(int id, String status) {
 
         Connection con = null;
-        PreparedStatement preparedStatement = null;
         try {
             con = DBConnection.createConnection();
-            String query = "update event set status=? where id=" + id;
-            preparedStatement = con.prepareStatement(query);
+            PreparedStatement preparedStatement = con.prepareStatement("update event set status=? where id=?");
             preparedStatement.setString(1, status);
+            preparedStatement.setInt(2, id);
 
             int i = preparedStatement.executeUpdate();
 

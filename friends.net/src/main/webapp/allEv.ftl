@@ -65,10 +65,11 @@
                     <p>${event.description}</p>
                 </div>
                 <div class="descr">
+                    <p>${event.date}</p>
+                </div>
+                <div class="descr">
                     <p>${event.category.name}</p>
                 </div>
             </div>
         </#list>
     </div>
-    </body>
-    </html>

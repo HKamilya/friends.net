@@ -49,8 +49,10 @@ public class AddEventServlet extends HttpServlet {
         String street = request.getParameter("street");
         String house = request.getParameter("house");
         String date = request.getParameter("date");
+
+
         Part filePart = request.getPart("image"); // Retrieves <input type="file" name="file">
-        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
+        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
         InputStream fileContent = filePart.getInputStream();
         String imgName = "img\\" + username + fileName;
         String pathName = "C:\\Users\\gipot\\Desktop\\inf\\friends.net\\friends.net\\src\\main\\webapp\\img\\" + username + fileName;

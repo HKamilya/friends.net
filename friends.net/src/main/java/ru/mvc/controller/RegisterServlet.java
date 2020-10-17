@@ -58,6 +58,7 @@ public class RegisterServlet extends HttpServlet {
             User user = userDao.getInfo(username);
             session.setMaxInactiveInterval(10 * 60);
             session.setAttribute("User", username);
+            request.setAttribute("user", username);
             request.setAttribute("username", username);
             request.setAttribute("fullName", fullName);
             request.setAttribute("username", username);

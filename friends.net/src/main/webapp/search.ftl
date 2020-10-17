@@ -78,15 +78,18 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-4"><p><b>Фильтры</b></p>
-                    <form id="filter">
+                    <form id="filter" method="post" action="/Search">
+                        <input class="search" name="search" placeholder="Поиск по названию..." type="text">
+                        <br>
                         <table>
                             <th>По категории:</th>
+                            <input type="hidden" name="category" value="0">
                             <#list catList as catList>
                                 <tr>
                                     <td>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="checkbox" id="outside"
-                                                   value="outside" name="${catList.id}">
+                                                   value="${catList.id}" name="category">
                                             <label class="form-check-label" for="outside">${catList.name}</label>
                                         </div>
                                     </td>
@@ -119,15 +122,10 @@
                                 </td>
                             </tr>
                         </table>
-                        <input class="sub" type="submit" value="Принять" style="margin-bottom: 5px">
+                        <input class="sub" type="submit" value="Поиск" style="margin-bottom: 5px">
                     </form>
                 </div>
-
                 <div class="col-sm-8" style="border-left: 1px solid black">
-                    <form action="/Search" method="post">
-                        <input class="search" name="search" placeholder="Поиск по названию..." type="text">
-                        <button type="submit">Поиск</button>
-                    </form>
 
                     <div class="main">
                         <#include "allEv.ftl">

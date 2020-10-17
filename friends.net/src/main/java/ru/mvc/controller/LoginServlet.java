@@ -92,6 +92,7 @@ public class LoginServlet extends HttpServlet {
                 loginBean = loginDao.getInfo(username);
                 EventDao eventDao = new EventDao();
                 List<Event> events = eventDao.getAllUsersEvents(loginBean.getId());
+                request.setAttribute("image", loginBean.getImage());
                 request.setAttribute("eventsList", events);
                 request.setAttribute("description", loginBean.getDescription());
                 request.setAttribute("fullName", loginBean.getFullName());

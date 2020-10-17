@@ -17,7 +17,7 @@ public class UserDao {
         PreparedStatement preparedStatement = null;
         try {
             con = DBConnection.createConnection();
-            String query = "insert into \"user\"(fullname,email,username,password) values (?,?,?,?)"; //Insert user details into the table 'USERS'
+            String query = "insert into \"user\"(fullname,email,username,password) values (?,?,?,?)";
             preparedStatement = con.prepareStatement(query);
             preparedStatement.setString(1, fullName);
             preparedStatement.setString(2, email);
@@ -174,7 +174,7 @@ public class UserDao {
                 }
             }
         }
-        return "Данные успешно изменены";
+        return "Что-то пошло не так";
     }
 
     public User findById(int id) {
