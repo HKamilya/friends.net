@@ -28,13 +28,13 @@ public class UserEventsServlet extends HttpServlet {
         String username = (String) session.getAttribute("User");
         request.setAttribute("user", username);
         UserDao userDao = new UserDao();
-        User user = userDao.getInfo(username);
+        User user = userDao.findByName(username);
         EventDao eventDao = new EventDao();
-        List<Event> eventList = eventDao.getAllUsersEvents(user.getId());
+        List<Event> eventList = eventDao.findByUserId(user.getId());
         LinkedHashMap<Event, List<Request>> evReqList = new LinkedHashMap<>();
         for (Event event : eventList) {
             RequestDao requestDao = new RequestDao();
-            List<Request> requests = requestDao.getAllRequests(event.getId());
+            List<Request> requests = requestDao.findAllByEventId(event.getId());
             evReqList.put(event, requests);
         }
         for (Map.Entry ev : evReqList.entrySet()) {

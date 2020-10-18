@@ -25,7 +25,7 @@ public class RandomEventServlet extends HttpServlet {
         req.setAttribute("user", usernm);
 
         EventDao eventDao = new EventDao();
-        Event event = eventDao.getRandomEvent();
+        Event event = eventDao.findRandomEvent();
         UserDao userDao = new UserDao();
         User user = userDao.findById(event.getUser().getId());
         req.setAttribute("event_id", event.getId());
@@ -39,11 +39,11 @@ public class RandomEventServlet extends HttpServlet {
         req.setAttribute("date", event.getDate());
         req.setAttribute("author", event.getUser().getUserName());
         RequestDao requestDao = new RequestDao();
-        List<Request> requests = requestDao.getAllRequests(event.getId());
+        List<Request> requests = requestDao.findAllByEventId(event.getId());
         req.setAttribute("numOfReq", requests.size());
 
         ReviewDao reviewDao = new ReviewDao();
-        List<Review> reviews = reviewDao.getReviews(event.getId());
+        List<Review> reviews = reviewDao.findAllByEventId(event.getId());
         req.setAttribute("reviewsList", reviews);
         getServletContext().getRequestDispatcher("/event.ftl").forward(req, resp);
 

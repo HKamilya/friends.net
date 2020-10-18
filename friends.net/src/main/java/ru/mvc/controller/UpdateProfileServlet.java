@@ -17,8 +17,9 @@ public class UpdateProfileServlet extends HttpServlet {
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("User");
         UserDao userDao = new UserDao();
-        User user = userDao.getInfo(username);
+        User user = userDao.findByName(username);
         String fullname = request.getParameter("fullName");
+        System.out.println(fullname);
         String description = request.getParameter("description");
         Part filePart = request.getPart("image");
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
@@ -62,7 +63,7 @@ public class UpdateProfileServlet extends HttpServlet {
         String username = (String) session.getAttribute("User");
         request.setAttribute("user", username);
         UserDao userDao = new UserDao();
-        User user = userDao.getInfo(username);
+        User user = userDao.findByName(username);
         request.setAttribute("image", user.getImage());
         request.setAttribute("password", user.getPassword());
         request.setAttribute("fullName", user.getFullName());

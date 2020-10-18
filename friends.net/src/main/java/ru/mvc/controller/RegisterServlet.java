@@ -50,12 +50,12 @@ public class RegisterServlet extends HttpServlet {
 
         UserDao registerDao = new UserDao();
 
-        String userRegistered = registerDao.registerUser(users);
+        String userRegistered = registerDao.insert(users);
 
         if (userRegistered.equals("SUCCESS")) {
             HttpSession session = request.getSession();
             UserDao userDao = new UserDao();
-            User user = userDao.getInfo(username);
+            User user = userDao.findByName(username);
             session.setMaxInactiveInterval(10 * 60);
             session.setAttribute("User", username);
             request.setAttribute("user", username);

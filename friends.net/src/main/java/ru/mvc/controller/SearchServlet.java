@@ -20,7 +20,7 @@ public class SearchServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         CategoriesDao categoriesDao = new CategoriesDao();
-        List<Categories> categories = categoriesDao.getAllCategories();
+        List<Categories> categories = categoriesDao.findAll();
         request.setAttribute("catList", categories);
         String username = (String) session.getAttribute("User");
         String search = request.getParameter("search");
@@ -49,9 +49,9 @@ public class SearchServlet extends HttpServlet {
         String user = (String) session.getAttribute("User");
         request.setAttribute("user", user);
         CategoriesDao categoriesDao = new CategoriesDao();
-        List<Categories> categories = categoriesDao.getAllCategories();
+        List<Categories> categories = categoriesDao.findAll();
         EventDao eventDao = new EventDao();
-        List<Event> eventList = eventDao.getAllEvents();
+        List<Event> eventList = eventDao.findAll();
         request.setAttribute("catList", categories);
         request.setAttribute("list", eventList);
         getServletContext().getRequestDispatcher("/search.ftl").forward(request, response);

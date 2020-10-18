@@ -89,9 +89,9 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("User", username);
                 request.setAttribute("username", username);
                 request.setAttribute("user", username);
-                loginBean = loginDao.getInfo(username);
+                loginBean = loginDao.findByName(username);
                 EventDao eventDao = new EventDao();
-                List<Event> events = eventDao.getAllUsersEvents(loginBean.getId());
+                List<Event> events = eventDao.findByUserId(loginBean.getId());
                 request.setAttribute("image", loginBean.getImage());
                 request.setAttribute("eventsList", events);
                 request.setAttribute("description", loginBean.getDescription());
@@ -104,7 +104,7 @@ public class LoginServlet extends HttpServlet {
                 request.getRequestDispatcher("/login.ftl").forward(request, response);
             }
         } catch (Exception e1) {
-            throw new IllegalStateException();
+            throw new IllegalStateException(e1);
         }
     }
 }

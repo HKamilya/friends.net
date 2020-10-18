@@ -5,9 +5,10 @@ import ru.mvc.model.User;
 import ru.mvc.util.DBConnection;
 
 import java.sql.*;
+import java.util.List;
 
-public class UserDao {
-    public String registerUser(User user) {
+public class UserDao extends AbstractDao<User> {
+    public String insert(User user) {
         String fullName = user.getFullName();
         String email = user.getEmail();
         String userName = user.getUserName();
@@ -100,7 +101,7 @@ public class UserDao {
         return "Введен неверный логин или пароль";
     }
 
-    public User getInfo(String username) {
+    public User findByName(String username) {
         User user = new User();
         Connection con = null;
         PreparedStatement ps = null;
@@ -162,11 +163,11 @@ public class UserDao {
         PreparedStatement preparedStatement = null;
         try {
             con = DBConnection.createConnection();
-            String query = "update \"user\" set fullname=?, description=?, image=? where username=" + "'" + user.getUserName() + "'";
-            preparedStatement = con.prepareStatement(query);
+            preparedStatement = con.prepareStatement("update \"user\" set fullname=?, description=?, image=? where username=?");
             preparedStatement.setString(1, fullName);
             preparedStatement.setString(2, description);
             preparedStatement.setString(3, user.getImage());
+            preparedStatement.setString(4, user.getUserName());
 
 
             int i = preparedStatement.executeUpdate();
@@ -237,5 +238,20 @@ public class UserDao {
         }
 
         return user;
+    }
+
+    @Override
+    public void update(User adr) {
+
+    }
+
+    @Override
+    public void delete(User adr) {
+
+    }
+
+    @Override
+    public List<User> findAll() {
+        return null;
     }
 }

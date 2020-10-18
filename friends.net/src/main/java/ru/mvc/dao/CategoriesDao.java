@@ -8,9 +8,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoriesDao implements DaoInterface<Categories> {
+public class CategoriesDao extends AbstractDao<Categories> {
 
-    public List<Categories> getAllCategories() {
+    public List<Categories> findAll() {
         List<Categories> categories = new ArrayList<>();
         Connection con = null;
         Statement statement = null;
@@ -61,6 +61,11 @@ public class CategoriesDao implements DaoInterface<Categories> {
         return categories;
     }
 
+    @Override
+    public String insert(Categories adr) {
+        return null;
+    }
+
     public Categories findById(int id) {
         Categories categories = new Categories();
         Connection con = null;
@@ -105,6 +110,16 @@ public class CategoriesDao implements DaoInterface<Categories> {
         }
 
         return categories;
+    }
+
+    @Override
+    public void update(Categories adr) {
+
+    }
+
+    @Override
+    public void delete(Categories adr) {
+
     }
 }
 

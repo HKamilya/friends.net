@@ -3,28 +3,31 @@
 <link rel="stylesheet" href="css/style_menu_alternative.css">
 <@base.main>
     <#if user??>
-    <#--        <script>-->
-    <#--            function validate() {-->
+        <script>
+            var maxCount = 300;
+            var redCount = 3;
+            var input = $("#description");
 
-    <#--                var password = document.form.password.value;-->
-    <#--                var conpassword = document.form.conpassword.value;-->
-    <#--                var earlpass = document.forms.earlpass.value;-->
-    <#--                if (earlpass != < % request.getParameter("password");-->
-    <#--            %>)-->
-    <#--                {-->
-    <#--                    alert("Старый пароль введен не верно");-->
-    <#--                    return false;-->
-    <#--                }-->
-    <#--            else-->
-    <#--                if (password.length < 6) {-->
-    <#--                    alert("Пароль должен содержать более 6 символов");-->
-    <#--                    return false;-->
-    <#--                } else if (password != conpassword) {-->
-    <#--                    alert("Пароли должный совпадать");-->
-    <#--                    return false;-->
-    <#--                }-->
-    <#--            }-->
-    <#--        </script>-->
+            $("#count").text(maxCount);
+
+            function getCount() {
+                var count = maxCount - $("#description").val().length;
+                $("#count").text(count);
+                if (count <= redCount) {
+                    $(".inform-text").addClass("red");
+                } else if (count > 0 && $(".inform-text").hasClass("red")) {
+                    $(".inform-text").removeClass("red");
+                    $("#submit-button").removeClass("disabled");
+                }
+                if (count <= 0) {
+                    $("#submit-button").addClass("disabled");
+                    $("#submit-button").text("Недоступно");
+                } else if (count > 0 && $("#submit-button").hasClass("disabled")) {
+                    $("#submit-button").removeClass("disabled");
+                    $("#submit-button").text("Отправить");
+                }
+            }
+        </script>
         <style>
             .container {
                 width: 100%;
@@ -113,27 +116,30 @@
                             <h3>О себе:</h3>
                         </div>
                         <div class="about">
-                            <input type="text" class="about_text" name="description"
+                            <input type="text" autocomplete="off"  class="about_text" id="description" name="description"
                                    value="<#if description??>${description}</#if>">
+
                         </div>
+                        <p class="inform-text">Количество оставшихся символов: <span id="count"></span></p>
+
                     </div>
                 </div>
-                <button type="submit" name="submit">Сохранить</button>
+                <button type="submit" id="submit-button" name="submit">Сохранить</button>
             </form>
-<#--            <form method="post" action="">-->
-<#--                <label class="txt" for="pass"><b>Старый пароль</b></label>-->
-<#--                <div class="register_line">-->
-<#--                    <input type="password" id="earlpass" name="earlpass"/>-->
-<#--                </div>-->
-<#--                <label class="txt" for="pass"><b>Новый пароль</b></label>-->
-<#--                <div class="register_line">-->
-<#--                    <input type="password" id="pass" name="password"/>-->
-<#--                </div>-->
-<#--                <label class="txt" for="confPass"><b>Повторите пароль</b></label>-->
-<#--                <div class="register_line">-->
-<#--                    <input type="password" id="confPass" name="conpassword"/>-->
-<#--                </div>-->
-<#--            </form>-->
+            <#--            <form method="post" action="">-->
+            <#--                <label class="txt" for="pass"><b>Старый пароль</b></label>-->
+            <#--                <div class="register_line">-->
+            <#--                    <input type="password" id="earlpass" name="earlpass"/>-->
+            <#--                </div>-->
+            <#--                <label class="txt" for="pass"><b>Новый пароль</b></label>-->
+            <#--                <div class="register_line">-->
+            <#--                    <input type="password" id="pass" name="password"/>-->
+            <#--                </div>-->
+            <#--                <label class="txt" for="confPass"><b>Повторите пароль</b></label>-->
+            <#--                <div class="register_line">-->
+            <#--                    <input type="password" id="confPass" name="conpassword"/>-->
+            <#--                </div>-->
+            <#--            </form>-->
         </div>
     </#if>
 </@base.main>

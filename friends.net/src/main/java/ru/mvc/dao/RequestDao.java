@@ -11,8 +11,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RequestDao {
-    public String addRequest(Request request) {
+public class RequestDao extends AbstractDao<Request> {
+    public String insert(Request request) {
         Event event = request.getEvent();
         String comment = request.getComment();
         User user = request.getSubscriber();
@@ -32,13 +32,13 @@ public class RequestDao {
             statement = con1.createStatement();
             resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
-                int subscriber = resultSet.getInt("subscriber");
+                int subscriber = resultSet.getInt("subscriber_id");
                 int event_id = resultSet.getInt("event_id");
                 if (event.getId() == event_id & user.getId() == subscriber) {
                     return "вы уже участвуете в этом мероприятии";
                 }
             }
-            String query = "insert into request(event_id, subscriber, comment) values (?,?,?)";
+            String query = "insert into request(event_id, subscriber_id, comment) values (?,?,?)";
             preparedStatement = con.prepareStatement(query);
             preparedStatement.setInt(1, event.getId());
             preparedStatement.setInt(2, user.getId());
@@ -67,7 +67,27 @@ public class RequestDao {
         return "Something went wrong";
     }
 
-    public List<Request> getAllRequests(int event_id) {
+    @Override
+    public Request findById(int id) {
+        return null;
+    }
+
+    @Override
+    public void update(Request adr) {
+
+    }
+
+    @Override
+    public void delete(Request adr) {
+
+    }
+
+    @Override
+    public List<Request> findAll() {
+        return null;
+    }
+
+    public List<Request> findAllByEventId(int event_id) {
         List<Request> requests = new ArrayList<>();
         Connection con = null;
         Statement statement = null;
@@ -79,7 +99,7 @@ public class RequestDao {
             resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
-                int subscriber = resultSet.getInt("subscriber");
+                int subscriber = resultSet.getInt("subscriber_id");
                 String comment = resultSet.getString("comment");
 
                 UserDao userDao = new UserDao();

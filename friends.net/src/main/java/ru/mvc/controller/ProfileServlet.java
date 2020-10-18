@@ -39,8 +39,8 @@ public class ProfileServlet extends HttpServlet {
         EventDao eventDao = new EventDao();
 
         UserDao userDao = new UserDao();
-        User user = userDao.getInfo(username);
-        List<Event> events = eventDao.getAllUsersEvents(user.getId());
+        User user = userDao.findByName(username);
+        List<Event> events = eventDao.findByUserId(user.getId());
         request.setAttribute("username", username);
         request.setAttribute("fullName", user.getFullName());
         request.setAttribute("description", user.getDescription());

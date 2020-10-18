@@ -9,8 +9,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReviewDao implements DaoInterface<Review> {
-    public List<Review> getReviews(int id) {
+public class ReviewDao extends AbstractDao<ReviewDao> {
+    public List<Review> findAllByEventId(int id) {
         List<Review> reviews = new ArrayList<>();
         Event res = null;
         Connection con = null;
@@ -66,7 +66,7 @@ public class ReviewDao implements DaoInterface<Review> {
         return reviews;
     }
 
-    public String addReview(Review review) {
+    public String insert(Review review) {
         String text = review.getText();
 
         Connection con = null;
@@ -110,7 +110,27 @@ public class ReviewDao implements DaoInterface<Review> {
     }
 
     @Override
-    public Review findById(int id) {
+    public String insert(ReviewDao adr) {
+        return null;
+    }
+
+    @Override
+    public ReviewDao findById(int id) {
+        return null;
+    }
+
+    @Override
+    public void update(ReviewDao adr) {
+
+    }
+
+    @Override
+    public void delete(ReviewDao adr) {
+
+    }
+
+    @Override
+    public List<ReviewDao> findAll() {
         return null;
     }
 }

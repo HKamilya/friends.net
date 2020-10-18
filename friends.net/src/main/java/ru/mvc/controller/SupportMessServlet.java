@@ -24,7 +24,7 @@ public class SupportMessServlet extends HttpServlet {
         String email = request.getParameter("email");
         if (email.equals("email")) {
             UserDao userdao = new UserDao();
-            User user = userdao.getInfo(username);
+            User user = userdao.findByName(username);
             email = user.getEmail();
         }
         SupportMessageDao supMessDao = new SupportMessageDao();
@@ -32,7 +32,7 @@ public class SupportMessServlet extends HttpServlet {
         suppMess.setEmail(email);
         suppMess.setTitle(title);
         suppMess.setText(text);
-        supMessDao.addMessage(suppMess);
+        supMessDao.insert(suppMess);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

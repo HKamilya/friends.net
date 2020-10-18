@@ -22,7 +22,7 @@ public class SendRequestServlet extends HttpServlet {
         String comment = request.getParameter("comment");
         int event_id = Integer.parseInt(request.getParameter("event_id"));
         UserDao userDao = new UserDao();
-        User user = userDao.getInfo(username);
+        User user = userDao.findByName(username);
         Request req = new Request();
         EventDao eventDao = new EventDao();
         Event event = eventDao.findById(event_id);
@@ -32,7 +32,7 @@ public class SendRequestServlet extends HttpServlet {
         System.out.println(user);
         System.out.println(event);
         RequestDao requestDao = new RequestDao();
-        String requestSended = requestDao.addRequest( req);
+        String requestSended = requestDao.insert( req);
         if (requestSended.equals("SUCCESS")) {
             response.sendRedirect(request.getContextPath() + "/Event?id=" + event_id);
         } else {

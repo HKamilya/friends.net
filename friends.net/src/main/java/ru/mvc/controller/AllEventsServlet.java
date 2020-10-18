@@ -21,7 +21,7 @@ public class AllEventsServlet extends HttpServlet {
         String user = (String) session.getAttribute("User");
         request.setAttribute("user", user);
         EventDao eventDao = new EventDao();
-        List<Event> eventList = eventDao.getAllEvents();
+        List<Event> eventList = eventDao.findAll();
         request.setAttribute("list", eventList);
         getServletContext().getRequestDispatcher("/allEvents.ftl").forward(request, response);
     }

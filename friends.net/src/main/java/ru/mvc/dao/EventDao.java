@@ -10,8 +10,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventDao implements DaoInterface<Event> {
-    public String addEvent(Event event) {
+public class EventDao extends AbstractDao<Event> {
+    public String insert(Event event) {
         String name = event.getName();
         String city = event.getCity();
         String street = event.getStreet();
@@ -67,7 +67,7 @@ public class EventDao implements DaoInterface<Event> {
         return "Что-то пошло не так";
     }
 
-    public Event getRandomEvent() {
+    public Event findRandomEvent() {
         List<Event> events = new ArrayList<>();
         Event res = null;
         Connection con = null;
@@ -144,7 +144,7 @@ public class EventDao implements DaoInterface<Event> {
         return res;
     }
 
-    public List<Event> getAllEvents() {
+    public List<Event> findAll() {
         List<Event> events = new ArrayList<>();
         Connection con = null;
         ResultSet resultSet = null;
@@ -214,7 +214,7 @@ public class EventDao implements DaoInterface<Event> {
         return events;
     }
 
-    public List<Event> getAllUsersEvents(int id) {
+    public List<Event> findByUserId(int id) {
         List<Event> events = new ArrayList<>();
         Connection con = null;
         ResultSet resultSet = null;
@@ -349,6 +349,17 @@ public class EventDao implements DaoInterface<Event> {
             }
         }
         return event;
+    }
+
+    @Override
+    public void update(Event adr) {
+        
+    }
+
+
+    @Override
+    public void delete(Event adr) {
+
     }
 
     public List<Event> findByNameAndCategory(String eventName, List<Integer> categories) {

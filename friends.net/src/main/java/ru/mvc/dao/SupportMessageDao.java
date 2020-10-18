@@ -4,9 +4,10 @@ import ru.mvc.model.SupportMessage;
 import ru.mvc.util.DBConnection;
 
 import java.sql.*;
+import java.util.List;
 
-public class SupportMessageDao {
-    public void addMessage(SupportMessage supportMessage) {
+public class SupportMessageDao extends AbstractDao<SupportMessage> {
+    public String insert(SupportMessage supportMessage) {
         Connection con = null;
         PreparedStatement preparedStatement = null;
 
@@ -20,12 +21,13 @@ public class SupportMessageDao {
 
 
             int i = preparedStatement.executeUpdate();
-
+            if (i != 0) {
+                return "SUCCESS";
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             if (con != null) {
                 try {
                     con.close();
@@ -33,6 +35,27 @@ public class SupportMessageDao {
                 }
             }
         }
+        return "Что-то пошло не так";
+    }
+
+    @Override
+    public SupportMessage findById(int id) {
+        return null;
+    }
+
+    @Override
+    public void update(SupportMessage adr) {
+
+    }
+
+    @Override
+    public void delete(SupportMessage adr) {
+
+    }
+
+    @Override
+    public List<SupportMessage> findAll() {
+        return null;
     }
 }
 

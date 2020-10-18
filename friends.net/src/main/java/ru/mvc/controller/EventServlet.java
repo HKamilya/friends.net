@@ -30,7 +30,7 @@ public class EventServlet extends HttpServlet {
         UserDao userDao = new UserDao();
 
         User user = userDao.findById(id);
-        List<Request> requests = requestDao.getAllRequests(id);
+        List<Request> requests = requestDao.findAllByEventId(id);
         req.setAttribute("event_id", event.getId());
         req.setAttribute("name", event.getName());
         req.setAttribute("city", event.getCity());
@@ -44,7 +44,7 @@ public class EventServlet extends HttpServlet {
         req.setAttribute("author", event.getUser().getUserName());
         System.out.println(user.getUserName());
         ReviewDao reviewDao = new ReviewDao();
-        List<Review> reviews = reviewDao.getReviews(id);
+        List<Review> reviews = reviewDao.findAllByEventId(id);
         for (Review r : reviews) {
             System.out.println(r.getUser().getUserName());
         }

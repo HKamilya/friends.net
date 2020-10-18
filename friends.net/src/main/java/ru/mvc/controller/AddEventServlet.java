@@ -28,7 +28,7 @@ public class AddEventServlet extends HttpServlet {
         String user = (String) session.getAttribute("User");
         req.setAttribute("user", user);
         CategoriesDao categoriesDao = new CategoriesDao();
-        List<Categories> catList = categoriesDao.getAllCategories();
+        List<Categories> catList = categoriesDao.findAll();
         req.setAttribute("list", catList);
         for (Categories cat : catList) {
             System.out.println(cat.getName());
@@ -88,11 +88,11 @@ public class AddEventServlet extends HttpServlet {
         event.setStatus(status);
         event.setDate(date);
         UserDao userDao = new UserDao();
-        User user = userDao.getInfo(username);
+        User user = userDao.findByName(username);
         EventDao eventDao = new EventDao();
         event.setUser(user);
 
-        String userRegistered = eventDao.addEvent(event);
+        String userRegistered = eventDao.insert(event);
 
         if (userRegistered.equals("SUCCESS")) {
             request.getRequestDispatcher("/addEvent.ftl").forward(request, response);

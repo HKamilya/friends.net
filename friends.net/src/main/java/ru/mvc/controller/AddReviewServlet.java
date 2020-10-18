@@ -25,7 +25,7 @@ public class AddReviewServlet extends HttpServlet {
         int event_id = Integer.parseInt(request.getParameter("event_id"));
 
         UserDao userDao = new UserDao();
-        User user = userDao.getInfo(username);
+        User user = userDao.findByName(username);
         Review review = new Review();
         EventDao eventDao = new EventDao();
         Event event = eventDao.findById(event_id);
@@ -42,7 +42,7 @@ public class AddReviewServlet extends HttpServlet {
 
         ReviewDao reviewDao = new ReviewDao();
 
-        String reviewAdded = reviewDao.addReview(review);
+        String reviewAdded = reviewDao.insert(review);
 
         if (reviewAdded.equals("SUCCESS")) {
             response.sendRedirect(request.getContextPath() + "/Event?id=" + event_id);
