@@ -113,26 +113,27 @@
                             <h3>О себе:</h3>
                         </div>
                         <div class="about">
-                            <input type="text" class="about_text" name="description" value="${description}">
+                            <input type="text" class="about_text" name="description"
+                                   value="<#if description??>${description}</#if>">
                         </div>
                     </div>
                 </div>
                 <button type="submit" name="submit">Сохранить</button>
             </form>
-            <form method="post" action="">
-                <label class="txt" for="pass"><b>Старый пароль</b></label>
-                <div class="register_line">
-                    <input type="password" id="earlpass" name="earlpass"/>
-                </div>
-                <label class="txt" for="pass"><b>Новый пароль</b></label>
-                <div class="register_line">
-                    <input type="password" id="pass" name="password"/>
-                </div>
-                <label class="txt" for="confPass"><b>Повторите пароль</b></label>
-                <div class="register_line">
-                    <input type="password" id="confPass" name="conpassword"/>
-                </div>
-            </form>
+<#--            <form method="post" action="">-->
+<#--                <label class="txt" for="pass"><b>Старый пароль</b></label>-->
+<#--                <div class="register_line">-->
+<#--                    <input type="password" id="earlpass" name="earlpass"/>-->
+<#--                </div>-->
+<#--                <label class="txt" for="pass"><b>Новый пароль</b></label>-->
+<#--                <div class="register_line">-->
+<#--                    <input type="password" id="pass" name="password"/>-->
+<#--                </div>-->
+<#--                <label class="txt" for="confPass"><b>Повторите пароль</b></label>-->
+<#--                <div class="register_line">-->
+<#--                    <input type="password" id="confPass" name="conpassword"/>-->
+<#--                </div>-->
+<#--            </form>-->
         </div>
     </#if>
 </@base.main>

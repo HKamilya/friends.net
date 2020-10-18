@@ -27,7 +27,6 @@ public class EventDao implements DaoInterface<Event> {
         Connection con = null;
 
         PreparedStatement preparedStatement = null;
-        Statement statement = null;
 
         try {
             con = DBConnection.createConnection();
@@ -57,6 +56,12 @@ public class EventDao implements DaoInterface<Event> {
                 } catch (SQLException ignore) {
                 }
             }
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException ignore) {
+                }
+            }
         }
 
         return "Что-то пошло не так";
@@ -67,9 +72,10 @@ public class EventDao implements DaoInterface<Event> {
         Event res = null;
         Connection con = null;
         ResultSet resultSet = null;
+        PreparedStatement preparedStatement = null;
         try {
             con = DBConnection.createConnection();
-            PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM event where status=?");
+            preparedStatement = con.prepareStatement("SELECT * FROM event where status=?");
             preparedStatement.setString(1, "актуально");
             resultSet = preparedStatement.executeQuery();
 
@@ -121,6 +127,12 @@ public class EventDao implements DaoInterface<Event> {
                 } catch (SQLException ignore) {
                 }
             }
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException ignore) {
+                }
+            }
             if (con != null) {
                 try {
                     con.close();
@@ -134,13 +146,12 @@ public class EventDao implements DaoInterface<Event> {
 
     public List<Event> getAllEvents() {
         List<Event> events = new ArrayList<>();
-        Event res = null;
         Connection con = null;
-        Statement statement = null;
         ResultSet resultSet = null;
+        PreparedStatement preparedStatement = null;
         try {
             con = DBConnection.createConnection();
-            PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM event where status=? order by date asc");
+            preparedStatement = con.prepareStatement("SELECT * FROM event where status=? order by date asc");
             preparedStatement.setString(1, "актуально");
             resultSet = preparedStatement.executeQuery();
 
@@ -186,9 +197,9 @@ public class EventDao implements DaoInterface<Event> {
                 } catch (SQLException ignore) {
                 }
             }
-            if (statement != null) {
+            if (preparedStatement != null) {
                 try {
-                    statement.close();
+                    preparedStatement.close();
                 } catch (SQLException ignore) {
                 }
             }
@@ -205,13 +216,12 @@ public class EventDao implements DaoInterface<Event> {
 
     public List<Event> getAllUsersEvents(int id) {
         List<Event> events = new ArrayList<>();
-        Event res = null;
         Connection con = null;
-        Statement statement = null;
         ResultSet resultSet = null;
+        PreparedStatement preparedStatement = null;
         try {
             con = DBConnection.createConnection();
-            PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM event where user_id=?");
+            preparedStatement = con.prepareStatement("SELECT * FROM event where user_id=?");
             preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
 
@@ -257,9 +267,9 @@ public class EventDao implements DaoInterface<Event> {
                 } catch (SQLException ignore) {
                 }
             }
-            if (statement != null) {
+            if (preparedStatement != null) {
                 try {
-                    statement.close();
+                    preparedStatement.close();
                 } catch (SQLException ignore) {
                 }
             }
@@ -277,11 +287,11 @@ public class EventDao implements DaoInterface<Event> {
     public Event findById(int id) {
         Event event = new Event();
         Connection con = null;
-        Statement statement = null;
+        PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
             con = DBConnection.createConnection();
-            PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM event where id=?");
+            preparedStatement = con.prepareStatement("SELECT * FROM event where id=?");
             preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
 
@@ -325,9 +335,9 @@ public class EventDao implements DaoInterface<Event> {
                 } catch (SQLException ignore) {
                 }
             }
-            if (statement != null) {
+            if (preparedStatement != null) {
                 try {
-                    statement.close();
+                    preparedStatement.close();
                 } catch (SQLException ignore) {
                 }
             }
@@ -351,14 +361,14 @@ public class EventDao implements DaoInterface<Event> {
         try {
             con = DBConnection.createConnection();
             if (categories.size() > 0 & eventName.length() > 0) {
-                sql = "SELECT * FROM event where name =" + "'" + eventName + "'";
-                sql += " and (";
+                sql = "SELECT * FROM event where name ILIKE  " + "'" + eventName + "'";
+                sql += " and status='актуально' and (";
                 for (int i = 0; i < categories.size() - 2; i++) {
                     sql += "category_id=" + categories.get(i) + " or ";
                 }
                 sql += "category_id=" + categories.get(categories.size() - 1) + ");";
             } else if (categories.size() > 0) {
-                sql = "SELECT * FROM event where ";
+                sql = "SELECT * FROM event where status='актуально' and";
                 for (int i = 0; i < categories.size() - 2; i++) {
                     sql += "category_id=" + categories.get(i) + " or ";
                 }
@@ -430,11 +440,11 @@ public class EventDao implements DaoInterface<Event> {
         List<Event> events = new ArrayList<>();
 
         Connection con = null;
-        Statement statement = null;
+        PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
             con = DBConnection.createConnection();
-            PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM event where name =?");
+            preparedStatement = con.prepareStatement("SELECT * FROM event where name ILIKE ? and status='актуально'");
             preparedStatement.setString(1, eventName);
             resultSet = preparedStatement.executeQuery();
 
@@ -480,9 +490,9 @@ public class EventDao implements DaoInterface<Event> {
                 } catch (SQLException ignore) {
                 }
             }
-            if (statement != null) {
+            if (preparedStatement != null) {
                 try {
-                    statement.close();
+                    preparedStatement.close();
                 } catch (SQLException ignore) {
                 }
             }
@@ -498,22 +508,31 @@ public class EventDao implements DaoInterface<Event> {
     }
 
     public void updateStatus(int id, String status) {
-
+        PreparedStatement preparedStatement = null;
         Connection con = null;
         try {
             con = DBConnection.createConnection();
-            PreparedStatement preparedStatement = con.prepareStatement("update event set status=? where id=?");
+            preparedStatement = con.prepareStatement("update event set status=? where id=?");
             preparedStatement.setString(1, status);
             preparedStatement.setInt(2, id);
 
             int i = preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        try {
-            con.close();
-        } catch (SQLException ignore) {
+            throw new IllegalStateException(e);
+        } finally {
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException ignore) {
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ignore) {
+                }
+            }
         }
     }
 }

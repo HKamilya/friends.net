@@ -45,9 +45,9 @@
                     </tr>
                     <tr>
                         <td>Описание</td>
-                        <td><label>
-                                <textarea rows="5" type="text" name="description" required/>
-                            </label></td>
+                        <td>
+                            <textarea rows="5" type="text" name="description" required/></textarea>
+                        </td>
                     </tr>
                     <tr>
                         <td>Категория</td>

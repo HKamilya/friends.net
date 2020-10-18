@@ -98,7 +98,7 @@
                 <form name="form" action="Registration" method="post" onsubmit="return validate()">
                     <label class="txt" for="fullnm"><b>Имя</b></label>
                     <div class="register_line">
-                        <input type="text"  id="fullnm" name="fullname"/>
+                        <input type="text" id="fullnm" name="fullname"/>
 
                     </div>
                     <label class="txt" for="email"><b>Адрес электронной почты</b></label>
@@ -113,13 +113,14 @@
                     <label class="txt" for="pass"><b>Пароль</b></label>
                     <div class="register_line">
                         <input type="password" id="pass"
-                                name="password" />
+                               name="password"
+                               pattern="(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6,}"/>
                         <span class="form-error">Неправильная форма пароля</span>
                     </div>
                     <label class="txt" for="confPass"><b>Повторите пароль</b></label>
                     <div class="register_line">
                         <input type="password" id="confPass"
-                                  name="conpassword"/>
+                               name="conpassword"/>
                     </div>
                     <p style="color: red"><#if errMessage??> ${errMessage}</#if>
                     </p>

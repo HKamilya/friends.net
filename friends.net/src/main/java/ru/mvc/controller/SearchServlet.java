@@ -37,6 +37,7 @@ public class SearchServlet extends HttpServlet {
             events = eventDao.findByNameAndCategory(search, list);
         }
         System.out.println(list);
+        request.setAttribute("user", username);
         request.setAttribute("list", events);
         getServletContext().getRequestDispatcher("/search.ftl").forward(request, response);
 

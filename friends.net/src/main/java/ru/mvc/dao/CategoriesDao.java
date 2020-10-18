@@ -12,7 +12,6 @@ public class CategoriesDao implements DaoInterface<Categories> {
 
     public List<Categories> getAllCategories() {
         List<Categories> categories = new ArrayList<>();
-        Event res = null;
         Connection con = null;
         Statement statement = null;
         ResultSet resultSet = null;
@@ -65,13 +64,14 @@ public class CategoriesDao implements DaoInterface<Categories> {
     public Categories findById(int id) {
         Categories categories = new Categories();
         Connection con = null;
-        Statement statement = null;
         ResultSet resultSet = null;
+        PreparedStatement preparedStatement = null;
         try {
             con = DBConnection.createConnection();
-            String sql = "SELECT * FROM categories where id=" + id;
-            statement = con.createStatement();
-            resultSet = statement.executeQuery(sql);
+            preparedStatement = con.prepareStatement("SELECT * FROM categories where id=?");
+            preparedStatement.setInt(1, id);
+            resultSet = preparedStatement.executeQuery();
+
 
             while (resultSet.next()) {
                 String name = resultSet.getString("name");
@@ -90,9 +90,9 @@ public class CategoriesDao implements DaoInterface<Categories> {
                 } catch (SQLException ignore) {
                 }
             }
-            if (statement != null) {
+            if (preparedStatement != null) {
                 try {
-                    statement.close();
+                    preparedStatement.close();
                 } catch (SQLException ignore) {
                 }
             }

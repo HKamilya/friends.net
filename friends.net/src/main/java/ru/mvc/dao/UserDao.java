@@ -15,6 +15,8 @@ public class UserDao {
 
         Connection con = null;
         PreparedStatement preparedStatement = null;
+
+
         try {
             con = DBConnection.createConnection();
             String query = "insert into \"user\"(fullname,email,username,password) values (?,?,?,?)";
@@ -34,6 +36,12 @@ public class UserDao {
             if (con != null) {
                 try {
                     con.close();
+                } catch (SQLException ignore) {
+                }
+            }
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
                 } catch (SQLException ignore) {
                 }
             }
@@ -95,13 +103,14 @@ public class UserDao {
     public User getInfo(String username) {
         User user = new User();
         Connection con = null;
+        PreparedStatement ps = null;
         Statement statement = null;
         ResultSet resultSet = null;
         try {
             con = DBConnection.createConnection();
-            String sql = "SELECT * FROM \"user\" where username=" + "'" + username + "'";
-            statement = con.createStatement();
-            resultSet = statement.executeQuery(sql);
+            ps = con.prepareStatement("SELECT * FROM \"user\" where username=?");
+            ps.setString(1, username);
+            resultSet = ps.executeQuery();
 
             while (resultSet.next()) {
                 int user_id = resultSet.getInt("id");

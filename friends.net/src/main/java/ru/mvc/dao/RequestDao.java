@@ -58,6 +58,12 @@ public class RequestDao {
             } catch (SQLException ignore) {
             }
         }
+        if (preparedStatement != null) {
+            try {
+                preparedStatement.close();
+            } catch (SQLException ignore) {
+            }
+        }
         return "Something went wrong";
     }
 
@@ -68,7 +74,7 @@ public class RequestDao {
         ResultSet resultSet = null;
         try {
             con = DBConnection.createConnection();
-            String sql = "SELECT * FROM request where event_id="+event_id;
+            String sql = "SELECT * FROM request where event_id=" + event_id;
             statement = con.createStatement();
             resultSet = statement.executeQuery(sql);
 
