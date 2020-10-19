@@ -353,26 +353,21 @@ public class EventDao extends AbstractDao<Event> {
 
     @Override
     public void update(Event adr) {
-        
-    }
-
-
-    @Override
-    public void delete(Event adr) {
 
     }
+
 
     public List<Event> findByNameAndCategory(String eventName, List<Integer> categories) {
         List<Event> events = new ArrayList<>();
         Connection con = null;
-        Statement statement = null;
+        PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         String sql = null;
         System.out.println(categories.size());
         try {
             con = DBConnection.createConnection();
             if (categories.size() > 0 & eventName.length() > 0) {
-                sql = "SELECT * FROM event where name ILIKE  " + "'" + eventName + "'";
+                sql = "SELECT * FROM event where name ILIKE  ?";
                 sql += " and status='актуально' and (";
                 for (int i = 0; i < categories.size() - 2; i++) {
                     sql += "category_id=" + categories.get(i) + " or ";
@@ -385,8 +380,10 @@ public class EventDao extends AbstractDao<Event> {
                 }
                 sql += "category_id=" + categories.get(categories.size() - 1) + ";";
             }
-            statement = con.createStatement();
-            resultSet = statement.executeQuery(sql);
+            preparedStatement = con.prepareStatement(sql);
+            preparedStatement.setString(1, eventName);
+            resultSet = preparedStatement.executeQuery();
+
 
             while (resultSet.next()) {
                 int event_id = resultSet.getInt("id");
@@ -430,9 +427,9 @@ public class EventDao extends AbstractDao<Event> {
                 } catch (SQLException ignore) {
                 }
             }
-            if (statement != null) {
+            if (preparedStatement != null) {
                 try {
-                    statement.close();
+                    preparedStatement.close();
                 } catch (SQLException ignore) {
                 }
             }

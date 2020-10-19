@@ -190,13 +190,13 @@ public class UserDao extends AbstractDao<User> {
     public User findById(int id) {
         User user = new User();
         Connection con = null;
-        Statement statement = null;
+        PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
             con = DBConnection.createConnection();
-            String sql = "SELECT * FROM \"user\" where id=" + id;
-            statement = con.createStatement();
-            resultSet = statement.executeQuery(sql);
+            preparedStatement = con.prepareStatement("SELECT * FROM \"user\" where id=? ");
+            preparedStatement.setInt(1, id);
+            resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
                 String username = resultSet.getString("username");
@@ -223,9 +223,9 @@ public class UserDao extends AbstractDao<User> {
                 } catch (SQLException ignore) {
                 }
             }
-            if (statement != null) {
+            if (preparedStatement != null) {
                 try {
-                    statement.close();
+                    preparedStatement.close();
                 } catch (SQLException ignore) {
                 }
             }
@@ -242,11 +242,6 @@ public class UserDao extends AbstractDao<User> {
 
     @Override
     public void update(User adr) {
-
-    }
-
-    @Override
-    public void delete(User adr) {
 
     }
 

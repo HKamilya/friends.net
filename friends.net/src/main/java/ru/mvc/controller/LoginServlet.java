@@ -43,7 +43,7 @@ public class LoginServlet extends HttpServlet {
         String user = (String) session.getAttribute("User");
         request.setAttribute("user", user);
 
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/login.ftl");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/login.ftl");
         requestDispatcher.forward(request, response);
     }
 
@@ -96,12 +96,12 @@ public class LoginServlet extends HttpServlet {
                 request.setAttribute("eventsList", events);
                 request.setAttribute("description", loginBean.getDescription());
                 request.setAttribute("fullName", loginBean.getFullName());
-                request.getRequestDispatcher("/user.ftl").forward(request, response);
+                request.getRequestDispatcher("/views/user.ftl").forward(request, response);
             } else {
                 System.out.println("Error message = " + userValidate);
                 request.setAttribute("errMessage", userValidate);
 
-                request.getRequestDispatcher("/login.ftl").forward(request, response);
+                request.getRequestDispatcher("/views/login.ftl").forward(request, response);
             }
         } catch (Exception e1) {
             throw new IllegalStateException(e1);

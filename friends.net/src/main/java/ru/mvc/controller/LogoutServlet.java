@@ -18,7 +18,7 @@ public class LogoutServlet extends HttpServlet {
         {
             session.invalidate(); //removes all session attributes bound to the session
             request.setAttribute("errMessage", "You have logged out successfully");
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/login.ftl");
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/login.ftl");
             requestDispatcher.forward(request, response);
             System.out.println("Logged out");
         }

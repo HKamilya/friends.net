@@ -103,16 +103,6 @@
     </servlet-mapping>
     <servlet>
         <description></description>
-        <display-name>ListOfRequestsServlet</display-name>
-        <servlet-name>ListOfRequestsServlet</servlet-name>
-        <servlet-class>ru.mvc.controller.ListOfRequestsServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ListOfRequestsServlet</servlet-name>
-        <url-pattern>/ListOfRequests</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <description></description>
         <display-name>UpdateProfileServlet</display-name>
         <servlet-name>UpdateProfileServlet</servlet-name>
         <servlet-class>ru.mvc.controller.UpdateProfileServlet</servlet-class>

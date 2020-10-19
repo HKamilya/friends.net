@@ -30,8 +30,8 @@
 
 
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="css/style_menu.css">
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="../css/style_menu.css">
+        <link rel="stylesheet" href="../css/style.css">
     </head>
     <body>
     <header class="header">
@@ -45,7 +45,7 @@
                     </#if>
                     <a class="nav__link" href="/Search">Поиск</a>
                     <div class="header__logo">
-                        <img class="picture" src="img/man.png" alt="">
+                        <img class="picture" src="../img/man.png" alt="">
                     </div>
                     <a class="nav__link" href="/AllEvents">Интересные<br>мероприятия</a>
                     <a class="nav__link" href="/RandomEvent">Случайное<br>

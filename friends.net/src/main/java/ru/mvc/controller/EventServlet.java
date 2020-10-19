@@ -49,7 +49,7 @@ public class EventServlet extends HttpServlet {
             System.out.println(r.getUser().getUserName());
         }
         req.setAttribute("reviewsList", reviews);
-        getServletContext().getRequestDispatcher("/event.ftl").forward(req, resp);
+        getServletContext().getRequestDispatcher("/views/event.ftl").forward(req, resp);
 
 
     }

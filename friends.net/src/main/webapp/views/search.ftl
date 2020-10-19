@@ -1,6 +1,6 @@
 <#ftl encoding="UTF-8"/>
 <#import "header.ftl" as base>
-<link rel="stylesheet" href="css/style_menu_alternative.css">
+<link rel="stylesheet" href="../css/style_menu_alternative.css">
 <@base.main>
 
     <meta charset="UTF-8">
@@ -20,7 +20,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
             integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
             crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/style_menu_alternative.css">
+    <link rel="stylesheet" href="../css/style_menu_alternative.css">
     <title>List</title>
     <style>
         .main {

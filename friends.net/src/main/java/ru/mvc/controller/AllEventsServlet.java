@@ -23,6 +23,6 @@ public class AllEventsServlet extends HttpServlet {
         EventDao eventDao = new EventDao();
         List<Event> eventList = eventDao.findAll();
         request.setAttribute("list", eventList);
-        getServletContext().getRequestDispatcher("/allEvents.ftl").forward(request, response);
+        getServletContext().getRequestDispatcher("/views/allEvents.ftl").forward(request, response);
     }
 }

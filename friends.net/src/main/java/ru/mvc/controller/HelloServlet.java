@@ -19,7 +19,7 @@ public class HelloServlet extends HttpServlet {
         request.setAttribute("user", user);
 
 
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/main.ftl");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/main.ftl");
         requestDispatcher.forward(request, response);
 
     }

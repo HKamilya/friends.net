@@ -1,5 +1,6 @@
 package ru.mvc.controller;
 
+import org.apache.commons.io.FilenameUtils;
 import ru.mvc.dao.UserDao;
 import ru.mvc.model.Categories;
 import ru.mvc.model.Event;
@@ -33,7 +34,7 @@ public class AddEventServlet extends HttpServlet {
         for (Categories cat : catList) {
             System.out.println(cat.getName());
         }
-        getServletContext().getRequestDispatcher("/addEvent.ftl").forward(req, resp);
+        getServletContext().getRequestDispatcher("/views/addEvent.ftl").forward(req, resp);
 
     }
 
@@ -54,8 +55,9 @@ public class AddEventServlet extends HttpServlet {
         Part filePart = request.getPart("image"); // Retrieves <input type="file" name="file">
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
         InputStream fileContent = filePart.getInputStream();
-        String imgName = "img\\" + username + fileName;
-        String pathName = "C:\\Users\\gipot\\Desktop\\inf\\friends.net\\friends.net\\src\\main\\webapp\\img\\" + username + fileName;
+        String ext2 = FilenameUtils.getExtension(fileName);
+        String imgName = "img\\profileimg" + username + date + "." + ext2;
+        String pathName = "C:\\Users\\gipot\\Desktop\\inf\\friends.net\\friends.net\\src\\main\\webapp\\img\\profileimg" + username + date + "." + ext2;
         File file = new File(pathName);
         boolean created = file.createNewFile();
         OutputStream os = new FileOutputStream(pathName);
@@ -95,10 +97,10 @@ public class AddEventServlet extends HttpServlet {
         String userRegistered = eventDao.insert(event);
 
         if (userRegistered.equals("SUCCESS")) {
-            request.getRequestDispatcher("/addEvent.ftl").forward(request, response);
+            request.getRequestDispatcher("/views/addEvent.ftl").forward(request, response);
         } else {
             request.setAttribute("errMessage", userRegistered);
-            request.getRequestDispatcher("/addEvent.ftl").forward(request, response);
+            request.getRequestDispatcher("/views/addEvent.ftl").forward(request, response);
         }
     }
 

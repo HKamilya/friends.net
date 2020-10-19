@@ -14,13 +14,13 @@ public class ReviewDao extends AbstractDao<ReviewDao> {
         List<Review> reviews = new ArrayList<>();
         Event res = null;
         Connection con = null;
-        Statement statement = null;
+        PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
             con = DBConnection.createConnection();
-            String sql = "SELECT * FROM  review  where event_id=" + id;
-            statement = con.createStatement();
-            resultSet = statement.executeQuery(sql);
+            preparedStatement = con.prepareStatement("SELECT * FROM  review  where event_id=? ");
+            preparedStatement.setInt(1, id);
+            resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
                 int user_id = resultSet.getInt("user_id");
@@ -49,9 +49,9 @@ public class ReviewDao extends AbstractDao<ReviewDao> {
                 } catch (SQLException ignore) {
                 }
             }
-            if (statement != null) {
+            if (preparedStatement != null) {
                 try {
-                    statement.close();
+                   preparedStatement.close();
                 } catch (SQLException ignore) {
                 }
             }
@@ -124,10 +124,6 @@ public class ReviewDao extends AbstractDao<ReviewDao> {
 
     }
 
-    @Override
-    public void delete(ReviewDao adr) {
-
-    }
 
     @Override
     public List<ReviewDao> findAll() {

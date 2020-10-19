@@ -1,5 +1,6 @@
 package ru.mvc.controller;
 
+import org.apache.commons.io.FilenameUtils;
 import ru.mvc.model.User;
 import ru.mvc.dao.UserDao;
 
@@ -23,11 +24,11 @@ public class UpdateProfileServlet extends HttpServlet {
         String description = request.getParameter("description");
         Part filePart = request.getPart("image");
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+        String ext2 = FilenameUtils.getExtension(fileName);
         if (fileName.length() > 1) {
             InputStream fileContent = filePart.getInputStream();
-            System.out.println("~" + fileName + "~");
-            String imgName = "img\\profileimg" + username + fileName;
-            String pathName = "C:\\Users\\gipot\\Desktop\\inf\\friends.net\\friends.net\\src\\main\\webapp\\img\\profileimg" + username + fileName;
+            String imgName = "img\\profileimg" + username + "." + ext2;
+            String pathName = "C:\\Users\\gipot\\Desktop\\inf\\friends.net\\friends.net\\src\\main\\webapp\\img\\profileimg" + username + "." + ext2;
             File file = new File(pathName);
             boolean created = file.createNewFile();
             OutputStream os = new FileOutputStream(pathName);
@@ -68,6 +69,6 @@ public class UpdateProfileServlet extends HttpServlet {
         request.setAttribute("password", user.getPassword());
         request.setAttribute("fullName", user.getFullName());
         request.setAttribute("description", user.getDescription());
-        getServletContext().getRequestDispatcher("/updateProfile.ftl").forward(request, response);
+        getServletContext().getRequestDispatcher("/views/updateProfile.ftl").forward(request, response);
     }
 }

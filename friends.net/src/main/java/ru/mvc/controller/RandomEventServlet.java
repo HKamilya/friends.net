@@ -45,7 +45,7 @@ public class RandomEventServlet extends HttpServlet {
         ReviewDao reviewDao = new ReviewDao();
         List<Review> reviews = reviewDao.findAllByEventId(event.getId());
         req.setAttribute("reviewsList", reviews);
-        getServletContext().getRequestDispatcher("/event.ftl").forward(req, resp);
+        getServletContext().getRequestDispatcher("/views/event.ftl").forward(req, resp);
 
     }
 

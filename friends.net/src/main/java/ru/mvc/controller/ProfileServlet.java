@@ -46,7 +46,7 @@ public class ProfileServlet extends HttpServlet {
         request.setAttribute("description", user.getDescription());
         request.setAttribute("image", user.getImage());
         request.setAttribute("eventsList", events);
-        request.getRequestDispatcher("/user.ftl").forward(request, response);
+        request.getRequestDispatcher("/views/user.ftl").forward(request, response);
 
     }
 }

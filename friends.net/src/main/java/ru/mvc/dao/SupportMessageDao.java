@@ -48,10 +48,6 @@ public class SupportMessageDao extends AbstractDao<SupportMessage> {
 
     }
 
-    @Override
-    public void delete(SupportMessage adr) {
-
-    }
 
     @Override
     public List<SupportMessage> findAll() {

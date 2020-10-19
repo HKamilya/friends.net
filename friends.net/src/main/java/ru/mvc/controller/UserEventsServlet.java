@@ -43,7 +43,7 @@ public class UserEventsServlet extends HttpServlet {
         }
 
         request.setAttribute("evReqList", evReqList);
-        getServletContext().getRequestDispatcher("/userEvents.ftl").forward(request, response);
+        getServletContext().getRequestDispatcher("/views/userEvents.ftl").forward(request, response);
 
     }
 }

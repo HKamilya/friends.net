@@ -39,7 +39,7 @@ public class SearchServlet extends HttpServlet {
         System.out.println(list);
         request.setAttribute("user", username);
         request.setAttribute("list", events);
-        getServletContext().getRequestDispatcher("/search.ftl").forward(request, response);
+        getServletContext().getRequestDispatcher("/views/search.ftl").forward(request, response);
 
 
     }
@@ -54,7 +54,7 @@ public class SearchServlet extends HttpServlet {
         List<Event> eventList = eventDao.findAll();
         request.setAttribute("catList", categories);
         request.setAttribute("list", eventList);
-        getServletContext().getRequestDispatcher("/search.ftl").forward(request, response);
+        getServletContext().getRequestDispatcher("/views/search.ftl").forward(request, response);
 
     }
 }

@@ -22,7 +22,7 @@
             } else if (username == null || username == "") {
                 alert("Введите логин");
                 return false;
-            } else if (password.length < 6) {
+            } else if (password.length <= 6) {
                 alert("Пароль должен состоять минимум из 6 символов");
                 return false;
             } else if (password != conpassword) {
@@ -114,8 +114,10 @@
                     <div class="register_line">
                         <input type="password" id="pass"
                                name="password"
-                               pattern="(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6,}"/>
+                               pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"/>
                         <span class="form-error">Неправильная форма пароля</span>
+                        <br>
+                        <span>Пароль должен содержать cтрочные и прописные латинские буквы, цифры</span>
                     </div>
                     <label class="txt" for="confPass"><b>Повторите пароль</b></label>
                     <div class="register_line">

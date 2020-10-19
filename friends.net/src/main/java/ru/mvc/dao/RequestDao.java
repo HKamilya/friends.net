@@ -77,10 +77,6 @@ public class RequestDao extends AbstractDao<Request> {
 
     }
 
-    @Override
-    public void delete(Request adr) {
-
-    }
 
     @Override
     public List<Request> findAll() {
@@ -90,13 +86,14 @@ public class RequestDao extends AbstractDao<Request> {
     public List<Request> findAllByEventId(int event_id) {
         List<Request> requests = new ArrayList<>();
         Connection con = null;
-        Statement statement = null;
+        PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
             con = DBConnection.createConnection();
-            String sql = "SELECT * FROM request where event_id=" + event_id;
-            statement = con.createStatement();
-            resultSet = statement.executeQuery(sql);
+            preparedStatement = con.prepareStatement("SELECT * FROM request where event_id=? ");
+            preparedStatement.setInt(1, event_id);
+            resultSet = preparedStatement.executeQuery();
+
 
             while (resultSet.next()) {
                 int subscriber = resultSet.getInt("subscriber_id");
@@ -123,9 +120,9 @@ public class RequestDao extends AbstractDao<Request> {
                 } catch (SQLException ignore) {
                 }
             }
-            if (statement != null) {
+            if (preparedStatement != null) {
                 try {
-                    statement.close();
+                    preparedStatement.close();
                 } catch (SQLException ignore) {
                 }
             }

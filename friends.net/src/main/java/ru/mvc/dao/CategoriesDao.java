@@ -117,9 +117,5 @@ public class CategoriesDao extends AbstractDao<Categories> {
 
     }
 
-    @Override
-    public void delete(Categories adr) {
-
-    }
 }
 
