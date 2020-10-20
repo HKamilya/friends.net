@@ -74,14 +74,20 @@ public class LoginServlet extends HttpServlet {
             String userValidate = loginDao.authenticateUser(loginBean);
 
             if (userValidate.equals("User_Role")) {
+                UserDao userDao = new UserDao();
+                User user = userDao.findByName(username);
+                String id1 = String.valueOf(user.getId());
                 System.out.println("User's Home");
                 if (rememberMe) {
                     Cookie c = new Cookie("username", username);
                     Cookie p = new Cookie("password", password);
+                    Cookie id = new Cookie("id", id1);
                     c.setMaxAge(24 * 60 * 60 * 31);
                     p.setMaxAge(24 * 60 * 60 * 31);
+                    id.setMaxAge(24 * 60 * 60 * 31);
                     response.addCookie(c);
                     response.addCookie(p);
+                    response.addCookie(id);
                 }
 
                 HttpSession session = request.getSession();

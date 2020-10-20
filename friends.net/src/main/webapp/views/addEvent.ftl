@@ -38,6 +38,12 @@
                             </label></td>
                     </tr>
                     <tr>
+                        <td>Время</td>
+                        <td><label>
+                                <input type="time" name="time" required/>
+                            </label></td>
+                    </tr>
+                    <tr>
                         <td>Фотография</td>
                         <td><label>
                                 <input type="file" name="image" accept="image/*" required/>
@@ -54,8 +60,7 @@
                         <td>
                             <label>
                                 <select name="category"><#list list as categories>
-                                        <option name="category_id" value="${categories.id}">${categories.name}
-                                        </option>
+                                        <option name="category_id" value="${categories.id}">${categories.name}</option>
                                     </#list>
                                 </select>
                             </label>

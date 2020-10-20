@@ -37,6 +37,7 @@ public class RandomEventServlet extends HttpServlet {
         req.setAttribute("description", event.getDescription());
         req.setAttribute("category", event.getCategory().getName());
         req.setAttribute("date", event.getDate());
+        req.setAttribute("time", event.getTime());
         req.setAttribute("author", event.getUser().getUserName());
         RequestDao requestDao = new RequestDao();
         List<Request> requests = requestDao.findAllByEventId(event.getId());

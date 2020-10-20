@@ -217,11 +217,11 @@
                     </div>
                     <div class="where_when">
                         <div class="where">
-                            ${city} ${street} ${house}
+                            ${city}<#if street??>,${street}<#if house??>,${house}</#if></#if>
                         </div>
                         <div class="when">
                             <#if date??>
-                                ${date}
+                                ${date} ${time}
                             </#if>
                         </div>
                     </div>

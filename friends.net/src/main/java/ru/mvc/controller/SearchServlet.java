@@ -25,20 +25,37 @@ public class SearchServlet extends HttpServlet {
         String username = (String) session.getAttribute("User");
         String search = request.getParameter("search");
         String[] names = request.getParameterValues("category");
+        String date = request.getParameter("date");
+        System.out.println("lfnf" + date);
         List<Event> events = new ArrayList<>();
         List<Integer> list = new ArrayList<>();
         EventDao eventDao = new EventDao();
-        if (names.length == 1 & names[0].equals("0")) {
-            events = eventDao.findByName(search);
-        } else {
+        System.out.println(Arrays.toString(names));
+        if (names.length > 1 & date.length() > 1 & search.length() != 0) { //поиск по категориям, имени и дате или по категории и дате
+            for (int i = 1; i < names.length; i++) {
+                list.add(Integer.parseInt(names[i]));
+                System.out.println("oh");
+            }
+            events = eventDao.findByNameAndCategoryAndDate(search, list, date);
+        } else if (names.length > 1 & date.length() < 1) { // поиск по категориям и  имени и просто категориям
             for (int i = 1; i < names.length; i++) {
                 list.add(Integer.parseInt(names[i]));
             }
             events = eventDao.findByNameAndCategory(search, list);
+        } else if (names.length == 1 & names[0].equals("0") & search.length() > 0 & date.length() > 0) {
+            events = eventDao.findByNameAndDate(search, date);
+        } else if (date.length() < 1 & names.length == 1 & names[0].equals("0")) {//поиск по имени
+            events = eventDao.findByName(search);
+        } else if (names.length == 1 & names[0].equals("0") & search.length() == 0 & date.length() > 1) {
+            events = eventDao.findByDate(date);
         }
-        System.out.println(list);
+        if (events.size() == 0) {
+            request.setAttribute("message", "   К сожалению, таких мероприятий нет");
+        }
+
         request.setAttribute("user", username);
         request.setAttribute("list", events);
+
         getServletContext().getRequestDispatcher("/views/search.ftl").forward(request, response);
 
 

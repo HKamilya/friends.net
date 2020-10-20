@@ -40,6 +40,7 @@ public class EventServlet extends HttpServlet {
         req.setAttribute("description", event.getDescription());
         req.setAttribute("category", event.getCategory().getName().toString());
         req.setAttribute("date", event.getDate());
+        req.setAttribute("time", event.getTime());
         req.setAttribute("numOfReq", requests.size());
         req.setAttribute("author", event.getUser().getUserName());
         System.out.println(user.getUserName());

@@ -96,29 +96,12 @@
                                 </tr>
                             </#list>
 
-                            <th>По времени:</th>
+                            <th>По дате:</th>
                             <tr>
                                 <td>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="early" value="early">
-                                        <label class="form-check-label" for="early">Раннее утро</label>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="middle" value="middle">
-                                        <label class="form-check-label" for="middle">Дневное время</label>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="evening" value="evening">
-                                        <label class="form-check-label" for="evening">Вечернее</label>
-                                    </div>
+                                    <label>
+                                        <input type="date" name="date">
+                                    </label>
                                 </td>
                             </tr>
                         </table>
@@ -129,6 +112,9 @@
 
                     <div class="main">
                         <#include "allEv.ftl">
+                        <#if message??>
+                            <h2>${message}</h2>
+                        </#if>
                     </div>
                 </div>
             </div>

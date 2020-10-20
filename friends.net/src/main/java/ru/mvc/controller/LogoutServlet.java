@@ -2,10 +2,7 @@ package ru.mvc.controller;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 
 public class LogoutServlet extends HttpServlet {
@@ -13,6 +10,17 @@ public class LogoutServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false); //Fetch session object
+
+
+//        Cookie[] cookies = request.getCookies();
+//        for (Cookie cookie : cookies) {
+//            if (cookie.getName().equals("username") || cookie.getName().equals("password") || cookie.getName().equals("id")) {
+//                cookie.setValue(null);
+//                cookie.setPath(request.getContextPath());
+//                cookie.setMaxAge(0);
+//                response.addCookie(cookie);
+//            }
+//        }
 
         if (session != null) //If session is not null
         {

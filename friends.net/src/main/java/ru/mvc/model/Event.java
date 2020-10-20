@@ -19,8 +19,10 @@ public class Event {
     private String image;
     private String description;
     private Categories category;
+    private String time;
     private String status;
 
-    public Event(){}
+    public Event() {
+    }
 
 }

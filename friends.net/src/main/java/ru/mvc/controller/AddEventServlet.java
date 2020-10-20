@@ -34,6 +34,7 @@ public class AddEventServlet extends HttpServlet {
         for (Categories cat : catList) {
             System.out.println(cat.getName());
         }
+        req.setAttribute("user", user);
         getServletContext().getRequestDispatcher("/views/addEvent.ftl").forward(req, resp);
 
     }
@@ -43,7 +44,7 @@ public class AddEventServlet extends HttpServlet {
         HttpSession session = request.getSession();
         int categoryId = Integer.parseInt(request.getParameter("category"));
 
-        //Copying all the input parameters in to local variables
+
         String username = (String) session.getAttribute("User");
         String name = request.getParameter("name");
         String city = request.getParameter("city");
@@ -51,13 +52,15 @@ public class AddEventServlet extends HttpServlet {
         String house = request.getParameter("house");
         String date = request.getParameter("date");
 
+        String time = request.getParameter("time");
 
-        Part filePart = request.getPart("image"); // Retrieves <input type="file" name="file">
+
+        Part filePart = request.getPart("image");
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
         InputStream fileContent = filePart.getInputStream();
         String ext2 = FilenameUtils.getExtension(fileName);
-        String imgName = "img\\profileimg" + username + date + "." + ext2;
-        String pathName = "C:\\Users\\gipot\\Desktop\\inf\\friends.net\\friends.net\\src\\main\\webapp\\img\\profileimg" + username + date + "." + ext2;
+        String imgName = "\\img\\profileimg" + username + date + "." + ext2;
+        String pathName = "C:\\Users\\gipot\\Desktop\\inf\\friends.net\\friends.net\\src\\main\\webapp\\img\\eventimg" + username + date + "." + ext2;
         File file = new File(pathName);
         boolean created = file.createNewFile();
         OutputStream os = new FileOutputStream(pathName);
@@ -82,6 +85,7 @@ public class AddEventServlet extends HttpServlet {
         categories.setId(categoryId);
         event.setName(name);
         event.setCity(city);
+        event.setTime(time);
         event.setStreet(street);
         event.setHouse(house);
         event.setImage(imgName);
@@ -94,13 +98,13 @@ public class AddEventServlet extends HttpServlet {
         EventDao eventDao = new EventDao();
         event.setUser(user);
 
-        String userRegistered = eventDao.insert(event);
+        String eventAdded = eventDao.insert(event);
 
-        if (userRegistered.equals("SUCCESS")) {
-            request.getRequestDispatcher("/views/addEvent.ftl").forward(request, response);
+        if (eventAdded.equals("SUCCESS")) {
+            response.sendRedirect(request.getContextPath() + "/AddEvent");
         } else {
-            request.setAttribute("errMessage", userRegistered);
-            request.getRequestDispatcher("/views/addEvent.ftl").forward(request, response);
+            request.setAttribute("errMessage", eventAdded);
+            response.sendRedirect(request.getContextPath() + "/AddEvent");
         }
     }
 

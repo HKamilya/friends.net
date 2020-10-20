@@ -16,6 +16,7 @@
     .name {
         font-family: 'Ravi Prakash', cursive;
         color: black;
+        font-size: larger;
         text-decoration: none;
         transition: color 0.4s linear;
     }
@@ -63,7 +64,10 @@
                 <p>${event.description}</p>
                 <br>
                 <p>${event.date}</p>
+                <br><#if event.time??>
+                <p>${event.time}</p>
                 <br>
+                </#if>
                 <p>${event.category.name}</p>
             </div>
 
