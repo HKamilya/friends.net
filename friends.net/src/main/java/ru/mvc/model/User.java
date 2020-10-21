@@ -17,7 +17,7 @@ public class User {
     private String email;
     private String userName;
     private String password;
-    private String image;
+    private Image image;
     private String description;
 
     public User() {

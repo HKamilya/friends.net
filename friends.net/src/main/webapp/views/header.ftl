@@ -53,13 +53,12 @@
                 </nav>
                 <div class="header__auth">
                     <a class="nav__link" href="" data-toggle="modal" data-target="#exampleModal">Поддержка</a>
-                    <#if user??>
-                        <a class="auth__link" href="/Profile">${user}</a>
-                    </#if>
+
                     <#if !user??>
                         <a class="auth__link" href="/Registration">Регистрация</a>
                         <a class="auth__link" href="/Login">Войти</a>
                     <#else >
+                        <a class="auth__link" href="/Profile">${user}</a>
                         <a href="/Logout">Выйти</a>
                     </#if>
                 </div>

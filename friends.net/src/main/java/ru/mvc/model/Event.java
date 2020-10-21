@@ -16,7 +16,7 @@ public class Event {
     private String street;
     private String house;
     private String date;
-    private String image;
+    private Image image;
     private String description;
     private Categories category;
     private String time;
