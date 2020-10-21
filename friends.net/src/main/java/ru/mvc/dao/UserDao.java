@@ -1,6 +1,7 @@
 package ru.mvc.dao;
 
 
+import ru.mvc.model.Image;
 import ru.mvc.model.User;
 import ru.mvc.util.DBConnection;
 
@@ -118,12 +119,14 @@ public class UserDao extends AbstractDao<User> {
                 String fullname = resultSet.getString("fullname");
                 String email = resultSet.getString("email");
                 String password = resultSet.getString("password");
-                String image = resultSet.getString("image");
+                int imageId = resultSet.getInt("image");
                 String description = resultSet.getString("description");
 
                 user.setId(user_id);
                 user.setEmail(email);
                 user.setFullName(fullname);
+                ImageDao imageDao = new ImageDao();
+                Image image = imageDao.findById(imageId);
                 user.setImage(image);
                 user.setPassword(password);
                 user.setDescription(description);
@@ -166,7 +169,7 @@ public class UserDao extends AbstractDao<User> {
             preparedStatement = con.prepareStatement("update \"user\" set fullname=?, description=?, image=? where username=?");
             preparedStatement.setString(1, fullName);
             preparedStatement.setString(2, description);
-            preparedStatement.setString(3, user.getImage());
+            preparedStatement.setInt(3, user.getImage().getId());
             preparedStatement.setString(4, user.getUserName());
 
 
@@ -203,13 +206,15 @@ public class UserDao extends AbstractDao<User> {
                 String fullname = resultSet.getString("fullname");
                 String email = resultSet.getString("email");
                 String password = resultSet.getString("password");
-                String image = resultSet.getString("image");
+                int imageId = resultSet.getInt("image");
                 String description = resultSet.getString("description");
 
                 user.setId(id);
                 user.setEmail(email);
                 user.setUserName(username);
                 user.setFullName(fullname);
+                ImageDao imageDao = new ImageDao();
+                Image image = imageDao.findById(imageId);
                 user.setImage(image);
                 user.setPassword(password);
                 user.setDescription(description);

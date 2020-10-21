@@ -3,6 +3,7 @@ package ru.mvc.dao;
 
 import ru.mvc.model.Categories;
 import ru.mvc.model.Event;
+import ru.mvc.model.Image;
 import ru.mvc.model.User;
 import ru.mvc.util.DBConnection;
 
@@ -12,18 +13,6 @@ import java.util.List;
 
 public class EventDao extends AbstractDao<Event> {
     public String insert(Event event) {
-        String name = event.getName();
-        String city = event.getCity();
-        String street = event.getStreet();
-        String house = event.getHouse();
-        String date = event.getDate();
-        String image = event.getImage();
-        String description = event.getDescription();
-        Categories category = event.getCategory();
-        String status = event.getStatus();
-        String time = event.getTime();
-        User user = event.getUser();
-
 
         Connection con = null;
 
@@ -34,17 +23,17 @@ public class EventDao extends AbstractDao<Event> {
 
             String query = "insert into event(user_id,name,city,street,house,image,description,category_id,status,date, time ) values (?,?,?,?,?,?,?,?,?,?,?)"; //Insert user details into the table 'USERS'
             preparedStatement = con.prepareStatement(query); //Making use of prepared statements here to insert bunch of data
-            preparedStatement.setInt(1, user.getId());
-            preparedStatement.setString(2, name);
-            preparedStatement.setString(3, city);
-            preparedStatement.setString(4, street);
-            preparedStatement.setString(5, house);
-            preparedStatement.setString(6, image);
-            preparedStatement.setString(7, description);
-            preparedStatement.setInt(8, category.getId());
-            preparedStatement.setString(9, status);
-            preparedStatement.setString(10, date);
-            preparedStatement.setString(11, time);
+            preparedStatement.setInt(1, event.getUser().getId());
+            preparedStatement.setString(2, event.getName());
+            preparedStatement.setString(3, event.getCity());
+            preparedStatement.setString(4, event.getStreet());
+            preparedStatement.setString(5, event.getHouse());
+            preparedStatement.setInt(6, event.getImage().getId());
+            preparedStatement.setString(7, event.getDescription());
+            preparedStatement.setInt(8, event.getCategory().getId());
+            preparedStatement.setString(9, event.getStatus());
+            preparedStatement.setString(10, event.getDate());
+            preparedStatement.setString(11, event.getTime());
             int i = preparedStatement.executeUpdate();
 
             if (i != 0)
@@ -91,7 +80,9 @@ public class EventDao extends AbstractDao<Event> {
                 event.setCity(resultSet.getString("city"));
                 event.setStreet(resultSet.getString("street"));
                 event.setStreet(resultSet.getString("house"));
-                event.setImage(resultSet.getString("image"));
+                ImageDao imageDao = new ImageDao();
+                Image image = imageDao.findById(resultSet.getInt("image"));
+                event.setImage(image);
                 event.setDescription(resultSet.getString("description"));
                 CategoriesDao categoriesDao = new CategoriesDao();
                 Categories category = categoriesDao.findById(resultSet.getInt("category_id"));
@@ -154,7 +145,9 @@ public class EventDao extends AbstractDao<Event> {
                 event.setCity(resultSet.getString("city"));
                 event.setStreet(resultSet.getString("street"));
                 event.setStreet(resultSet.getString("house"));
-                event.setImage(resultSet.getString("image"));
+                ImageDao imageDao = new ImageDao();
+                Image image = imageDao.findById(resultSet.getInt("image"));
+                event.setImage(image);
                 event.setDescription(resultSet.getString("description"));
                 CategoriesDao categoriesDao = new CategoriesDao();
                 Categories category = categoriesDao.findById(resultSet.getInt("category_id"));
@@ -213,7 +206,9 @@ public class EventDao extends AbstractDao<Event> {
                 event.setCity(resultSet.getString("city"));
                 event.setStreet(resultSet.getString("street"));
                 event.setStreet(resultSet.getString("house"));
-                event.setImage(resultSet.getString("image"));
+                ImageDao imageDao = new ImageDao();
+                Image image = imageDao.findById(resultSet.getInt("image"));
+                event.setImage(image);
                 event.setDescription(resultSet.getString("description"));
                 CategoriesDao categoriesDao = new CategoriesDao();
                 Categories category = categoriesDao.findById(resultSet.getInt("category_id"));
@@ -268,7 +263,7 @@ public class EventDao extends AbstractDao<Event> {
                 String city = resultSet.getString("city");
                 String street = resultSet.getString("street");
                 String house = resultSet.getString("house");
-                String image = resultSet.getString("image");
+                int imageId = resultSet.getInt("image");
                 String description = resultSet.getString("description");
                 int category_id = resultSet.getInt("category_id");
                 String status = resultSet.getString("status");
@@ -291,6 +286,9 @@ public class EventDao extends AbstractDao<Event> {
                 event.setStatus(status);
                 event.setDate(date);
                 event.setTime(time);
+                ImageDao imageDao = new ImageDao();
+                Image image = imageDao.findById(imageId);
+                event.setImage(image);
                 event.setImage(image);
                 event.setDescription(description);
                 event.setStreet(street);
@@ -368,7 +366,9 @@ public class EventDao extends AbstractDao<Event> {
                     event.setCity(resultSet.getString("city"));
                     event.setStreet(resultSet.getString("street"));
                     event.setStreet(resultSet.getString("house"));
-                    event.setImage(resultSet.getString("image"));
+                    ImageDao imageDao = new ImageDao();
+                    Image image = imageDao.findById(resultSet.getInt("image"));
+                    event.setImage(image);
                     event.setDescription(resultSet.getString("description"));
                     CategoriesDao categoriesDao = new CategoriesDao();
                     Categories category = categoriesDao.findById(resultSet.getInt("category_id"));
@@ -450,7 +450,9 @@ public class EventDao extends AbstractDao<Event> {
                     event.setCity(resultSet.getString("city"));
                     event.setStreet(resultSet.getString("street"));
                     event.setStreet(resultSet.getString("house"));
-                    event.setImage(resultSet.getString("image"));
+                    ImageDao imageDao = new ImageDao();
+                    Image image = imageDao.findById(resultSet.getInt("image"));
+                    event.setImage(image);
                     event.setDescription(resultSet.getString("description"));
                     CategoriesDao categoriesDao = new CategoriesDao();
                     Categories category = categoriesDao.findById(resultSet.getInt("category_id"));
@@ -511,7 +513,9 @@ public class EventDao extends AbstractDao<Event> {
                 event.setCity(resultSet.getString("city"));
                 event.setStreet(resultSet.getString("street"));
                 event.setStreet(resultSet.getString("house"));
-                event.setImage(resultSet.getString("image"));
+                ImageDao imageDao = new ImageDao();
+                Image image = imageDao.findById(resultSet.getInt("image"));
+                event.setImage(image);
                 event.setDescription(resultSet.getString("description"));
                 CategoriesDao categoriesDao = new CategoriesDao();
                 Categories category = categoriesDao.findById(resultSet.getInt("category_id"));
@@ -572,7 +576,9 @@ public class EventDao extends AbstractDao<Event> {
                 event.setCity(resultSet.getString("city"));
                 event.setStreet(resultSet.getString("street"));
                 event.setStreet(resultSet.getString("house"));
-                event.setImage(resultSet.getString("image"));
+                ImageDao imageDao = new ImageDao();
+                Image image = imageDao.findById(resultSet.getInt("image"));
+                event.setImage(image);
                 event.setDescription(resultSet.getString("description"));
                 CategoriesDao categoriesDao = new CategoriesDao();
                 Categories category = categoriesDao.findById(resultSet.getInt("category_id"));
@@ -632,7 +638,9 @@ public class EventDao extends AbstractDao<Event> {
                 event.setCity(resultSet.getString("city"));
                 event.setStreet(resultSet.getString("street"));
                 event.setStreet(resultSet.getString("house"));
-                event.setImage(resultSet.getString("image"));
+                ImageDao imageDao = new ImageDao();
+                Image image = imageDao.findById(resultSet.getInt("image"));
+                event.setImage(image);
                 event.setDescription(resultSet.getString("description"));
                 CategoriesDao categoriesDao = new CategoriesDao();
                 Categories category = categoriesDao.findById(resultSet.getInt("category_id"));
