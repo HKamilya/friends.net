@@ -56,7 +56,7 @@
             <div class="h_p">
                 <div class="img">
                     <#if event.image??>
-                        <img class="photo" src="${event.image}">
+                        <img class="photo" src="/img?id=${event.image.id}">
                     </#if>
                 </div>
             </div>
@@ -66,7 +66,7 @@
                 <p>${event.date}</p>
                 <br><#if event.time??>
                 <p>${event.time}</p>
-                <br>
+            <br>
                 </#if>
                 <p>${event.category.name}</p>
             </div>

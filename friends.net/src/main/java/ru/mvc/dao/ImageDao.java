@@ -1,7 +1,6 @@
 package ru.mvc.dao;
 
 import ru.mvc.model.Image;
-import ru.mvc.model.User;
 import ru.mvc.util.DBConnection;
 
 import java.sql.*;
@@ -15,18 +14,21 @@ public class ImageDao extends AbstractDao<Image> {
 
         PreparedStatement preparedStatement = null;
         Statement statement = null;
+        ResultSet resultSet = null;
+        int id = 0;
 
         try {
             con = DBConnection.createConnection();
-            String query = "insert into image(type, address) values (?,?)";
+            String query = "insert into image(type, address) values (?,?) returning id";
             preparedStatement = con.prepareStatement(query);
             preparedStatement.setString(1, adr.getType());
             preparedStatement.setString(2, adr.getAddress());
 
-            int i = preparedStatement.executeUpdate();
+            resultSet = preparedStatement.executeQuery();
 
-            if (i != 0)
-                return "SUCCESS";
+            if (resultSet.next()) {
+                id = resultSet.getInt(1);
+            }
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         } finally {
@@ -44,8 +46,37 @@ public class ImageDao extends AbstractDao<Image> {
             }
 
         }
+        return String.valueOf(id);
+    }
 
-        return "Что-то пошло не так";
+    public void update(Image image) {
+        PreparedStatement preparedStatement = null;
+        Connection con = null;
+        try {
+            con = DBConnection.createConnection();
+            preparedStatement = con.prepareStatement("update image set address=?, type=? where id=?");
+            preparedStatement.setString(1, image.getAddress());
+            preparedStatement.setString(2, image.getType());
+            preparedStatement.setInt(3, image.getId());
+
+            int i = preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new IllegalStateException(e);
+        } finally {
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException ignore) {
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ignore) {
+                }
+            }
+        }
     }
 
     @Override
@@ -91,11 +122,6 @@ public class ImageDao extends AbstractDao<Image> {
         return image;
     }
 
-
-    @Override
-    public void update(Image adr) {
-
-    }
 
     @Override
     public List<Image> findAll() {

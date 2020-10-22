@@ -46,6 +46,10 @@
         <display-name>AddEventServlet</display-name>
         <servlet-name>AddEventServlet</servlet-name>
         <servlet-class>ru.mvc.controller.AddEventServlet</servlet-class>
+        <init-param>
+            <param-name>uploadDir</param-name>
+            <param-value>C:\Users\gipot\Desktop\inf\friends.net\friends.net\data</param-value>
+        </init-param>
     </servlet>
     <servlet-mapping>
         <servlet-name>AddEventServlet</servlet-name>
@@ -106,11 +110,16 @@
         <display-name>UpdateProfileServlet</display-name>
         <servlet-name>UpdateProfileServlet</servlet-name>
         <servlet-class>ru.mvc.controller.UpdateProfileServlet</servlet-class>
+        <init-param>
+            <param-name>uploadDir</param-name>
+            <param-value>C:\Users\gipot\Desktop\inf\friends.net\friends.net\data</param-value>
+        </init-param>
     </servlet>
     <servlet-mapping>
         <servlet-name>UpdateProfileServlet</servlet-name>
         <url-pattern>/UpdateProfile</url-pattern>
     </servlet-mapping>
+
     <servlet>
         <description></description>
         <display-name>ProfileServlet</display-name>

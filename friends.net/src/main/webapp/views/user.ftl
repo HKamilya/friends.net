@@ -74,7 +74,7 @@
         <div class="container">
             <div class="photo">
                 <#if image??>
-                    <img class="img" src="${image}" alt=" ">
+                    <img class="img" src="/img?id=${image.id}" alt=" ">
                 </#if>
             </div>
             <div class="inf">
@@ -109,39 +109,6 @@
             </#if>
 
         </div>
-        <#--        <#if  eventList??>-->
-        <#--            <#list eventList as eventList>-->
 
-        <#--                <a class="name" href="/Event?id=${eventList.id}">${eventList.id}</a>-->
-        <#--                <div class="event">-->
-        <#--                    <div class="h_p">-->
-        <#--                        <div class="img">-->
-        <#--                            <#if eventList.image??>-->
-        <#--                                <img class="photo" src="${eventList.image}">-->
-        <#--                            </#if>-->
-        <#--                        </div>-->
-        <#--                    </div>-->
-        <#--                    <div class="descr">-->
-        <#--                        <p>${eventList.description}</p>-->
-        <#--                    </div>-->
-        <#--                    <div class="descr">-->
-        <#--                        <p>${eventList.category.name}</p>-->
-        <#--                    </div>-->
-        <#--                    <div class="descr">-->
-        <#--                        <p>${eventList.status}</p>-->
-        <#--                    </div>-->
-        <#--                    <#if user==username>-->
-        <#--                        <form action="/Profile" method="post">-->
-        <#--                            <input type="hidden" name="event_id" value="${eventList.id}">-->
-        <#--                            <select name="status">-->
-        <#--                                <option name="status_name" value="1">актуально</option>-->
-        <#--                                <option name="status_name" value="2">неактуально</option>-->
-        <#--                            </select>-->
-        <#--                            <button type="submit" name="submit">Сохранить</button>-->
-        <#--                        </form>-->
-        <#--                    </#if>-->
-        <#--                </div>-->
-        <#--            </#list>-->
-        <#--        </#if>-->
     </div>
 </@base.main>

@@ -1,7 +1,6 @@
 package ru.mvc.dao;
 
 import ru.mvc.model.Categories;
-import ru.mvc.model.Event;
 import ru.mvc.util.DBConnection;
 
 import java.sql.*;

@@ -1,11 +1,14 @@
 package ru.mvc.controller;
 
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
+import ru.mvc.dao.ImageDao;
 import ru.mvc.dao.UserDao;
 import ru.mvc.model.Categories;
 import ru.mvc.model.Event;
 import ru.mvc.dao.EventDao;
 import ru.mvc.dao.CategoriesDao;
+import ru.mvc.model.Image;
 import ru.mvc.model.User;
 
 
@@ -13,9 +16,9 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
 import java.io.*;
-import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.UUID;
 
 @MultipartConfig
 public class AddEventServlet extends HttpServlet {
@@ -57,23 +60,25 @@ public class AddEventServlet extends HttpServlet {
 
         Part filePart = request.getPart("image");
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-        InputStream fileContent = filePart.getInputStream();
         String ext2 = FilenameUtils.getExtension(fileName);
-        String imgName = "\\img\\profileimg" + username + date + "." + ext2;
-        String pathName = "C:\\Users\\gipot\\Desktop\\inf\\friends.net\\friends.net\\src\\main\\webapp\\img\\eventimg" + username + date + "." + ext2;
-        File file = new File(pathName);
-        boolean created = file.createNewFile();
-        OutputStream os = new FileOutputStream(pathName);
-
-        byte[] b = new byte[2048];
-        int length;
-
-        while ((length = fileContent.read(b)) != -1) {
-            os.write(b, 0, length);
-        }
-
-        fileContent.close();
-        os.close();
+        String uploadDir = getServletConfig().getInitParameter("uploadDir");
+        String imgAddress = uploadDir +
+                File.separator +
+                UUID.randomUUID().toString() +
+                "-" +
+                filePart.getSubmittedFileName();
+        IOUtils.copyLarge(
+                filePart.getInputStream(),
+                new FileOutputStream(imgAddress
+                )
+        );
+        ImageDao imageDao = new ImageDao();
+        Image image = new Image();
+        image.setType("image/" + ext2);
+        image.setAddress(imgAddress);
+        imageDao.insert(image);
+        String v = imageDao.insert(image);
+        image.setId(Integer.parseInt(v));
 
 
         String description = request.getParameter("description");
@@ -88,7 +93,7 @@ public class AddEventServlet extends HttpServlet {
         event.setTime(time);
         event.setStreet(street);
         event.setHouse(house);
-        event.setImage(imgName);
+        event.setImage(image);
         event.setDescription(description);
         event.setCategory(categories);
         event.setStatus(status);

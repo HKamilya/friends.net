@@ -1,10 +1,10 @@
 package ru.mvc.controller;
 
 import ru.mvc.dao.EventDao;
+import ru.mvc.dao.ReviewDao;
 import ru.mvc.dao.UserDao;
 import ru.mvc.model.Event;
 import ru.mvc.model.Review;
-import ru.mvc.dao.ReviewDao;
 import ru.mvc.model.User;
 
 import javax.servlet.ServletException;

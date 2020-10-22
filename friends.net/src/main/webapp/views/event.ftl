@@ -200,7 +200,7 @@
         <div class="row">
             <div class="col-5">
                 <div class="image">
-                    <img class="picture" src="<#if image??>${image}<#else>img/plyaj.jpg</#if>" alt="">
+                    <img class="picture" src="/img?id=${image.id}" alt="">
                 </div>
             </div>
             <div class="col-7">

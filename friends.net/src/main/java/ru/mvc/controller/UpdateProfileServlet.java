@@ -1,6 +1,9 @@
 package ru.mvc.controller;
 
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
+import ru.mvc.dao.ImageDao;
+import ru.mvc.model.Image;
 import ru.mvc.model.User;
 import ru.mvc.dao.UserDao;
 
@@ -9,6 +12,7 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
 import java.io.*;
 import java.nio.file.Paths;
+import java.util.UUID;
 
 @MultipartConfig
 public class UpdateProfileServlet extends HttpServlet {
@@ -26,22 +30,25 @@ public class UpdateProfileServlet extends HttpServlet {
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
         String ext2 = FilenameUtils.getExtension(fileName);
         if (fileName.length() > 1) {
-            InputStream fileContent = filePart.getInputStream();
-            String imgName = "img\\profileimg" + username + "." + ext2;
-            String pathName = "C:\\Users\\gipot\\Desktop\\inf\\friends.net\\friends.net\\src\\main\\webapp\\img\\profileimg" + username + "." + ext2;
-            File file = new File(pathName);
-            boolean created = file.createNewFile();
-            OutputStream os = new FileOutputStream(pathName);
-
-            byte[] b = new byte[2048];
-            int length;
-
-            while ((length = fileContent.read(b)) != -1) {
-                os.write(b, 0, length);
-            }
-            os.close();
-            user.setImage(imgName);
-            fileContent.close();
+            String uploadDir = getServletConfig().getInitParameter("uploadDir");
+            String imgAddress = uploadDir +
+                    File.separator +
+                    UUID.randomUUID().toString() +
+                    "-" +
+                    filePart.getSubmittedFileName();
+            IOUtils.copyLarge(
+                    filePart.getInputStream(),
+                    new FileOutputStream(imgAddress
+                    )
+            );
+            ImageDao imageDao = new ImageDao();
+            Image image = user.getImage();
+            image.setAddress(imgAddress);
+            image.setType("image/" + ext2);
+            imageDao.update(image);
+            String v = imageDao.insert(image);
+            image.setId(Integer.parseInt(v));
+            user.setImage(image);
         }
 
 
