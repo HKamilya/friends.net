@@ -22,6 +22,15 @@
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/style_menu_alternative.css">
     <title>List</title>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#search').autocomplete({
+                source: '/ajax'
+            });
+
+        });
+    </script>
     <style>
         .main {
             display: flex;
@@ -79,11 +88,12 @@
             <div class="row">
                 <div class="col-sm-4"><p><b>Фильтры</b></p>
                     <form id="filter" method="post" action="/Search">
-                        <input class="search" name="search" placeholder="Поиск по названию..." type="text">
+                        <input class="search" autocomplete="off" name="search" id="search" placeholder="Поиск по названию..." type="text">
                         <br>
                         <table>
                             <th>По категории:</th>
                             <input type="hidden" name="category" value="0">
+                            <br>
                             <#list catList as catList>
                                 <tr>
                                     <td>

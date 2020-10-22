@@ -62,14 +62,14 @@ public class AddEventServlet extends HttpServlet {
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
         String ext2 = FilenameUtils.getExtension(fileName);
         String uploadDir = getServletConfig().getInitParameter("uploadDir");
-        String imgAddress = uploadDir +
-                File.separator +
+        String imgAddress =
                 UUID.randomUUID().toString() +
-                "-" +
-                filePart.getSubmittedFileName();
+                        "-" +
+                        filePart.getSubmittedFileName();
         IOUtils.copyLarge(
                 filePart.getInputStream(),
-                new FileOutputStream(imgAddress
+                new FileOutputStream(uploadDir +
+                        File.separator + imgAddress
                 )
         );
         ImageDao imageDao = new ImageDao();

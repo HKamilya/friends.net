@@ -26,21 +26,25 @@ public class UpdateProfileServlet extends HttpServlet {
         String fullname = request.getParameter("fullName");
         System.out.println(fullname);
         String description = request.getParameter("description");
+
+
         Part filePart = request.getPart("image");
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
         String ext2 = FilenameUtils.getExtension(fileName);
         if (fileName.length() > 1) {
             String uploadDir = getServletConfig().getInitParameter("uploadDir");
-            String imgAddress = uploadDir +
-                    File.separator +
+            String imgAddress =
                     UUID.randomUUID().toString() +
-                    "-" +
-                    filePart.getSubmittedFileName();
+                            "-" +
+                            filePart.getSubmittedFileName();
             IOUtils.copyLarge(
                     filePart.getInputStream(),
-                    new FileOutputStream(imgAddress
+                    new FileOutputStream(uploadDir +
+                            File.separator + imgAddress
                     )
             );
+
+
             ImageDao imageDao = new ImageDao();
             Image image = user.getImage();
             image.setAddress(imgAddress);

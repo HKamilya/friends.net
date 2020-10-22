@@ -4,6 +4,7 @@ import ru.mvc.model.Event;
 import ru.mvc.model.User;
 import ru.mvc.dao.EventDao;
 import ru.mvc.dao.UserDao;
+import ru.mvc.util.Hashing;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -56,19 +57,10 @@ public class LoginServlet extends HttpServlet {
         User loginBean = new User();
 
 
-        MessageDigest md5 = null;
-        try {
-            md5 = MessageDigest.getInstance("MD5");
-        } catch (NoSuchAlgorithmException e) {
-            throw new IllegalStateException();
-        }
-        byte[] bytes = md5.digest(password.getBytes());
-        StringBuilder builder = new StringBuilder();
-        for (byte b : bytes) {
-            builder.append(b);
-        }
+        Hashing hashing = new Hashing();
+        String hashPass = hashing.hasing(password);
         loginBean.setUserName(username);
-        loginBean.setPassword(builder.toString());
+        loginBean.setPassword(hashPass);
         UserDao loginDao = new UserDao();
         try {
             String userValidate = loginDao.authenticateUser(loginBean);
@@ -88,6 +80,7 @@ public class LoginServlet extends HttpServlet {
                     response.addCookie(c);
                     response.addCookie(p);
                     response.addCookie(id);
+                    System.out.println(c.getValue() + " " + p.getValue() + " " + id.getValue() + " ");
                 }
 
                 HttpSession session = request.getSession();

@@ -16,18 +16,18 @@ import java.io.IOException;
 
 @WebServlet("/img")
 public class UploadImage extends HttpServlet {
+    public final String UPLOAD_DIR = "C:\\Users\\gipot\\Desktop\\inf\\friends.net\\friends.net\\data";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
-
         ImageDao imageDao = new ImageDao();
         Image image = imageDao.findById(id);
 
         resp.setContentType(image.getType());
 
         IOUtils.copyLarge(
-                new FileInputStream(image.getAddress()),
+                new FileInputStream(UPLOAD_DIR + File.separator + image.getAddress()),
                 resp.getOutputStream()
         );
     }

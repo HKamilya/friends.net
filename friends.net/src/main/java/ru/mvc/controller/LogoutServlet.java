@@ -12,15 +12,15 @@ public class LogoutServlet extends HttpServlet {
         HttpSession session = request.getSession(false); //Fetch session object
 
 
-//        Cookie[] cookies = request.getCookies();
-//        for (Cookie cookie : cookies) {
-//            if (cookie.getName().equals("username") || cookie.getName().equals("password") || cookie.getName().equals("id")) {
-//                cookie.setValue(null);
-//                cookie.setPath(request.getContextPath());
-//                cookie.setMaxAge(0);
-//                response.addCookie(cookie);
-//            }
-//        }
+        Cookie[] cookies = request.getCookies();
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("username") || cookie.getName().equals("password") || cookie.getName().equals("id")) {
+                cookie.setValue(null);
+                cookie.setPath(request.getContextPath());
+                cookie.setMaxAge(0);
+                response.addCookie(cookie);
+            }
+        }
 
 
         if (session != null) //If session is not null

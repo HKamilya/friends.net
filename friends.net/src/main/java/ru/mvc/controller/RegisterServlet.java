@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import ru.mvc.model.User;
 import ru.mvc.dao.UserDao;
+import ru.mvc.util.Hashing;
 
 public class RegisterServlet extends HttpServlet {
 
@@ -37,24 +38,15 @@ public class RegisterServlet extends HttpServlet {
             request.setAttribute("errMessage", "Введите корректные данные");
             request.getRequestDispatcher("/views/register.ftl").forward(request, response);
         } else {
-            MessageDigest md5 = null;
-            try {
-                md5 = MessageDigest.getInstance("MD5");
-            } catch (NoSuchAlgorithmException e) {
-                throw new IllegalStateException();
-            }
-            byte[] bytes = md5.digest(password.getBytes());
-            StringBuilder builder = new StringBuilder();
-            for (byte b : bytes) {
-                builder.append(b);
-            }
+            Hashing hashing = new Hashing();
+            String hashPass = hashing.hasing(password);
 
             User users = new User();
 
             users.setFullName(fullName);
             users.setEmail(email);
             users.setUserName(username);
-            users.setPassword(builder.toString());
+            users.setPassword(hashPass);
 
 
             UserDao registerDao = new UserDao();
