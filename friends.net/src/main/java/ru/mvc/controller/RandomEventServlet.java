@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class RandomEventServlet extends HttpServlet {
@@ -24,10 +26,17 @@ public class RandomEventServlet extends HttpServlet {
         String usernm = (String) session.getAttribute("User");
         req.setAttribute("user", usernm);
 
+        Date dateNow = new Date();
+        SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy-MM-dd");
+
+        String currDate = formatForDateNow.format(dateNow);
+
         EventDao eventDao = new EventDao();
         Event event = eventDao.findRandomEvent();
         UserDao userDao = new UserDao();
         User user = userDao.findById(event.getUser().getId());
+
+
         req.setAttribute("event_id", event.getId());
         req.setAttribute("name", event.getName());
         req.setAttribute("city", event.getCity());
@@ -42,7 +51,9 @@ public class RandomEventServlet extends HttpServlet {
         RequestDao requestDao = new RequestDao();
         List<Request> requests = requestDao.findAllByEventId(event.getId());
         req.setAttribute("numOfReq", requests.size());
+        int result = event.getDate().compareTo(currDate);
 
+        req.setAttribute("diff", result);
         ReviewDao reviewDao = new ReviewDao();
         List<Review> reviews = reviewDao.findAllByEventId(event.getId());
         req.setAttribute("reviewsList", reviews);

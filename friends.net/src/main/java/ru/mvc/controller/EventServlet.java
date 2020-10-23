@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class EventServlet extends HttpServlet {
@@ -29,6 +31,11 @@ public class EventServlet extends HttpServlet {
         RequestDao requestDao = new RequestDao();
         UserDao userDao = new UserDao();
 
+        Date dateNow = new Date();
+        SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy-MM-dd");
+
+        String currDate = formatForDateNow.format(dateNow);
+
         User user = userDao.findById(id);
         List<Request> requests = requestDao.findAllByEventId(id);
         req.setAttribute("event_id", event.getId());
@@ -43,6 +50,11 @@ public class EventServlet extends HttpServlet {
         req.setAttribute("time", event.getTime());
         req.setAttribute("numOfReq", requests.size());
         req.setAttribute("author", event.getUser().getUserName());
+        req.setAttribute("currDate", currDate);
+
+        int result = event.getDate().compareTo(currDate);
+
+        req.setAttribute("diff", result);
         System.out.println(user.getUserName());
         ReviewDao reviewDao = new ReviewDao();
         List<Review> reviews = reviewDao.findAllByEventId(id);

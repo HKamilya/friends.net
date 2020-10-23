@@ -57,16 +57,16 @@ public class UserDao extends AbstractDao<User> {
         String password = loginBean.getPassword();
 
         Connection con = null;
-        Statement statement = null;
+        PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        System.out.println(password);
         String userNameDB = "";
         String passwordDB = "";
 
         try {
             con = DBConnection.createConnection();
-            statement = con.createStatement();
-            resultSet = statement.executeQuery("select username,password from \"user\"");
+            preparedStatement = con.prepareStatement("SELECT * FROM \"user\" where username=?");
+            preparedStatement.setString(1, userName);
+            resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
                 userNameDB = resultSet.getString("username");
@@ -85,9 +85,9 @@ public class UserDao extends AbstractDao<User> {
                 } catch (SQLException ignore) {
                 }
             }
-            if (statement != null) {
+            if (preparedStatement != null) {
                 try {
-                    statement.close();
+                    preparedStatement.close();
                 } catch (SQLException ignore) {
                 }
             }

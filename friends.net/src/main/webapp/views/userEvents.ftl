@@ -62,7 +62,7 @@
                 <div class="h_p">
                     <div class="img">
                         <#if event.image??>
-                            <img class="photo" src="${event.image}">
+                            <img class="photo" src="/img?id=${event.image.id}">
                         </#if>
                     </div>
                 </div>
