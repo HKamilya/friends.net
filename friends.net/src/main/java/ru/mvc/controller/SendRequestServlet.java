@@ -26,9 +26,9 @@ public class SendRequestServlet extends HttpServlet {
         Request req = new Request();
         EventDao eventDao = new EventDao();
         Event event = eventDao.findById(event_id);
-        req.setEvent(event);
+        req.setEvent_id(event);
         req.setComment(comment);
-        req.setSubscriber(user);
+        req.setSubscriber_id(user);
         System.out.println(user);
         System.out.println(event);
         RequestDao requestDao = new RequestDao();

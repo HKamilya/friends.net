@@ -30,9 +30,9 @@ public class AddReviewServlet extends HttpServlet {
         EventDao eventDao = new EventDao();
         Event event = eventDao.findById(event_id);
 
-        review.setEvent(event);
+        review.setEvent_id(event);
         review.setText(rev);
-        review.setUser(user);
+        review.setUser_id(user);
         System.out.println(user.getId() + " " + event_id);
         Date dateNow = new Date();
         SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy-MM-dd");

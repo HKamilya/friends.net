@@ -33,6 +33,7 @@ public class RegisterServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         boolean passMatcher = password.matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\\s).*$");
+
         boolean userNMMatcher = username.matches("^[a-zA-Z](.[a-zA-Z0-9_-]*)");
         if (!passMatcher | !userNMMatcher) {
             request.setAttribute("errMessage", "Введите корректные данные");
@@ -43,9 +44,9 @@ public class RegisterServlet extends HttpServlet {
 
             User users = new User();
 
-            users.setFullName(fullName);
+            users.setFullname(fullName);
             users.setEmail(email);
-            users.setUserName(username);
+            users.setUsername(username);
             users.setPassword(hashPass);
 
 
@@ -63,7 +64,7 @@ public class RegisterServlet extends HttpServlet {
                 request.setAttribute("username", username);
                 request.setAttribute("fullName", fullName);
                 request.setAttribute("username", username);
-                request.setAttribute("fullname", user.getFullName());
+                request.setAttribute("fullname", user.getFullname());
                 request.setAttribute("description", user.getDescription());
                 request.setAttribute("image", user.getImage());
 

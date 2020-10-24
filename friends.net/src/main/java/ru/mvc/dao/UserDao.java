@@ -10,9 +10,9 @@ import java.util.List;
 
 public class UserDao extends AbstractDao<User> {
     public String insert(User user) {
-        String fullName = user.getFullName();
+        String fullName = user.getFullname();
         String email = user.getEmail();
-        String userName = user.getUserName();
+        String userName = user.getUsername();
         String password = user.getPassword();
 
         Connection con = null;
@@ -53,7 +53,7 @@ public class UserDao extends AbstractDao<User> {
     }
 
     public String authenticateUser(User loginBean) {
-        String userName = loginBean.getUserName();
+        String userName = loginBean.getUsername();
         String password = loginBean.getPassword();
 
         Connection con = null;
@@ -124,7 +124,7 @@ public class UserDao extends AbstractDao<User> {
 
                 user.setId(user_id);
                 user.setEmail(email);
-                user.setFullName(fullname);
+                user.setFullname(fullname);
                 ImageDao imageDao = new ImageDao();
                 Image image = imageDao.findById(imageId);
                 user.setImage(image);
@@ -159,7 +159,7 @@ public class UserDao extends AbstractDao<User> {
     }
 
     public String updateUsersData(User user) {
-        String fullName = user.getFullName();
+        String fullName = user.getFullname();
         String description = user.getDescription();
 
         Connection con = null;
@@ -170,7 +170,7 @@ public class UserDao extends AbstractDao<User> {
             preparedStatement.setString(1, fullName);
             preparedStatement.setString(2, description);
             preparedStatement.setInt(3, user.getImage().getId());
-            preparedStatement.setString(4, user.getUserName());
+            preparedStatement.setString(4, user.getUsername());
 
 
             int i = preparedStatement.executeUpdate();
@@ -211,8 +211,8 @@ public class UserDao extends AbstractDao<User> {
 
                 user.setId(id);
                 user.setEmail(email);
-                user.setUserName(username);
-                user.setFullName(fullname);
+                user.setUsername(username);
+                user.setFullname(fullname);
                 ImageDao imageDao = new ImageDao();
                 Image image = imageDao.findById(imageId);
                 user.setImage(image);

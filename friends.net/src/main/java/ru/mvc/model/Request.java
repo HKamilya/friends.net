@@ -13,9 +13,9 @@ import ru.mvc.model.User;
 //@Table(name = "request")
 public class Request {
 //    @Column(name = "event_id")
-    private Event event;
+    private Event event_id;
 //    @Column(name = "subscriber_id")
-    private User subscriber;
+    private User subscriber_id;
 //    @Column(name = "comment")
     private String comment;
 

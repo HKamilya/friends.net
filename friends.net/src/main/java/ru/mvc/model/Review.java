@@ -13,9 +13,9 @@ import ru.mvc.annotation.Table;
 //@Table(name = "review")
 public class Review {
 //    @Column(name = "event_id")
-    private Event event;
+    private Event event_id;
 //    @Column(name = "user_id")
-    private User user;
+    private User user_id;
 //    @Column(name = "text")
     private String text;
 //    @Column(name = "date")

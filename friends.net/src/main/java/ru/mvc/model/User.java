@@ -9,14 +9,13 @@ import ru.mvc.annotation.Table;
 
 @Getter
 @Setter
-//@Table(name = "user")
+
 public class User {
 
     private int id;
-
-    private String fullName;
+    private String fullname;
     private String email;
-    private String userName;
+    private String username;
     private String password;
     private Image image;
     private String description;

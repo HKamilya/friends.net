@@ -23,14 +23,14 @@ public class EventDao extends AbstractDao<Event> {
 
             String query = "insert into event(user_id,name,city,street,house,image,description,category_id,status,date, time ) values (?,?,?,?,?,?,?,?,?,?,?)"; //Insert user details into the table 'USERS'
             preparedStatement = con.prepareStatement(query); //Making use of prepared statements here to insert bunch of data
-            preparedStatement.setInt(1, event.getUser().getId());
+            preparedStatement.setInt(1, event.getUser_id().getId());
             preparedStatement.setString(2, event.getName());
             preparedStatement.setString(3, event.getCity());
             preparedStatement.setString(4, event.getStreet());
             preparedStatement.setString(5, event.getHouse());
             preparedStatement.setInt(6, event.getImage().getId());
             preparedStatement.setString(7, event.getDescription());
-            preparedStatement.setInt(8, event.getCategory().getId());
+            preparedStatement.setInt(8, event.getCategory_id().getId());
             preparedStatement.setString(9, event.getStatus());
             preparedStatement.setString(10, event.getDate());
             preparedStatement.setString(11, event.getTime());
@@ -75,7 +75,7 @@ public class EventDao extends AbstractDao<Event> {
                 event.setId(resultSet.getInt("id"));
                 UserDao userDao = new UserDao();
                 User user = userDao.findById(resultSet.getInt("user_id"));
-                event.setUser(user);
+                event.setUser_id(user);
                 event.setName(resultSet.getString("name"));
                 event.setCity(resultSet.getString("city"));
                 event.setStreet(resultSet.getString("street"));
@@ -86,7 +86,7 @@ public class EventDao extends AbstractDao<Event> {
                 event.setDescription(resultSet.getString("description"));
                 CategoriesDao categoriesDao = new CategoriesDao();
                 Categories category = categoriesDao.findById(resultSet.getInt("category_id"));
-                event.setCategory(category);
+                event.setCategory_id(category);
                 event.setStatus(resultSet.getString("status"));
                 event.setDate(resultSet.getString("date"));
                 event.setTime(resultSet.getString("time"));
@@ -140,7 +140,7 @@ public class EventDao extends AbstractDao<Event> {
                 event.setId(resultSet.getInt("id"));
                 UserDao userDao = new UserDao();
                 User user = userDao.findById(resultSet.getInt("user_id"));
-                event.setUser(user);
+                event.setUser_id(user);
                 event.setName(resultSet.getString("name"));
                 event.setCity(resultSet.getString("city"));
                 event.setStreet(resultSet.getString("street"));
@@ -151,7 +151,7 @@ public class EventDao extends AbstractDao<Event> {
                 event.setDescription(resultSet.getString("description"));
                 CategoriesDao categoriesDao = new CategoriesDao();
                 Categories category = categoriesDao.findById(resultSet.getInt("category_id"));
-                event.setCategory(category);
+                event.setCategory_id(category);
                 event.setStatus(resultSet.getString("status"));
                 event.setDate(resultSet.getString("date"));
                 event.setTime(resultSet.getString("time"));
@@ -201,7 +201,7 @@ public class EventDao extends AbstractDao<Event> {
                 event.setId(resultSet.getInt("id"));
                 UserDao userDao = new UserDao();
                 User user = userDao.findById(resultSet.getInt("user_id"));
-                event.setUser(user);
+                event.setUser_id(user);
                 event.setName(resultSet.getString("name"));
                 event.setCity(resultSet.getString("city"));
                 event.setStreet(resultSet.getString("street"));
@@ -212,7 +212,7 @@ public class EventDao extends AbstractDao<Event> {
                 event.setDescription(resultSet.getString("description"));
                 CategoriesDao categoriesDao = new CategoriesDao();
                 Categories category = categoriesDao.findById(resultSet.getInt("category_id"));
-                event.setCategory(category);
+                event.setCategory_id(category);
                 event.setStatus(resultSet.getString("status"));
                 event.setDate(resultSet.getString("date"));
                 event.setTime(resultSet.getString("time"));
@@ -279,8 +279,8 @@ public class EventDao extends AbstractDao<Event> {
 
 
                 event.setId(id);
-                event.setUser(user);
-                event.setCategory(category);
+                event.setUser_id(user);
+                event.setCategory_id(category);
                 event.setCity(city);
                 event.setHouse(house);
                 event.setStatus(status);
@@ -361,7 +361,7 @@ public class EventDao extends AbstractDao<Event> {
                     event.setId(resultSet.getInt("id"));
                     UserDao userDao = new UserDao();
                     User user = userDao.findById(resultSet.getInt("user_id"));
-                    event.setUser(user);
+                    event.setUser_id(user);
                     event.setName(resultSet.getString("name"));
                     event.setCity(resultSet.getString("city"));
                     event.setStreet(resultSet.getString("street"));
@@ -372,7 +372,7 @@ public class EventDao extends AbstractDao<Event> {
                     event.setDescription(resultSet.getString("description"));
                     CategoriesDao categoriesDao = new CategoriesDao();
                     Categories category = categoriesDao.findById(resultSet.getInt("category_id"));
-                    event.setCategory(category);
+                    event.setCategory_id(category);
                     event.setStatus(resultSet.getString("status"));
                     event.setDate(resultSet.getString("date"));
                     event.setTime(resultSet.getString("time"));
@@ -445,7 +445,7 @@ public class EventDao extends AbstractDao<Event> {
                     event.setId(resultSet.getInt("id"));
                     UserDao userDao = new UserDao();
                     User user = userDao.findById(resultSet.getInt("user_id"));
-                    event.setUser(user);
+                    event.setUser_id(user);
                     event.setName(resultSet.getString("name"));
                     event.setCity(resultSet.getString("city"));
                     event.setStreet(resultSet.getString("street"));
@@ -456,7 +456,7 @@ public class EventDao extends AbstractDao<Event> {
                     event.setDescription(resultSet.getString("description"));
                     CategoriesDao categoriesDao = new CategoriesDao();
                     Categories category = categoriesDao.findById(resultSet.getInt("category_id"));
-                    event.setCategory(category);
+                    event.setCategory_id(category);
                     event.setStatus(resultSet.getString("status"));
                     event.setDate(resultSet.getString("date"));
                     event.setTime(resultSet.getString("time"));
@@ -508,7 +508,7 @@ public class EventDao extends AbstractDao<Event> {
                 event.setId(resultSet.getInt("id"));
                 UserDao userDao = new UserDao();
                 User user = userDao.findById(resultSet.getInt("user_id"));
-                event.setUser(user);
+                event.setUser_id(user);
                 event.setName(resultSet.getString("name"));
                 event.setCity(resultSet.getString("city"));
                 event.setStreet(resultSet.getString("street"));
@@ -519,7 +519,7 @@ public class EventDao extends AbstractDao<Event> {
                 event.setDescription(resultSet.getString("description"));
                 CategoriesDao categoriesDao = new CategoriesDao();
                 Categories category = categoriesDao.findById(resultSet.getInt("category_id"));
-                event.setCategory(category);
+                event.setCategory_id(category);
                 event.setStatus(resultSet.getString("status"));
                 event.setDate(resultSet.getString("date"));
                 event.setTime(resultSet.getString("time"));
@@ -571,7 +571,7 @@ public class EventDao extends AbstractDao<Event> {
                 event.setId(resultSet.getInt("id"));
                 UserDao userDao = new UserDao();
                 User user = userDao.findById(resultSet.getInt("user_id"));
-                event.setUser(user);
+                event.setUser_id(user);
                 event.setName(resultSet.getString("name"));
                 event.setCity(resultSet.getString("city"));
                 event.setStreet(resultSet.getString("street"));
@@ -582,7 +582,7 @@ public class EventDao extends AbstractDao<Event> {
                 event.setDescription(resultSet.getString("description"));
                 CategoriesDao categoriesDao = new CategoriesDao();
                 Categories category = categoriesDao.findById(resultSet.getInt("category_id"));
-                event.setCategory(category);
+                event.setCategory_id(category);
                 event.setStatus(resultSet.getString("status"));
                 event.setDate(resultSet.getString("date"));
                 event.setTime(resultSet.getString("time"));
@@ -633,7 +633,7 @@ public class EventDao extends AbstractDao<Event> {
                 event.setId(resultSet.getInt("id"));
                 UserDao userDao = new UserDao();
                 User user = userDao.findById(resultSet.getInt("user_id"));
-                event.setUser(user);
+                event.setUser_id(user);
                 event.setName(resultSet.getString("name"));
                 event.setCity(resultSet.getString("city"));
                 event.setStreet(resultSet.getString("street"));
@@ -644,7 +644,7 @@ public class EventDao extends AbstractDao<Event> {
                 event.setDescription(resultSet.getString("description"));
                 CategoriesDao categoriesDao = new CategoriesDao();
                 Categories category = categoriesDao.findById(resultSet.getInt("category_id"));
-                event.setCategory(category);
+                event.setCategory_id(category);
                 event.setStatus(resultSet.getString("status"));
                 event.setDate(resultSet.getString("date"));
                 event.setTime(resultSet.getString("time"));

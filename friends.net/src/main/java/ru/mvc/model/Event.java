@@ -14,7 +14,7 @@ public class Event {
 //    @Column(name = "id")
     private int id;
 //    @Column(name = "user_id")
-    private User user;
+    private User user_id;
 //    @Column(name = "name")
     private String name;
 //    @Column(name = "city")
@@ -30,7 +30,7 @@ public class Event {
 //    @Column(name = "description")
     private String description;
 //    @Column(name = "category_id")
-    private Categories category;
+    private Categories category_id;
 //    @Column(name = "time")
     private String time;
 //    @Column(name = "status")

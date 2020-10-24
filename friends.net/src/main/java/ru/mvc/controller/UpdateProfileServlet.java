@@ -57,8 +57,8 @@ public class UpdateProfileServlet extends HttpServlet {
 
 
         user.setDescription(description);
-        user.setUserName(username);
-        user.setFullName(fullname);
+        user.setUsername(username);
+        user.setFullname(fullname);
         String updatedUsersData = userDao.updateUsersData(user);
 
         if (updatedUsersData.equals("SUCCESS")) {
@@ -78,7 +78,7 @@ public class UpdateProfileServlet extends HttpServlet {
         User user = userDao.findByName(username);
         request.setAttribute("image", user.getImage());
         request.setAttribute("password", user.getPassword());
-        request.setAttribute("fullName", user.getFullName());
+        request.setAttribute("fullName", user.getFullname());
         request.setAttribute("description", user.getDescription());
         getServletContext().getRequestDispatcher("/views/updateProfile.ftl").forward(request, response);
     }

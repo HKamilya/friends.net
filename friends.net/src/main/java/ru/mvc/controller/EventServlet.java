@@ -38,28 +38,18 @@ public class EventServlet extends HttpServlet {
 
         User user = userDao.findById(id);
         List<Request> requests = requestDao.findAllByEventId(id);
-        req.setAttribute("event_id", event.getId());
-        req.setAttribute("name", event.getName());
-        req.setAttribute("city", event.getCity());
-        req.setAttribute("street", event.getStreet());
-        req.setAttribute("house", event.getHouse());
-        req.setAttribute("image", event.getImage());
-        req.setAttribute("description", event.getDescription());
-        req.setAttribute("category", event.getCategory().getName().toString());
-        req.setAttribute("date", event.getDate());
-        req.setAttribute("time", event.getTime());
+        req.setAttribute("event", event);
         req.setAttribute("numOfReq", requests.size());
-        req.setAttribute("author", event.getUser().getUserName());
         req.setAttribute("currDate", currDate);
 
         int result = event.getDate().compareTo(currDate);
 
         req.setAttribute("diff", result);
-        System.out.println(user.getUserName());
+        System.out.println(user.getUsername());
         ReviewDao reviewDao = new ReviewDao();
         List<Review> reviews = reviewDao.findAllByEventId(id);
         for (Review r : reviews) {
-            System.out.println(r.getUser().getUserName());
+            System.out.println(r.getUser_id().getUsername());
         }
         req.setAttribute("reviewsList", reviews);
         getServletContext().getRequestDispatcher("/views/event.ftl").forward(req, resp);

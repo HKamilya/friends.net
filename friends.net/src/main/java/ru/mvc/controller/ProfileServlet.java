@@ -50,7 +50,7 @@ public class ProfileServlet extends HttpServlet {
 
         List<Event> events = eventDao.findByUserId(user.getId());
         request.setAttribute("username", username);
-        request.setAttribute("fullName", user.getFullName());
+        request.setAttribute("fullName", user.getFullname());
         request.setAttribute("description", user.getDescription());
         request.setAttribute("eventsList", events);
         request.setAttribute("image", image);

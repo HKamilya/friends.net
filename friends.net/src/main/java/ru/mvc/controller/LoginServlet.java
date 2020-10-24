@@ -59,7 +59,7 @@ public class LoginServlet extends HttpServlet {
 
         Hashing hashing = new Hashing();
         String hashPass = hashing.hasing(password);
-        loginBean.setUserName(username);
+        loginBean.setUsername(username);
         loginBean.setPassword(hashPass);
         UserDao loginDao = new UserDao();
         try {
@@ -94,7 +94,7 @@ public class LoginServlet extends HttpServlet {
                 request.setAttribute("image", loginBean.getImage());
                 request.setAttribute("eventsList", events);
                 request.setAttribute("description", loginBean.getDescription());
-                request.setAttribute("fullName", loginBean.getFullName());
+                request.setAttribute("fullName", loginBean.getFullname());
                 request.getRequestDispatcher("/views/user.ftl").forward(request, response);
             } else {
                 System.out.println("Error message = " + userValidate);

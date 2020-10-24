@@ -13,9 +13,9 @@ import java.util.List;
 
 public class RequestDao extends AbstractDao<Request> {
     public String insert(Request request) {
-        Event event = request.getEvent();
+        Event event = request.getEvent_id();
         String comment = request.getComment();
-        User user = request.getSubscriber();
+        User user = request.getSubscriber_id();
 
 
         Connection con = null;
@@ -104,9 +104,9 @@ public class RequestDao extends AbstractDao<Request> {
                 EventDao eventDao = new EventDao();
                 Event event = eventDao.findById(event_id);
                 Request request = new Request();
-                request.setSubscriber(user);
+                request.setSubscriber_id(user);
                 request.setComment(comment);
-                request.setEvent(event);
+                request.setEvent_id(event);
 
 
                 requests.add(request);

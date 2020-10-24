@@ -31,7 +31,7 @@ public class AnProfileServlet extends HttpServlet {
 
 
         request.setAttribute("username", username);
-        request.setAttribute("fullName", user.getFullName());
+        request.setAttribute("fullName", user.getFullname());
         request.setAttribute("description", user.getDescription());
         request.setAttribute("image", user.getImage());
         request.setAttribute("eventsList", events);

@@ -36,7 +36,7 @@ public class HelloServlet extends HttpServlet {
             UserDao userDao = new UserDao();
 
             User user = new User();
-            user.setUserName(login);
+            user.setUsername(login);
             Hashing hashing = new Hashing();
             String hashPass = hashing.hasing(password);
             user.setPassword(hashPass);
@@ -44,8 +44,8 @@ public class HelloServlet extends HttpServlet {
             String mess = userDao.authenticateUser(user);
             if (mess.equals("User_Role")) {
                 user = userDao.findById(id);
-                request.getSession().setAttribute("User", user.getUserName());
-                System.out.println(user.getUserName());
+                request.getSession().setAttribute("User", user.getUsername());
+                System.out.println(user.getUsername());
                 request.setAttribute("user", login);
             }
 

@@ -68,7 +68,7 @@
                 <p>${event.time}</p>
             <br>
                 </#if>
-                <p>${event.category.name}</p>
+                <p>${event.category_id.name}</p>
             </div>
 
         </div>

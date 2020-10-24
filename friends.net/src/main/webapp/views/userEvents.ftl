@@ -101,7 +101,7 @@
                     <div class="modal-body">
 
                         <#list request as req>
-                            <a href="/AnProfile?username=${req.subscriber.userName}">${req.subscriber.fullName}</a>
+                            <a href="/AnProfile?username=${req.subscriber_id.username}">${req.subscriber_id.fullname}</a>
                             <br>
                             <#if req.comment??>
                                 <p>${req.comment}</p>

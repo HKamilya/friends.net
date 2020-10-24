@@ -35,8 +35,8 @@ public class ReviewDao extends AbstractDao<ReviewDao> {
 
                 Review review = new Review();
                 review.setDate(date);
-                review.setEvent(event);
-                review.setUser(user);
+                review.setEvent_id(event);
+                review.setUser_id(user);
                 review.setText(text);
                 reviews.add(review);
             }
@@ -78,8 +78,8 @@ public class ReviewDao extends AbstractDao<ReviewDao> {
             con = DBConnection.createConnection();
             String query = "insert into review(user_id,event_id,text,date) values (?,?,?,?)";
             preparedStatement = con.prepareStatement(query);
-            preparedStatement.setInt(1, review.getUser().getId());
-            preparedStatement.setInt(2, review.getEvent().getId());
+            preparedStatement.setInt(1, review.getUser_id().getId());
+            preparedStatement.setInt(2, review.getEvent_id().getId());
             preparedStatement.setString(3, text);
             preparedStatement.setString(4, review.getDate());
 

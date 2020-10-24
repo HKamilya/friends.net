@@ -34,23 +34,13 @@ public class RandomEventServlet extends HttpServlet {
         EventDao eventDao = new EventDao();
         Event event = eventDao.findRandomEvent();
         UserDao userDao = new UserDao();
-        User user = userDao.findById(event.getUser().getId());
 
-
-        req.setAttribute("event_id", event.getId());
-        req.setAttribute("name", event.getName());
-        req.setAttribute("city", event.getCity());
-        req.setAttribute("street", event.getStreet());
-        req.setAttribute("house", event.getHouse());
-        req.setAttribute("image", event.getImage());
-        req.setAttribute("description", event.getDescription());
-        req.setAttribute("category", event.getCategory().getName());
-        req.setAttribute("date", event.getDate());
-        req.setAttribute("time", event.getTime());
-        req.setAttribute("author", event.getUser().getUserName());
         RequestDao requestDao = new RequestDao();
         List<Request> requests = requestDao.findAllByEventId(event.getId());
+        req.setAttribute("event", event);
         req.setAttribute("numOfReq", requests.size());
+        req.setAttribute("currDate", currDate);
+
         int result = event.getDate().compareTo(currDate);
 
         req.setAttribute("diff", result);

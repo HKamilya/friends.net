@@ -200,14 +200,14 @@
         <div class="row">
             <div class="col-5">
                 <div class="image">
-                    <img class="picture" src="/img?id=${image.id}" alt="">
+                    <img class="picture" src="/img?id=${event.image.id}" alt="">
                 </div>
             </div>
             <div class="col-7">
                 <div class="text_block">
                     <div class="name_attend">
                         <div class="name">
-                            ${name}
+                            ${event.name}
                         </div>
                         <div class="attend">
                             уже идет
@@ -217,22 +217,22 @@
                     </div>
                     <div class="where_when">
                         <div class="where">
-                            ${city}<#if street??> ${street}<#if house??> ${house}</#if></#if>
+                            ${event.city}<#if event.street??> ${event.street}<#if event.house??> ${event.house}</#if></#if>
                         </div>
                         <div class="when">
                             <#if date??>
-                                ${date} ${time}
+                                ${event.date} ${event.time}
                             </#if>
                         </div>
                     </div>
                     <div class="inform">
-                        <p>${description}</p>
+                        <p>${event.description}</p>
                     </div>
                     <div class="inform">
-                        <p>${category}</p>
+                        <p>${event.category_id.name}</p>
                     </div>
                     <div class="inform">
-                        <a href="/AnProfile?username=${author}">${author}</a>
+                        <a href="/AnProfile?username=${event.user_id.username}">${event.user_id.username}</a>
                     </div>
                     <div class="tags">
                         <#--                        <%---->
@@ -341,8 +341,8 @@
                                     <div class="media-body">
                                         <div class="mar-btm">
                                             <div class="mar-btm">
-                                                <a href="/AnProfile?username=${review.user.userName}"
-                                                   class="btn-link text-semibold media-heading box-inline">${review.user.fullName}</a>
+                                                <a href="/AnProfile?username=${review.user_id.username}"
+                                                   class="btn-link text-semibold media-heading box-inline">${review.user_id.fullname}</a>
                                                 <p class="text-muted text-sm"><i class="fa fa-mobile fa-lg"></i> -
                                                     ${review.date}</p>
                                             </div>
