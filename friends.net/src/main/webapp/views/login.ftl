@@ -65,13 +65,14 @@
                         <div class="col-8">
                             <label for="usernm">Логин</label>
                             <br>
-                            <input type="text" <#if username??>value="${username}" </#if> class="form-control" id="usernm" aria-describedby="emailHelp"
+                            <input type="text" <#if username??>value="${username}" </#if> class="form-control"
+                                   id="username" aria-describedby="emailHelp"
                                    name="username">
                             <br>
                             <br>
                             <label for="pass">Пароль</label>
                             <br>
-                            <input type="password" class="form-control" id="pass"
+                            <input type="password" class="form-control" id="password"
                                    <#if password??>value="${password}" </#if> name="password">
                             <br>
                             <br>
@@ -82,7 +83,7 @@
                             <span style="color:red">
                                 <#if errMessage??>${errMessage}</#if></span>
                             <br>
-                            <input type="submit" class="btn btn-secondary btn-lg" value="Войти">
+                            <input type="submit" id="button" class="btn btn-secondary btn-lg" value="Войти">
                             <input type="reset" class="btn btn-secondary btn-lg" value="Сбросить">
                         </div>
                         <div class="col-2"></div>

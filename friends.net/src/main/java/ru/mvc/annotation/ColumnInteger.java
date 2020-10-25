@@ -10,5 +10,5 @@ import java.lang.annotation.Target;
 public @interface ColumnInteger {
     String name() default "";
 
-    Constraints constraints() default @Constraints;
+    Constraint constraints() default @Constraint;
 }

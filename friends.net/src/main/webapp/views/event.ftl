@@ -220,9 +220,8 @@
                             ${event.city}<#if event.street??> ${event.street}<#if event.house??> ${event.house}</#if></#if>
                         </div>
                         <div class="when">
-                            <#if date??>
-                                ${event.date} ${event.time}
-                            </#if>
+
+                            ${event.date} ${event.time}
                         </div>
                     </div>
                     <div class="inform">
@@ -280,7 +279,7 @@
                             <br>
                             <textarea style="width: 200px;" type="text" name="comment"></textarea>
 
-                            <input type="hidden" name="event_id" value="${event_id}">
+                            <input type="hidden" name="event_id" value="${event.id}">
                             <#if errMessage??>
                                 ${errMessage}
                             </#if>

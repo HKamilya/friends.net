@@ -21,6 +21,8 @@ public class LoginServlet extends HttpServlet {
     public LoginServlet() {
     }
 
+
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Cookie[] cookies = request.getCookies();     // request is an instance of type

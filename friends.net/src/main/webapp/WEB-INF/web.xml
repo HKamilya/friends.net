@@ -219,7 +219,7 @@
 
     <servlet-mapping>
         <servlet-name>hello_servlet</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern/>
     </servlet-mapping>
 
     <security-constraint>
