@@ -20,20 +20,6 @@ import java.util.List;
 
 public class ProfileServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        String status = null;
-        int status_id = Integer.parseInt(request.getParameter("status"));
-        if (status_id == 1) {
-            status = "актуально";
-        } else {
-            status = "неактуально";
-        }
-        int event_id = Integer.parseInt(request.getParameter("event_id"));
-
-        EventDao eventDao = new EventDao();
-        eventDao.updateStatus(event_id, status);
-        response.sendRedirect(request.getContextPath() + "/UserEvents");
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

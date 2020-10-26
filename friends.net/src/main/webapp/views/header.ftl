@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
               integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
               crossorigin="anonymous">
+
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
               integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
               crossorigin="anonymous">
@@ -87,14 +88,13 @@
                             </div>
                             <br>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="тема" name="title">
+                                <input type="text" class="form-control" placeholder="тема" name="title" required>
                             </div>
                             <br>
-                            <input type="date" name="date"/>
                             </label></td>
                             <div class="form-group">
                             <textarea class="form-control" placeholder="опишите, пожалуйста, проблему"
-                                      name="text"></textarea>
+                                      name="text" required></textarea>
                             </div>
                             <br>
                             <p>Ответ будет отправлен на почту</p>

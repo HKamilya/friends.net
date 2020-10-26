@@ -2,55 +2,8 @@
 <#import "header.ftl" as base>
 
 <@base.main>
+    <link rel="stylesheet" href="../css/login.css">
 
-    <style>
-        .row {
-            width: 100%;
-            margin: 0 auto;
-        }
-
-        .login_block {
-            /*height: 500px;*/
-            padding: 30px 0;
-            background-color: #FF7373;
-            text-align: center;
-            border-radius: 30px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            margin: -100px auto 0;
-        }
-
-        body {
-            overflow-x: hidden;
-        }
-
-        .btn-primary, .btn-default, .btn-primary:hover {
-            background-color: black;
-            border-color: black;
-        }
-
-        .form-group {
-            width: 350px;
-        }
-
-        .row {
-            margin: 0;
-        }
-
-        .helper {
-            margin-left: 0;
-            margin-right: 0;
-        }
-
-        .top {
-            height: 150px;
-        }
-
-        .top2 {
-            height: 150px;
-        }
-    </style>
     <title>Login</title>
     <div class="container">
         <div class="row align-items-center helper">

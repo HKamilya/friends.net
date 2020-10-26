@@ -17,8 +17,6 @@ public class DBConnection {
                 throw new IllegalStateException(e);
             }
             con = DriverManager.getConnection(url, username, password);
-
-            System.out.println("Printing connection object " + con);
         } catch (Exception e) {
             throw new IllegalStateException(e);
         }

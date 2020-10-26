@@ -11,14 +11,15 @@ import ru.mvc.annotation.Table;
 //
 //@Table(name = "supportMessage")
 public class SupportMessage {
-//    @Column(name = "id")
+    //    @Column(name = "id")
     private int id;
-//    @Column(name = "email")
+    //    @Column(name = "email")
     private String email;
-//    @Column(name = "title")
+    //    @Column(name = "title")
     private String title;
-//    @Column(name = "text")
+    //    @Column(name = "text")
     private String text;
+    private String date;
 
     public SupportMessage() {
     }

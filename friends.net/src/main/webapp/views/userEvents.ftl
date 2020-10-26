@@ -71,7 +71,7 @@
                 </div>
                 <div class="descr">-->
                     <p>${event.status}</p>
-                    <form action="/Profile" method="post">
+                    <form action="/UserEvents" method="post">
                         <input type="hidden" name="event_id" value="${event.id}">
                         <select name="status">
                             <option name="status_name" value="1">актуально</option>

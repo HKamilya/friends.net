@@ -3,7 +3,9 @@
 
 <@base.main>
     <#if user??>
-        <div style="background: #6b6b6b">
+        <div style="background: #6b6b6b; height: 100%">
+            <br>
+            <br>
             <form name="form" action="AddEvent" method="post" onsubmit="return validate()"
                   enctype="multipart/form-data">
                 <table align="center">
