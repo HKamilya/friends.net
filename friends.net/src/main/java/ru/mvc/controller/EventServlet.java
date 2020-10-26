@@ -45,12 +45,10 @@ public class EventServlet extends HttpServlet {
         int result = event.getDate().compareTo(currDate);
 
         req.setAttribute("diff", result);
-        System.out.println(user.getUsername());
+
         ReviewDao reviewDao = new ReviewDao();
         List<Review> reviews = reviewDao.findAllByEventId(id);
-        for (Review r : reviews) {
-            System.out.println(r.getUser_id().getUsername());
-        }
+
         req.setAttribute("reviewsList", reviews);
         getServletContext().getRequestDispatcher("/views/event.ftl").forward(req, resp);
 

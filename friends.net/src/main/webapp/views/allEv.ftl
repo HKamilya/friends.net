@@ -1,4 +1,4 @@
-<link href="../css/allEv.css">
+<link rel="stylesheet" href="../css/allEv.css">
 
 <div class="main" id="v">
     <div id="vstavka">

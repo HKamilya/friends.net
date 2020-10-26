@@ -49,10 +49,6 @@ public class UserEventsServlet extends HttpServlet {
             List<Request> requests = requestDao.findAllByEventId(event.getId());
             evReqList.put(event, requests);
         }
-        for (Map.Entry ev : evReqList.entrySet()) {
-            System.out.println(ev.getKey() + " " + ev.getValue());
-
-        }
 
         request.setAttribute("evReqList", evReqList);
         getServletContext().getRequestDispatcher("/views/userEvents.ftl").forward(request, response);

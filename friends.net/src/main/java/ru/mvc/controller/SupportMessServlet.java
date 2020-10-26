@@ -22,7 +22,6 @@ public class SupportMessServlet extends HttpServlet {
         String username = (String) session.getAttribute("User");
         String text = request.getParameter("text");
         String date = request.getParameter("date");
-        System.out.println(date);
         String title = request.getParameter("title");
         String email = request.getParameter("email");
         if (email.equals("email")) {

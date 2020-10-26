@@ -34,9 +34,6 @@ public class AddEventServlet extends HttpServlet {
         CategoriesDao categoriesDao = new CategoriesDao();
         List<Categories> catList = categoriesDao.findAll();
         req.setAttribute("list", catList);
-        for (Categories cat : catList) {
-            System.out.println(cat.getName());
-        }
         req.setAttribute("user", user);
         getServletContext().getRequestDispatcher("/views/addEvent.ftl").forward(req, resp);
 

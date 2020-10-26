@@ -22,13 +22,10 @@ public class HelloServlet extends HttpServlet {
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals("username")) {
                 login = cookie.getValue();
-                System.out.println(login);
             } else if (cookie.getName().equals("password")) {
                 password = cookie.getValue();
-                System.out.println(password);
             } else if (cookie.getName().equals("id")) {
                 id = Integer.parseInt(cookie.getValue());
-                System.out.println(id);
             }
         }
 
@@ -45,7 +42,6 @@ public class HelloServlet extends HttpServlet {
             if (mess.equals("User_Role")) {
                 user = userDao.findById(id);
                 request.getSession().setAttribute("User", user.getUsername());
-                System.out.println(user.getUsername());
                 request.setAttribute("user", login);
             }
 

@@ -42,12 +42,6 @@ public class ProfileServlet extends HttpServlet {
         request.setAttribute("image", image);
 
 
-//        response.setContentType(image.getType());
-//
-//        IOUtils.copyLarge(
-//                new FileInputStream(image.getAddress()),
-//                response.getOutputStream()
-//        );
         request.getRequestDispatcher("/views/user.ftl").forward(request, response);
     }
 }

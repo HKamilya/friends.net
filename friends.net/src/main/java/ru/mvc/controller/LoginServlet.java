@@ -82,7 +82,6 @@ public class LoginServlet extends HttpServlet {
                     response.addCookie(c);
                     response.addCookie(p);
                     response.addCookie(id);
-                    System.out.println(c.getValue() + " " + p.getValue() + " " + id.getValue() + " ");
                 }
 
                 HttpSession session = request.getSession();
@@ -99,7 +98,6 @@ public class LoginServlet extends HttpServlet {
                 request.setAttribute("fullName", loginBean.getFullname());
                 request.getRequestDispatcher("/views/user.ftl").forward(request, response);
             } else {
-                System.out.println("Error message = " + userValidate);
                 request.setAttribute("errMessage", userValidate);
 
                 request.getRequestDispatcher("/views/login.ftl").forward(request, response);

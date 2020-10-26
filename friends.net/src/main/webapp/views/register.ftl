@@ -2,8 +2,8 @@
 <#import "header.ftl" as base>
 
 <@base.main>
+    <link rel="stylesheet" href="../css/register.css">
     <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
 
     <script>
         function validate() {
@@ -31,66 +31,6 @@
             }
         }
     </script>
-    <style>
-        .container_reg {
-            display: flex;
-            width: 100%;
-            height: 100%;
-            background: #FF7373;
-        }
-
-        .rectangle {
-            width: 400px;
-            height: 455px;
-            background: #212529;
-            margin: 0 auto;
-            margin-top: 100px;
-        }
-
-        .txt {
-            font-family: "Roboto", sans-serif;
-            font-size: 20px;
-            color: white;
-
-        }
-
-        .register_form {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .register_form {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .form-error {
-            color: #bf0000;
-            text-align: left;
-            font-size: 14px;
-            padding: 10px 10px;
-            margin-top: -10px;
-            display: none;
-        }
-
-        .register_form input:valid:not(:placeholder-shown) {
-            border-color: green;
-        }
-
-        .register_form input:invalid:not(:placeholder-shown) {
-            border-color: #bf0000;
-        }
-
-        .register_form input:invalid:not(:placeholder-shown) + .form-error {
-            display: block;
-        }
-
-    </style>
 
     <div class="container_reg">
         <div class="rectangle">

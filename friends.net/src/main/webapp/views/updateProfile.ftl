@@ -1,6 +1,7 @@
 <#ftl encoding="UTF-8"/>
 <#import "header.ftl" as base>
 <link rel="stylesheet" href="../css/style_menu_alternative.css">
+<link rel="stylesheet" href="../css/updateProfile.css">
 <@base.main>
     <#if user??>
         <script>
@@ -28,72 +29,7 @@
                 }
             }
         </script>
-        <style>
-            .container {
-                width: 100%;
-                max-width: 1170px;
-                margin: 0 auto;
-                display: flex;
-                flex-direction: row;
-            }
 
-            .profile {
-                padding: 10px;
-            }
-
-            .photo {
-                width: 30%;
-                height: 10%;
-            }
-
-            .img {
-                width: 100%;
-                height: 100%;
-            }
-
-            .inf {
-                width: 70%;
-                display: flex;
-                flex-direction: column;
-            }
-
-            .name {
-                padding: 10px 10px;
-                display: flex;
-                height: 40%;
-                width: auto;
-                background: #6B6B6B;
-            }
-
-            .space {
-                background: white;
-                padding: 20px 10px;
-                display: flex;
-                height: 17%;
-                width: auto;
-                align-items: center;
-            }
-
-            .name_text {
-                font-family: "Roboto Thin", serif;
-                font-size: 30px;
-                color: #161616;
-            }
-
-            .about {
-                padding: 10px 10px;
-                height: 90%;
-                display: flex;
-                background: #6B6B6B;
-                text-align: left;
-            }
-
-            .about_text {
-                font-family: "Times New Roman", serif;
-                width: 100%;
-                color: #161616;
-            }
-        </style>
 
         <div class="profile">
             <form action="/UpdateProfile" method="post" enctype="multipart/form-data">

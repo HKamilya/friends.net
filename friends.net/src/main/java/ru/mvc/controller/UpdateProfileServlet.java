@@ -24,7 +24,6 @@ public class UpdateProfileServlet extends HttpServlet {
         UserDao userDao = new UserDao();
         User user = userDao.findByName(username);
         String fullname = request.getParameter("fullName");
-        System.out.println(fullname);
         String description = request.getParameter("description");
 
 
