@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="../css/search.css">
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script>
+
         $(function () {
             $('#button').click(function (event) {
                 var search = $('#search').val();
@@ -50,12 +51,17 @@
                         date: date
                     },
                     dataType: 'json',
-                    success: function (res) {
-                        $.each(res, function(i, f) {
-                            var tblRow = "<tr>" + "<td>" + f.firstName + "</td>" +
-                                "<td>" + f.lastName + "</td>" + "<td>" + f.job + "</td>" + "<td>" + f.roll + "</td>" + "</tr>"
-                            $(tblRow).appendTo("#userdata tbody");
-
+                    success: function (result) {
+                        $("#vstavka").detach();
+                        $("<div id=\"vstavka\">").appendTo($("#v"));
+                        for (var i = 0; i < result.length; i++) {
+                            $('#vstavka').append($(' <a class=\"name\" href="/Event?id=' + result[i]['id'] + '\">' + result[i]['name'] + '</a><div class="event">' +
+                                '  <div class="h_p"><div class="img">' +
+                                ' <img class="photo" src="/img?id=' + result[i]['image']['id'] + '></div></div>' + '<div class="descr"><p>' + result[i]['description'] +
+                                '</p>  <br><p>' + result[i]['date'] + '</p>' +
+                                '           <br> <p>' + result[i]['time'] + '</p> <br><p>' + result[i]['category_id']['name'] + '</p>' + '</div></div>'
+                            ))
+                        }
                     }
                 });
             });

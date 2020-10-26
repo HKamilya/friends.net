@@ -337,20 +337,21 @@ public class EventDao extends AbstractDao<Event> {
             if (categories.size() > 0 & eventName.length() > 0) {
                 sql = "SELECT * FROM event where status='актуально' and name ILIKE  ? ";
                 sql += " and status='актуально' and (";
-                for (int i = 0; i < categories.size() - 2; i++) {
+                for (int i = 0; i < categories.size() - 1; i++) {
                     sql += "category_id=" + categories.get(i) + " or ";
                 }
-                sql += "category_id=" + categories.get(categories.size() - 1) + ");";
+                sql += "category_id=" + categories.get(categories.size()-1) + ");";
                 preparedStatement = con.prepareStatement(sql);
                 preparedStatement.setString(1, eventName + "%");
                 resultSet = preparedStatement.executeQuery();
             } else if (categories.size() > 0) {
                 sql = "SELECT * FROM event where status='актуально' and ";
-                for (int i = 0; i < categories.size() - 2; i++) {
+                for (int i = 0; i < categories.size() - 1; i++) {
                     sql += " category_id=" + categories.get(i) + " or ";
                 }
-                sql += "category_id=" + categories.get(categories.size() - 1) + ";";
+                sql += "category_id=" + categories.get(categories.size()-1) + ";";
                 preparedStatement = con.prepareStatement(sql);
+                System.out.println(sql);
                 resultSet = preparedStatement.executeQuery();
             }
 
@@ -380,6 +381,7 @@ public class EventDao extends AbstractDao<Event> {
 
                     events.add(event);
                 }
+                System.out.println(events);
             }
         } catch (SQLException e) {
             throw new IllegalStateException(e);
@@ -419,7 +421,7 @@ public class EventDao extends AbstractDao<Event> {
             if (categories.size() > 0 & eventName.length() > 0) {
                 sql = "SELECT * FROM event where status='актуально' and name ILIKE  ? and date =? ";
                 sql += " and status='актуально' and (";
-                for (int i = 0; i < categories.size() - 2; i++) {
+                for (int i = 0; i < categories.size() - 1; i++) {
                     sql += "category_id=" + categories.get(i) + " or ";
                 }
                 sql += "category_id=" + categories.get(categories.size() - 1) + ");";
@@ -429,7 +431,7 @@ public class EventDao extends AbstractDao<Event> {
                 resultSet = preparedStatement.executeQuery();
             } else if (categories.size() > 0) {
                 sql = "SELECT * FROM event where status='актуально' and date ILIKE ? ";
-                for (int i = 0; i < categories.size() - 2; i++) {
+                for (int i = 0; i < categories.size() - 1; i++) {
                     sql += " category_id=" + categories.get(i) + " or ";
                 }
                 sql += "category_id=" + categories.get(categories.size() - 1) + ";";
@@ -500,7 +502,7 @@ public class EventDao extends AbstractDao<Event> {
         try {
             con = DBConnection.createConnection();
             preparedStatement = con.prepareStatement("SELECT * FROM event where name ILIKE ? and status='актуально'");
-            preparedStatement.setString(1, eventName + "%");
+            preparedStatement.setString(1,eventName + "%");
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
@@ -562,7 +564,7 @@ public class EventDao extends AbstractDao<Event> {
         try {
             con = DBConnection.createConnection();
             preparedStatement = con.prepareStatement("SELECT * FROM event where name ILIKE ? and date ILIKE ? and status='актуально'");
-            preparedStatement.setString(1, eventName);
+            preparedStatement.setString(1, eventName+"%");
             preparedStatement.setString(2, eventDate);
             resultSet = preparedStatement.executeQuery();
 

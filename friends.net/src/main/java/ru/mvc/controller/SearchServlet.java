@@ -61,41 +61,43 @@ public class SearchServlet extends HttpServlet {
 //
 
         String search = request.getParameter("search");
+        System.out.println(search);
         String s = request.getParameter("tags");
         String date = request.getParameter("date");
         System.out.println("tags" + s);
         EventDao eventDao = new EventDao();
         List<Event> events = new ArrayList<>();
         List<Integer> list = new ArrayList<>();
+        String[] tags;
+        tags = s.split(",");
         if (!s.equals("[]")) {
-            String[] tags;
-            tags = s.split(",");
             for (int i = 0; i < tags.length; i++) {
                 tags[i] = tags[i].replace("[", "");
                 tags[i] = tags[i].replace("\"", "");
                 tags[i] = tags[i].replace("]", "");
             }
-            if (tags.length > 0 & date.length() > 1 & search.length() != 0) { //поиск по категориям, имени и дате или по категории и дате
-                for (int i = 0; i < tags.length; i++) {
-                    list.add(Integer.parseInt(tags[i]));
-                }
-                events = eventDao.findByNameAndCategoryAndDate(search, list, date);
-            } else if (tags.length > 0 & date.length() < 1) { // поиск по категориям и  имени и просто категориям
-                for (int i = 0; i < tags.length; i++) {
-                    list.add(Integer.parseInt(tags[i]));
-                }
-                events = eventDao.findByNameAndCategory(search, list);
+        }
+        if (!s.equals("[]") & date.length() > 1 & search.length() != 0) { //поиск по категориям, имени и дате или по категории и дате
+            for (int i = 0; i < tags.length; i++) {
+                list.add(Integer.parseInt(tags[i]));
             }
-        } else if (search.length() > 0 & date.length() > 0) { //поиск по имени и дате
+            events = eventDao.findByNameAndCategoryAndDate(search, list, date);
+        } else if (!s.equals("[]") & date.length() < 1) { // поиск по категориям и  имени и просто категориям
+            for (int i = 0; i < tags.length; i++) {
+                list.add(Integer.parseInt(tags[i]));
+            }
+            events = eventDao.findByNameAndCategory(search, list);
+        } else if (s.equals("[]") & search.length() > 0 & date.length() > 0) {
             events = eventDao.findByNameAndDate(search, date);
-        } else if (search.length() > 0) {//поиск по имени
+        } else if (date.length() < 1 & s.equals("[]")) {//поиск по имени
             events = eventDao.findByName(search);
-        } else if (date.length() > 1) { //поиск по дате
+        } else if (s.equals("[]") & search.length() == 0 & date.length() > 1) {
             events = eventDao.findByDate(date);
         }
         if (events.size() == 0) {
             request.setAttribute("message", "   К сожалению, таких мероприятий нет");
         }
+        System.out.println(events);
         response.setContentType("application/json");
         String json = new Gson().toJson(events);
         System.out.println(json);
