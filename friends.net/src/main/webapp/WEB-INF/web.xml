@@ -8,9 +8,25 @@
     <session-config>
         <session-timeout>10</session-timeout>
     </session-config>
-    <!--    <welcome-file-list>-->
-    <!--        <welcome-file>Main.jsp</welcome-file>-->
-    <!--    </welcome-file-list>-->
+
+    <filter>
+        <filter-name>EncodingFilter</filter-name>
+        <filter-class>ru.mvc.util.EncodingFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>EncodingFilter</filter-name>
+        <url-pattern>/</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>ru.mvc.util.AuthFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>/Auth</url-pattern>
+    </filter-mapping>
+
     <servlet>
         <description></description>
         <display-name>RegisterServlet</display-name>

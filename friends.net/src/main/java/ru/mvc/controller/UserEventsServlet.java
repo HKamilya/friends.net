@@ -19,7 +19,7 @@ import java.util.Map;
 
 public class UserEventsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
+        //  request.setCharacterEncoding("UTF-8");
         String status = null;
         int status_id = Integer.parseInt(request.getParameter("status"));
         if (status_id == 1) {

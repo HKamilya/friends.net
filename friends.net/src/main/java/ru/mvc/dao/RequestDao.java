@@ -137,4 +137,88 @@ public class RequestDao extends AbstractDao<Request> {
 
         return requests;
     }
+
+
+    public List<Event> findAllByUserId(int user_id) {
+        List<Event> requests = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            con = DBConnection.createConnection();
+            preparedStatement = con.prepareStatement("SELECT * FROM request where subscriber_id=? ");
+            preparedStatement.setInt(1, user_id);
+            resultSet = preparedStatement.executeQuery();
+
+
+            while (resultSet.next()) {
+                int subscriber = resultSet.getInt("subscriber_id");
+                String comment = resultSet.getString("comment");
+                int event_id = resultSet.getInt("event_id");
+
+                UserDao userDao = new UserDao();
+                User user = userDao.findById(subscriber);
+                EventDao eventDao = new EventDao();
+                Event event = eventDao.findById(event_id);
+                Request request = new Request();
+                request.setSubscriber_id(user);
+                request.setComment(comment);
+                request.setEvent_id(event);
+
+
+                requests.add(event);
+            }
+        } catch (SQLException e) {
+            throw new IllegalStateException(e);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException ignore) {
+                }
+            }
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException ignore) {
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ignore) {
+                }
+            }
+
+        }
+
+        return requests;
+    }
+
+    public void delete(int event_id, int user_id) {
+        Connection con = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            con = DBConnection.createConnection();
+            preparedStatement = con.prepareStatement("DELETE FROM request where subscriber_id=? and subscriber_id=?");
+            preparedStatement.setInt(1, event_id);
+            preparedStatement.setInt(2, user_id);
+            int row = preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new IllegalStateException(e);
+        } finally {
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException ignore) {
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ignore) {
+                }
+            }
+        }
+    }
 }

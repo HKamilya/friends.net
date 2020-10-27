@@ -41,7 +41,6 @@
                     }
                 }
                 var date = $('#date').val();
-                alert(tags);
 
                 $.ajax({
                     type: "POST", url: "/Search",
@@ -55,11 +54,17 @@
                         $("#vstavka").detach();
                         $("<div id=\"vstavka\">").appendTo($("#v"));
                         for (var i = 0; i < result.length; i++) {
-                            $('#vstavka').append($(' <a class=\"name\" href="/Event?id=' + result[i]['id'] + '\">' + result[i]['name'] + '</a><div class="event">' +
-                                '  <div class="h_p"><div class="img">' +
-                                ' <img class="photo" src="/img?id=' + result[i]['image']['id'] + '></div></div>' + '<div class="descr"><p>' + result[i]['description'] +
+                            $('#vstavka').append($(' <a class=\"name\" href="/Event?id=' + result[i]['id'] + '">' + result[i]['name'] + '</a>' +
+                                '<div class="event">' +
+                                '  <div class="h_p">' +
+                                '<div class="img">' +
+                                ' <img  alt="" class="photo" src="/img?id=' + result[i]['image']['id'] + '">' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="descr"><p>' + result[i]['description'] +
                                 '</p>  <br><p>' + result[i]['date'] + '</p>' +
-                                '           <br> <p>' + result[i]['time'] + '</p> <br><p>' + result[i]['category_id']['name'] + '</p>' + '</div></div>'
+                                '           <br> <p>' + result[i]['time'] + '</p> <br><p>' + result[i]['category_id']['name'] + '</p>' +
+                                '</div></div></div>'
                             ))
                         }
                     }
@@ -103,7 +108,7 @@
                                 </td>
                             </tr>
                         </table>
-                        <input class="sub" id="button" type="submit" value="Поиск" style="margin-bottom: 5px">
+                        <input class="sub" id="button" type="button" value="Поиск" style="margin-bottom: 5px">
                     </form>
                 </div>
                 <div class="col-sm-8" style="border-left: 1px solid black">

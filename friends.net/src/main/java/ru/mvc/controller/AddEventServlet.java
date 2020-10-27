@@ -40,7 +40,7 @@ public class AddEventServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
+     //   request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         int categoryId = Integer.parseInt(request.getParameter("category"));
 

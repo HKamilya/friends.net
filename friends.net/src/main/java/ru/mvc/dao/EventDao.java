@@ -325,6 +325,7 @@ public class EventDao extends AbstractDao<Event> {
     }
 
 
+
     public List<Event> findByNameAndCategory(String eventName, List<Integer> categories) {
         List<Event> events = new ArrayList<>();
         Connection con = null;

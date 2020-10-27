@@ -144,7 +144,7 @@
                                 <div class="media-block">
                                     <a class="media-left" href="#"><img class="img-circle img-sm"
                                                                         alt="Профиль пользователя"
-                                                                        src="https://bootstraptema.ru/snippets/icons/2016/mia/1.png"></a>
+                                                                        src="/img?id=${review.user_id.image.id}"></a>
                                     <div class="media-body">
                                         <div class="mar-btm">
                                             <div class="mar-btm">

@@ -12,7 +12,7 @@
             </div>
             <div class="col-6 login_block">
                 <div class="col-12 top2"></div>
-                <form method="post" action="/Login" name="form">
+                <form method="post" action="/Auth" name="form">
                     <div class="row">
                         <div class="col-2"></div>
                         <div class="col-8">

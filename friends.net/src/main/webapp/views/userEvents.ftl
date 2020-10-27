@@ -1,6 +1,6 @@
 <#ftl encoding="UTF-8"/>
 <#import "header.ftl" as base>
-
+<link rel="stylesheet" href="../css/userEvents.css">
 <@base.main>
     <style>
         .photo {
