@@ -19,7 +19,7 @@ import java.util.List;
 
 public class SearchServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    //    request.setCharacterEncoding("UTF-8");
+        //    request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
 //        CategoriesDao categoriesDao = new CategoriesDao();
 //        List<Categories> categories = categoriesDao.findAll();
@@ -100,7 +100,6 @@ public class SearchServlet extends HttpServlet {
         System.out.println(events);
         response.setContentType("application/json");
         String json = new Gson().toJson(events);
-        System.out.println(json);
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(json);
     }

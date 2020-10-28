@@ -32,14 +32,14 @@ public class AuthFilter implements Filter {
         try {
             String userValidate = loginDao.authenticateUser(loginBean);
 
-            if (userValidate.equals("User_Role")) {
+            if (userValidate.equals("User")) {
                 UserDao userDao = new UserDao();
                 User user = userDao.findByName(username);
                 String id1 = String.valueOf(user.getId());
                 System.out.println("User's Home");
                 if (rememberMe) {
                     Cookie c = new Cookie("username", username);
-                    Cookie p = new Cookie("password", password);
+                    Cookie p = new Cookie("password", hashPass);
                     Cookie id = new Cookie("id", id1);
                     c.setMaxAge(24 * 60 * 60 * 31);
                     p.setMaxAge(24 * 60 * 60 * 31);

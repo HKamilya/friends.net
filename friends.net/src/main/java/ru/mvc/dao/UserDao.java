@@ -74,7 +74,7 @@ public class UserDao extends AbstractDao<User> {
 
 
                 if (userName.equals(userNameDB) && password.equals(passwordDB))
-                    return "User_Role";
+                    return "User";
             }
         } catch (SQLException e) {
             throw new IllegalStateException(e);

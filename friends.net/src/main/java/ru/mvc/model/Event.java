@@ -3,37 +3,35 @@ package ru.mvc.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import ru.mvc.annotation.Column;
-import ru.mvc.annotation.Table;
+import ru.kpfu.itis.orm.annotation.Constraint;
+import ru.kpfu.itis.orm.annotation.Table;
+
 
 @Getter
 @Setter
 
-//@Table(name = "event")
+@Table(name = "event")
 public class Event {
-//    @Column(name = "id")
+    @Constraint(pk = true)
     private int id;
-//    @Column(name = "user_id")
     private User user_id;
-//    @Column(name = "name")
+    @Constraint(notNull = true)
     private String name;
-//    @Column(name = "city")
+    @Constraint(notNull = true)
     private String city;
-//    @Column(name = "street")
     private String street;
-//    @Column(name = "house")
     private String house;
-//    @Column(name = "date")
+    @Constraint(notNull = true)
     private String date;
-//    @Column(name = "image")
+    @Constraint(notNull = true)
     private Image image;
-//    @Column(name = "description")
+    @Constraint(notNull = true)
     private String description;
-//    @Column(name = "category_id")
+    @Constraint(notNull = true)
     private Categories category_id;
-//    @Column(name = "time")
+    @Constraint(notNull = true)
     private String time;
-//    @Column(name = "status")
+    @Constraint(notNull = true)
     private String status;
 
     public Event() {

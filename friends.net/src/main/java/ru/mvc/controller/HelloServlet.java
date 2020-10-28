@@ -34,12 +34,10 @@ public class HelloServlet extends HttpServlet {
 
             User user = new User();
             user.setUsername(login);
-            Hashing hashing = new Hashing();
-            String hashPass = hashing.hasing(password);
-            user.setPassword(hashPass);
+            user.setPassword(password);
             user.setId(id);
             String mess = userDao.authenticateUser(user);
-            if (mess.equals("User_Role")) {
+            if (mess.equals("User")) {
                 user = userDao.findById(id);
                 request.getSession().setAttribute("User", user.getUsername());
                 request.setAttribute("user", login);

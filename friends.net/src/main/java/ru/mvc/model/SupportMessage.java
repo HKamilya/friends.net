@@ -3,22 +3,24 @@ package ru.mvc.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import ru.mvc.annotation.Column;
-import ru.mvc.annotation.Table;
+import ru.kpfu.itis.orm.annotation.Constraint;
+import ru.kpfu.itis.orm.annotation.Table;
+
 
 @Getter
 @Setter
 //
-//@Table(name = "supportMessage")
+@Table(name = "supportMessage")
 public class SupportMessage {
-    //    @Column(name = "id")
+    @Constraint(notNull = true)
     private int id;
-    //    @Column(name = "email")
+    @Constraint(notNull = true)
     private String email;
-    //    @Column(name = "title")
+    @Constraint(notNull = true)
     private String title;
-    //    @Column(name = "text")
+    @Constraint(notNull = true)
     private String text;
+    @Constraint(notNull = true)
     private String date;
 
     public SupportMessage() {
