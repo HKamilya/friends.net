@@ -74,7 +74,6 @@ public class RequestDao extends AbstractDao<Request> {
 
     @Override
     public void update(Request adr) {
-
     }
 
 

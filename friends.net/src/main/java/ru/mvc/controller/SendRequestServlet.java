@@ -16,7 +16,7 @@ import java.io.IOException;
 
 public class SendRequestServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       // request.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("User");
         String comment = request.getParameter("comment");
@@ -30,7 +30,7 @@ public class SendRequestServlet extends HttpServlet {
         req.setComment(comment);
         req.setSubscriber_id(user);
         RequestDao requestDao = new RequestDao();
-        String requestSended = requestDao.insert( req);
+        String requestSended = requestDao.insert(req);
         if (requestSended.equals("SUCCESS")) {
             response.sendRedirect(request.getContextPath() + "/Event?id=" + event_id);
         } else {
