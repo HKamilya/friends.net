@@ -58,15 +58,10 @@ public class UpdateProfileServlet extends HttpServlet {
         user.setDescription(description);
         user.setUsername(username);
         user.setFullname(fullname);
-        String updatedUsersData = userDao.updateUsersData(user);
+        userDao.update(user);
 
-        if (updatedUsersData.equals("SUCCESS")) {
 
-            response.sendRedirect(request.getContextPath() + "/Profile");
-        } else {
-            request.setAttribute("errMessage", updatedUsersData);
-            response.sendRedirect(request.getContextPath() + "/Profile");
-        }
+        response.sendRedirect(request.getContextPath() + "/Profile");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

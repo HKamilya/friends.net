@@ -42,10 +42,6 @@ public class ProfileServlet extends HttpServlet {
         request.setAttribute("user", username);
         EventDao eventDao = new EventDao();
 
-        Date dateNow = new Date();
-        SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy-MM-dd");
-
-        String date = formatForDateNow.format(dateNow);
 
 
         UserDao userDao = new UserDao();
@@ -55,6 +51,11 @@ public class ProfileServlet extends HttpServlet {
         RequestDao requestDao = new RequestDao();
         List<Event> eventsEv = requestDao.findAllByUserId(user.getId());
         List<Event> events = new ArrayList<>();
+        Date dateNow = new Date();
+        SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy-MM-dd");
+
+        String date = formatForDateNow.format(dateNow);
+
         for (int i = 0; i < eventsEv.size(); i++) {
             if (eventsEv.get(i).getDate().compareTo(date) >= 0) {
                 events.add(eventsEv.get(i));

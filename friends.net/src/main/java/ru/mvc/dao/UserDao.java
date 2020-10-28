@@ -158,7 +158,7 @@ public class UserDao extends AbstractDao<User> {
 
     }
 
-    public String updateUsersData(User user) {
+    public void update(User user) {
         String fullName = user.getFullname();
         String description = user.getDescription();
 
@@ -175,8 +175,6 @@ public class UserDao extends AbstractDao<User> {
 
             int i = preparedStatement.executeUpdate();
 
-            if (i != 0)
-                return "SUCCESS";
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -187,7 +185,6 @@ public class UserDao extends AbstractDao<User> {
                 }
             }
         }
-        return "Что-то пошло не так";
     }
 
     public User findById(int id) {
@@ -245,10 +242,6 @@ public class UserDao extends AbstractDao<User> {
         return user;
     }
 
-    @Override
-    public void update(User adr) {
-
-    }
 
     @Override
     public List<User> findAll() {

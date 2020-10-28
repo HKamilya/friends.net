@@ -5,6 +5,7 @@
 <@base.main>
     <#if user??>
         <script>
+
             var maxCount = 300;
             var redCount = 3;
             var input = $("#description");
@@ -22,9 +23,11 @@
                 }
                 if (count <= 0) {
                     $("#submit-button").addClass("disabled");
+                    $("#submit-button").attr("disabled", true);
                     $("#submit-button").text("Недоступно");
                 } else if (count > 0 && $("#submit-button").hasClass("disabled")) {
                     $("#submit-button").removeClass("disabled");
+                    $("#submit-button").attr("disabled", false);
                     $("#submit-button").text("Отправить");
                 }
             }
@@ -52,7 +55,7 @@
                             <h3>О себе:</h3>
                         </div>
                         <div class="about">
-                            <input type="text" autocomplete="off"  class="about_text" id="description" name="description"
+                            <input oninput="getCount()" type="text" autocomplete="off"  class="about_text" id="description" name="description"
                                    value="<#if description??>${description}</#if>">
 
                         </div>

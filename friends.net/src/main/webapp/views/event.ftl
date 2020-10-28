@@ -25,11 +25,11 @@
                     </div>
                     <div class="where_when">
                         <div class="where">
-                            ${event.city}<#if event.street??> ${event.street}<#if event.house??> ${event.house}</#if></#if>
-                        </div>
+                            <p>${event.city}<#if event.street??> ${event.street}<#if event.house??> ${event.house}</#if></#if>
+                            </p></div>
                         <div class="when">
-
-                            ${event.date} ${event.time}
+                            <p>
+                                ${event.date} ${event.time}</p>
                         </div>
                     </div>
                     <div class="inform">

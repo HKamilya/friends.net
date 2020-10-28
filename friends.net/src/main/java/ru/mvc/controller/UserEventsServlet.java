@@ -20,7 +20,7 @@ import java.util.Map;
 public class UserEventsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        String status = null;
+        String status = "";
         int status_id = Integer.parseInt(request.getParameter("status"));
         if (status_id == 1) {
             status = "актуально";
@@ -30,7 +30,10 @@ public class UserEventsServlet extends HttpServlet {
         int event_id = Integer.parseInt(request.getParameter("event_id"));
 
         EventDao eventDao = new EventDao();
-        eventDao.updateStatus(event_id, status);
+        Event event = new Event();
+        event.setId(event_id);
+        event.setStatus(status);
+        eventDao.update(event);
         response.sendRedirect(request.getContextPath() + "/UserEvents");
 
     }

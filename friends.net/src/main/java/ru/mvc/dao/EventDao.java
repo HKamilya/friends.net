@@ -319,12 +319,6 @@ public class EventDao extends AbstractDao<Event> {
         return event;
     }
 
-    @Override
-    public void update(Event adr) {
-
-    }
-
-
 
     public List<Event> findByNameAndCategory(String eventName, List<Integer> categories) {
         List<Event> events = new ArrayList<>();
@@ -341,7 +335,7 @@ public class EventDao extends AbstractDao<Event> {
                 for (int i = 0; i < categories.size() - 1; i++) {
                     sql += "category_id=" + categories.get(i) + " or ";
                 }
-                sql += "category_id=" + categories.get(categories.size()-1) + ");";
+                sql += "category_id=" + categories.get(categories.size() - 1) + ");";
                 preparedStatement = con.prepareStatement(sql);
                 preparedStatement.setString(1, eventName + "%");
                 resultSet = preparedStatement.executeQuery();
@@ -350,7 +344,7 @@ public class EventDao extends AbstractDao<Event> {
                 for (int i = 0; i < categories.size() - 1; i++) {
                     sql += " category_id=" + categories.get(i) + " or ";
                 }
-                sql += "category_id=" + categories.get(categories.size()-1) + ";";
+                sql += "category_id=" + categories.get(categories.size() - 1) + ";";
                 preparedStatement = con.prepareStatement(sql);
                 System.out.println(sql);
                 resultSet = preparedStatement.executeQuery();
@@ -503,7 +497,7 @@ public class EventDao extends AbstractDao<Event> {
         try {
             con = DBConnection.createConnection();
             preparedStatement = con.prepareStatement("SELECT * FROM event where name ILIKE ? and status='актуально'");
-            preparedStatement.setString(1,eventName + "%");
+            preparedStatement.setString(1, eventName + "%");
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
@@ -565,7 +559,7 @@ public class EventDao extends AbstractDao<Event> {
         try {
             con = DBConnection.createConnection();
             preparedStatement = con.prepareStatement("SELECT * FROM event where name ILIKE ? and date ILIKE ? and status='актуально'");
-            preparedStatement.setString(1, eventName+"%");
+            preparedStatement.setString(1, eventName + "%");
             preparedStatement.setString(2, eventDate);
             resultSet = preparedStatement.executeQuery();
 
@@ -681,7 +675,9 @@ public class EventDao extends AbstractDao<Event> {
         return events;
     }
 
-    public void updateStatus(int id, String status) {
+    public void update(Event event) {
+        int id = event.getId();
+        String status = event.getStatus();
         PreparedStatement preparedStatement = null;
         Connection con = null;
         try {

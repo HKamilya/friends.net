@@ -111,7 +111,7 @@ public class CategoriesDao extends AbstractDao<Categories> {
         return categories;
     }
 
-    @Override
+
     public void update(Categories adr) {
 
     }
