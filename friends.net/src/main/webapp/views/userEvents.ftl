@@ -2,58 +2,6 @@
 <#import "header.ftl" as base>
 <link rel="stylesheet" href="../css/userEvents.css">
 <@base.main>
-    <style>
-        .photo {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        .main {
-            display: flex;
-            padding: 60px 0 0;
-            flex-direction: column;
-        }
-
-        .event {
-            width: 100%;
-            display: flex;
-            margin-bottom: 20px;
-            align-items: center;
-            background: black;
-        }
-
-        .name {
-            font-family: 'Ravi Prakash', cursive;
-            color: black;
-            text-decoration: none;
-            transition: color 0.4s linear;
-        }
-
-        .name:hover {
-            color: lightsalmon;
-        }
-
-        .descr {
-            font-family: "Roboto", sans-serif;
-            align-content: center;
-            width: 70%;
-            color: white;
-        }
-
-        .h_p {
-            width: 30%;
-            height: auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .img {
-            width: 100%;
-            height: 150px;
-        }
-    </style>
     <#list evReqList as event, request>
 
         <div class="main">

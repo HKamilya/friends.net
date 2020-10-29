@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class SearchServlet extends HttpServlet {
@@ -79,13 +80,13 @@ public class SearchServlet extends HttpServlet {
             }
         }
         if (!s.equals("[]") & date.length() > 1 & search.length() != 0) { //поиск по категориям, имени и дате или по категории и дате
-            for (int i = 0; i < tags.length; i++) {
-                list.add(Integer.parseInt(tags[i]));
+            for (String tag : tags) {
+                list.add(Integer.parseInt(tag));
             }
             events = eventDao.findByNameAndCategoryAndDate(search, list, date);
         } else if (!s.equals("[]") & date.length() < 1) { // поиск по категориям и  имени и просто категориям
-            for (int i = 0; i < tags.length; i++) {
-                list.add(Integer.parseInt(tags[i]));
+            for (String tag : tags) {
+                list.add(Integer.parseInt(tag));
             }
             events = eventDao.findByNameAndCategory(search, list);
         } else if (s.equals("[]") & search.length() > 0 & date.length() > 0) {
@@ -95,6 +96,7 @@ public class SearchServlet extends HttpServlet {
         } else if (s.equals("[]") & search.length() == 0 & date.length() > 1) {
             events = eventDao.findByDate(date);
         }
+        System.out.println(events.size());
         if (events.size() == 0) {
             request.setAttribute("message", "   К сожалению, таких мероприятий нет");
         }
@@ -118,6 +120,7 @@ public class SearchServlet extends HttpServlet {
         for (Event ev : eventList) {
             eventsNames.add(ev.getName());
         }
+        eventList.sort((o1, o2) -> (o2.getDate().compareTo(o1.getDate())));
         String json = new Gson().toJson(eventsNames);
         request.setAttribute("names", json);
         request.setAttribute("catList", categories);

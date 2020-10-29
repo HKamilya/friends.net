@@ -19,9 +19,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class ProfileServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -56,6 +54,7 @@ public class ProfileServlet extends HttpServlet {
                 events.add(eventsEv.get(i));
             }
         }
+        events.sort(Comparator.comparing(Event::getDate));
         System.out.println(events);
         request.setAttribute("username", user.getUsername());
         request.setAttribute("fullName", user.getFullname());

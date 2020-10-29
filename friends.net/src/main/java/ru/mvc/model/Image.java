@@ -12,7 +12,7 @@ import ru.kpfu.itis.orm.annotation.Table;
 @Table(name = "image")
 public class Image {
     @Constraint(pk = true)
-    private int id;
+    private Integer id;
     @Constraint(notNull = true)
     private String type;
     @Constraint(notNull = true)

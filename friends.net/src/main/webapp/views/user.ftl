@@ -96,7 +96,7 @@
 
         </div>
         <br>
-        <br><#if user==username>
+        <br><#if user.username==username>
         <H3>Предстоящие мероприятия</H3>
 
         <#list list as event>

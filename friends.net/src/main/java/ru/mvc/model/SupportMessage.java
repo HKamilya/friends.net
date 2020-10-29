@@ -12,8 +12,8 @@ import ru.kpfu.itis.orm.annotation.Table;
 //
 @Table(name = "supportMessage")
 public class SupportMessage {
-    @Constraint(notNull = true)
-    private int id;
+    @Constraint( pk = true)
+    private Integer id;
     @Constraint(notNull = true)
     private String email;
     @Constraint(notNull = true)

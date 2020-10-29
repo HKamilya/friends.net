@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -37,6 +38,7 @@ public class AllEventsServlet extends HttpServlet {
                 events.add(event);
             }
         }
+        events.sort(Comparator.comparing(Event::getDate));
         request.setAttribute("list", events);
         System.out.println(events);
         getServletContext().getRequestDispatcher("/views/allEvents.ftl").forward(request, response);

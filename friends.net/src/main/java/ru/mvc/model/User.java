@@ -13,7 +13,7 @@ import ru.kpfu.itis.orm.annotation.Table;
 @Table(name = "user")
 public class User {
     @Constraint(pk = true)
-    private int id;
+    private Integer id;
     @Constraint(notNull = true)
     private String fullname;
     @Constraint(notNull = true)
