@@ -5,6 +5,7 @@ import ru.mvc.model.Image;
 import ru.mvc.model.User;
 import ru.mvc.util.DBConnection;
 
+import javax.jws.soap.SOAPBinding;
 import java.sql.*;
 import java.util.List;
 
@@ -52,7 +53,7 @@ public class UserDao extends AbstractDao<User> {
 
     }
 
-    public String authenticateUser(User loginBean) {
+    public User authenticateUser(User loginBean) {
         String userName = loginBean.getUsername();
         String password = loginBean.getPassword();
 
@@ -64,17 +65,25 @@ public class UserDao extends AbstractDao<User> {
 
         try {
             con = DBConnection.createConnection();
-            preparedStatement = con.prepareStatement("SELECT * FROM \"user\" where username=?");
-            preparedStatement.setString(1, userName);
+            preparedStatement = con.prepareStatement("SELECT * FROM \"user\" where username=? and password=?");
+            preparedStatement.setString(1, loginBean.getUsername());
+            preparedStatement.setString(2, loginBean.getPassword());
+
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                userNameDB = resultSet.getString("username");
-                passwordDB = resultSet.getString("password");
+                User user = new User();
+                user.setFullname(resultSet.getString("fullname"));
+                user.setUsername(resultSet.getString("username"));
+                user.setPassword(resultSet.getString("password"));
+                user.setEmail(resultSet.getString("email"));
+                user.setDescription(resultSet.getString("description"));
+                ImageDao imageDao = new ImageDao();
+                Image image = imageDao.findById(resultSet.getInt("image"));
+                user.setImage(image);
+                user.setId(resultSet.getInt("id"));
 
-
-                if (userName.equals(userNameDB) && password.equals(passwordDB))
-                    return "User";
+                return user;
             }
         } catch (SQLException e) {
             throw new IllegalStateException(e);
@@ -99,7 +108,7 @@ public class UserDao extends AbstractDao<User> {
             }
         }
 
-        return "Введен неверный логин или пароль";
+        return null;
     }
 
     public User findByName(String username) {

@@ -5,6 +5,7 @@ import ru.mvc.dao.CategoriesDao;
 import ru.mvc.dao.EventDao;
 import ru.mvc.model.Categories;
 import ru.mvc.model.Event;
+import ru.mvc.model.User;
 
 import javax.lang.model.element.ElementVisitor;
 import javax.servlet.ServletException;
@@ -107,12 +108,18 @@ public class SearchServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        String user = (String) session.getAttribute("User");
+        User user = (User) session.getAttribute("User");
         request.setAttribute("user", user);
         CategoriesDao categoriesDao = new CategoriesDao();
         List<Categories> categories = categoriesDao.findAll();
         EventDao eventDao = new EventDao();
+        List<String> eventsNames = new ArrayList<>();
         List<Event> eventList = eventDao.findAll();
+        for (Event ev : eventList) {
+            eventsNames.add(ev.getName());
+        }
+        String json = new Gson().toJson(eventsNames);
+        request.setAttribute("names", json);
         request.setAttribute("catList", categories);
         request.setAttribute("list", eventList);
         getServletContext().getRequestDispatcher("/views/search.ftl").forward(request, response);

@@ -19,14 +19,12 @@ public class SupportMessServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
-        String username = (String) session.getAttribute("User");
+        User user = (User) session.getAttribute("User");
         String text = request.getParameter("text");
         String date = request.getParameter("date");
         String title = request.getParameter("title");
         String email = request.getParameter("email");
         if (email.equals("email")) {
-            UserDao userdao = new UserDao();
-            User user = userdao.findByName(username);
             email = user.getEmail();
         }
         Date dateNow = new Date();
@@ -45,7 +43,7 @@ public class SupportMessServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        String user = (String) session.getAttribute("User");
+       User user = (User) session.getAttribute("User");
         request.setAttribute("user", user);
     }
 }

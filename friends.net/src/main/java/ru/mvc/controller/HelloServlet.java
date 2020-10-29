@@ -36,17 +36,16 @@ public class HelloServlet extends HttpServlet {
             user.setUsername(login);
             user.setPassword(password);
             user.setId(id);
-            String mess = userDao.authenticateUser(user);
-            if (mess.equals("User")) {
-                user = userDao.findById(id);
-                request.getSession().setAttribute("User", user.getUsername());
-                request.setAttribute("user", login);
+            User user1 = userDao.authenticateUser(user);
+            if (user1!=null) {
+                request.getSession().setAttribute("User", user1);
+                request.setAttribute("user", user1);
             }
 
         }
 
         HttpSession session = request.getSession();
-        String user = (String) session.getAttribute("User");
+        User user = (User) session.getAttribute("User");
         request.setAttribute("user", user);
 
 

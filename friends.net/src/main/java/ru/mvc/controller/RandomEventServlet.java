@@ -23,8 +23,8 @@ public class RandomEventServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         HttpSession session = req.getSession();
-        String usernm = (String) session.getAttribute("User");
-        req.setAttribute("user", usernm);
+        User user = (User) session.getAttribute("User");
+        req.setAttribute("user", user);
 
         Date dateNow = new Date();
         SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy-MM-dd");
@@ -33,7 +33,6 @@ public class RandomEventServlet extends HttpServlet {
 
         EventDao eventDao = new EventDao();
         Event event = eventDao.findRandomEvent();
-        UserDao userDao = new UserDao();
 
         RequestDao requestDao = new RequestDao();
         List<Request> requests = requestDao.findAllByEventId(event.getId());

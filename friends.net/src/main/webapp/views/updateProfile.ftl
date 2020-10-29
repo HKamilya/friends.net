@@ -55,8 +55,9 @@
                             <h3>О себе:</h3>
                         </div>
                         <div class="about">
-                            <input oninput="getCount()" type="text" autocomplete="off"  class="about_text" id="description" name="description"
-                                   value="<#if description??>${description}</#if>">
+                            <textarea oninput="getCount()" autocomplete="off" class="about_text"
+                                      id="description" name="description"
+                            ><#if description??>${description}</#if></textarea>
 
                         </div>
                         <p class="inform-text">Количество оставшихся символов: <span id="count"></span></p>
@@ -65,20 +66,6 @@
                 </div>
                 <button type="submit" id="submit-button" name="submit">Сохранить</button>
             </form>
-            <#--            <form method="post" action="">-->
-            <#--                <label class="txt" for="pass"><b>Старый пароль</b></label>-->
-            <#--                <div class="register_line">-->
-            <#--                    <input type="password" id="earlpass" name="earlpass"/>-->
-            <#--                </div>-->
-            <#--                <label class="txt" for="pass"><b>Новый пароль</b></label>-->
-            <#--                <div class="register_line">-->
-            <#--                    <input type="password" id="pass" name="password"/>-->
-            <#--                </div>-->
-            <#--                <label class="txt" for="confPass"><b>Повторите пароль</b></label>-->
-            <#--                <div class="register_line">-->
-            <#--                    <input type="password" id="confPass" name="conpassword"/>-->
-            <#--                </div>-->
-            <#--            </form>-->
         </div>
     </#if>
 </@base.main>

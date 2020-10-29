@@ -20,20 +20,20 @@ public class AnProfileServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        String usernm = (String) session.getAttribute("User");
-        request.setAttribute("user", usernm);
+        User user = (User) session.getAttribute("User");
+        request.setAttribute("user", user);
         String username = request.getParameter("username");
 
         EventDao eventDao = new EventDao();
         UserDao userDao = new UserDao();
-        User user = userDao.findByName(username);
-        List<Event> events = eventDao.findByUserId(user.getId());
+        User anUser = userDao.findByName(username);
+        List<Event> events = eventDao.findByUserId(anUser.getId());
 
 
         request.setAttribute("username", username);
-        request.setAttribute("fullName", user.getFullname());
-        request.setAttribute("description", user.getDescription());
-        request.setAttribute("image", user.getImage());
+        request.setAttribute("fullName", anUser.getFullname());
+        request.setAttribute("description", anUser.getDescription());
+        request.setAttribute("image", anUser.getImage());
         request.setAttribute("eventsList", events);
         request.getRequestDispatcher("/views/user.ftl").forward(request, response);
 

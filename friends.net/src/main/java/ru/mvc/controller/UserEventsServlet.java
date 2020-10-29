@@ -40,10 +40,8 @@ public class UserEventsServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        String username = (String) session.getAttribute("User");
-        request.setAttribute("user", username);
-        UserDao userDao = new UserDao();
-        User user = userDao.findByName(username);
+        User user = (User) session.getAttribute("User");
+        request.setAttribute("user", user);
         EventDao eventDao = new EventDao();
         List<Event> eventList = eventDao.findByUserId(user.getId());
         LinkedHashMap<Event, List<Request>> evReqList = new LinkedHashMap<>();

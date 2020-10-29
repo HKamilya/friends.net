@@ -2,6 +2,7 @@ package ru.mvc.controller;
 
 import ru.mvc.model.Event;
 import ru.mvc.dao.EventDao;
+import ru.mvc.model.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,7 +22,7 @@ public class AllEventsServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        String user = (String) session.getAttribute("User");
+        User user = (User) session.getAttribute("User");
         request.setAttribute("user", user);
         EventDao eventDao = new EventDao();
         List<Event> eventList = eventDao.findAll();
@@ -36,8 +37,8 @@ public class AllEventsServlet extends HttpServlet {
                 events.add(event);
             }
         }
-        System.out.println(events);
         request.setAttribute("list", events);
+        System.out.println(events);
         getServletContext().getRequestDispatcher("/views/allEvents.ftl").forward(request, response);
     }
 }

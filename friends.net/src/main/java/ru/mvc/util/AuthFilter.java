@@ -30,17 +30,13 @@ public class AuthFilter implements Filter {
         loginBean.setPassword(hashPass);
         UserDao loginDao = new UserDao();
         try {
-            String userValidate = loginDao.authenticateUser(loginBean);
+            User user = loginDao.authenticateUser(loginBean);
 
-            if (userValidate.equals("User")) {
-                UserDao userDao = new UserDao();
-                User user = userDao.findByName(username);
-                String id1 = String.valueOf(user.getId());
-                System.out.println("User's Home");
+            if (user != null) {
                 if (rememberMe) {
                     Cookie c = new Cookie("username", username);
                     Cookie p = new Cookie("password", hashPass);
-                    Cookie id = new Cookie("id", id1);
+                    Cookie id = new Cookie("id", String.valueOf(user.getId()));
                     c.setMaxAge(24 * 60 * 60 * 31);
                     p.setMaxAge(24 * 60 * 60 * 31);
                     id.setMaxAge(24 * 60 * 60 * 31);
@@ -51,21 +47,19 @@ public class AuthFilter implements Filter {
 
                 HttpSession session = request.getSession();
                 session.setMaxInactiveInterval(10 * 60);
-                session.setAttribute("User", username);
+                session.setAttribute("User", user);
                 request.setAttribute("username", username);
-                request.setAttribute("user", username);
-                loginBean = loginDao.findByName(username);
-                EventDao eventDao = new EventDao();
+                request.setAttribute("user", user);
                 RequestDao requestDao = new RequestDao();
                 List<Event> events = requestDao.findAllByUserId(user.getId());
 
-                request.setAttribute("image", loginBean.getImage());
+                request.setAttribute("image", user.getImage());
                 request.setAttribute("list", events);
-                request.setAttribute("description", loginBean.getDescription());
-                request.setAttribute("fullName", loginBean.getFullname());
+                request.setAttribute("description", user.getDescription());
+                request.setAttribute("fullName", user.getFullname());
                 request.getRequestDispatcher("/views/user.ftl").forward(request, response);
             } else {
-                request.setAttribute("errMessage", userValidate);
+                request.setAttribute("errMessage", "Введены неправильные данные");
 
                 request.getRequestDispatcher("/views/login.ftl").forward(request, response);
             }

@@ -29,8 +29,7 @@ public class AddEventServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        String user = (String) session.getAttribute("User");
-        req.setAttribute("user", user);
+        User user = (User) session.getAttribute("User");
         CategoriesDao categoriesDao = new CategoriesDao();
         List<Categories> catList = categoriesDao.findAll();
         req.setAttribute("list", catList);
@@ -45,7 +44,7 @@ public class AddEventServlet extends HttpServlet {
         int categoryId = Integer.parseInt(request.getParameter("category"));
 
 
-        String username = (String) session.getAttribute("User");
+        User user = (User) session.getAttribute("User");
         String name = request.getParameter("name");
         String city = request.getParameter("city");
         String street = request.getParameter("street");
@@ -96,7 +95,6 @@ public class AddEventServlet extends HttpServlet {
         event.setStatus(status);
         event.setDate(date);
         UserDao userDao = new UserDao();
-        User user = userDao.findByName(username);
         EventDao eventDao = new EventDao();
         event.setUser_id(user);
 

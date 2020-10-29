@@ -26,9 +26,7 @@ import java.util.List;
 public class ProfileServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        String username = (String) session.getAttribute("User");
-        UserDao userDao = new UserDao();
-        User user = userDao.findByName(username);
+        User user = (User) session.getAttribute("User");
         RequestDao requestDao = new RequestDao();
         int event_id = Integer.parseInt(request.getParameter("event_id"));
         requestDao.delete(event_id, user.getId());
@@ -37,15 +35,12 @@ public class ProfileServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        String username = (String) session.getAttribute("User");
+        User user = (User) session.getAttribute("User");
 
-        request.setAttribute("user", username);
+        request.setAttribute("user", user);
         EventDao eventDao = new EventDao();
 
 
-
-        UserDao userDao = new UserDao();
-        User user = userDao.findByName(username);
         ImageDao imageDao = new ImageDao();
         Image image = imageDao.findById(user.getImage().getId());
         RequestDao requestDao = new RequestDao();
@@ -55,13 +50,14 @@ public class ProfileServlet extends HttpServlet {
         SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy-MM-dd");
 
         String date = formatForDateNow.format(dateNow);
-
+        System.out.println(user.getId());
         for (int i = 0; i < eventsEv.size(); i++) {
             if (eventsEv.get(i).getDate().compareTo(date) >= 0) {
                 events.add(eventsEv.get(i));
             }
         }
-        request.setAttribute("username", username);
+        System.out.println(events);
+        request.setAttribute("username", user.getUsername());
         request.setAttribute("fullName", user.getFullname());
         request.setAttribute("description", user.getDescription());
         request.setAttribute("list", events);

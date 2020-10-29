@@ -22,7 +22,7 @@ public class EventServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        String usernm = (String) session.getAttribute("User");
+        User usernm = (User) session.getAttribute("User");
         req.setAttribute("user", usernm);
 
         EventDao eventDao = new EventDao();

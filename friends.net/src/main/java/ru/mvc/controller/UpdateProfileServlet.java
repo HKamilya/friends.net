@@ -20,9 +20,8 @@ public class UpdateProfileServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
 
         HttpSession session = request.getSession();
-        String username = (String) session.getAttribute("User");
+        User user = (User) session.getAttribute("User");
         UserDao userDao = new UserDao();
-        User user = userDao.findByName(username);
         String fullname = request.getParameter("fullName");
         String description = request.getParameter("description");
 
@@ -56,7 +55,6 @@ public class UpdateProfileServlet extends HttpServlet {
 
 
         user.setDescription(description);
-        user.setUsername(username);
         user.setFullname(fullname);
         userDao.update(user);
 
@@ -66,10 +64,8 @@ public class UpdateProfileServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        String username = (String) session.getAttribute("User");
-        request.setAttribute("user", username);
-        UserDao userDao = new UserDao();
-        User user = userDao.findByName(username);
+        User user = (User) session.getAttribute("User");
+        request.setAttribute("user", user);
         request.setAttribute("image", user.getImage());
         request.setAttribute("password", user.getPassword());
         request.setAttribute("fullName", user.getFullname());

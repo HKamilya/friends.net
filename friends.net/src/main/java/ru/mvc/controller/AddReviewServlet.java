@@ -20,12 +20,10 @@ public class AddReviewServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
-        String username = (String) session.getAttribute("User");
+        User user = (User) session.getAttribute("User");
         String rev = request.getParameter("review");
         int event_id = Integer.parseInt(request.getParameter("event_id"));
 
-        UserDao userDao = new UserDao();
-        User user = userDao.findByName(username);
         Review review = new Review();
         EventDao eventDao = new EventDao();
         Event event = eventDao.findById(event_id);
@@ -54,7 +52,7 @@ public class AddReviewServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        String user = (String) session.getAttribute("User");
+        User user = (User) session.getAttribute("User");
         request.setAttribute("user", user);
     }
 }

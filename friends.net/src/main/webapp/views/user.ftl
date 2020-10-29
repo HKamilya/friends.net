@@ -83,7 +83,7 @@
         </div>
         <div class="container">
 
-            <#if user==username>
+            <#if user.username==username>
                 <form action="/UpdateProfile" style="float: right">
                     <button>Редактировать профиль</button>
                 </form>

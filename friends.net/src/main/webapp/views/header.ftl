@@ -59,7 +59,7 @@
                         <a class="auth__link" href="/Registration">Регистрация</a>
                         <a class="auth__link" href="/Login">Войти</a>
                     <#else >
-                        <a class="auth__link" href="/Profile">${user}</a>
+                        <a class="auth__link" href="/Profile">${user.username}</a>
                         <a href="/Logout">Выйти</a>
                     </#if>
                 </div>

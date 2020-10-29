@@ -42,23 +42,7 @@
                         <a href="/AnProfile?username=${event.user_id.username}">${event.user_id.username}</a>
                     </div>
                     <div class="tags">
-                        <#--                        <%---->
-                        <#--                        <div class="tag">--%>-->
-                        <#--                            <%-- Класс--%>-->
-                        <#--                            <%---->
-                        <#--                        </div>-->
-                        <#--                        --%>-->
-                        <#--                        <%---->
-                        <#--                        <div class="tag">--%>-->
-                        <#--                            <%-- Супер--%>-->
-                        <#--                            <%---->
-                        <#--                        </div>-->
-                        <#--                        --%>-->
-                        <#--                        <%---->
-                        <#--                        <div class="tag">--%>-->
-                        <#--                            <%-- Интересно--%>-->
-                        <#--                            <%---->
-                    </div>
+                      </div>
                 </div>
                 <div class="but" style="text-align: center">
                     <#if (diff >= 0)>
