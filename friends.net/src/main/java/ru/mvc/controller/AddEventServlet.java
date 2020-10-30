@@ -94,7 +94,6 @@ public class AddEventServlet extends HttpServlet {
         event.setCategory_id(categories);
         event.setStatus(status);
         event.setDate(date);
-        UserDao userDao = new UserDao();
         EventDao eventDao = new EventDao();
         event.setUser_id(user);
 

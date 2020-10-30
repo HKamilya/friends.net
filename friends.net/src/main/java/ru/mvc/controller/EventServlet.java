@@ -36,7 +36,6 @@ public class EventServlet extends HttpServlet {
 
         String currDate = formatForDateNow.format(dateNow);
 
-        User user = userDao.findById(id);
         List<Request> requests = requestDao.findAllByEventId(id);
         req.setAttribute("event", event);
         req.setAttribute("numOfReq", requests.size());

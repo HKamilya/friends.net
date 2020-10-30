@@ -55,7 +55,6 @@ public class ProfileServlet extends HttpServlet {
             }
         }
         events.sort(Comparator.comparing(Event::getDate));
-        System.out.println(events);
         request.setAttribute("username", user.getUsername());
         request.setAttribute("fullName", user.getFullname());
         request.setAttribute("description", user.getDescription());

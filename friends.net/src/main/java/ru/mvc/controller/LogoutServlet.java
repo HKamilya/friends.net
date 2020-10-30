@@ -29,7 +29,6 @@ public class LogoutServlet extends HttpServlet {
             request.setAttribute("errMessage", "You have logged out successfully");
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/login.ftl");
             requestDispatcher.forward(request, response);
-            System.out.println("Logged out");
         }
     }
 }

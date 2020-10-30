@@ -48,7 +48,7 @@ public class RegisterServlet extends HttpServlet {
             users.setEmail(email);
             users.setUsername(username);
             users.setPassword(hashPass);
-
+            System.out.println(username);
 
             UserDao registerDao = new UserDao();
 
@@ -61,9 +61,9 @@ public class RegisterServlet extends HttpServlet {
                 session.setMaxInactiveInterval(10 * 60);
                 session.setAttribute("User", user);
                 request.setAttribute("user", user);
-                request.setAttribute("username", username);
-                request.setAttribute("fullName", fullName);
-                request.setAttribute("username", username);
+                request.setAttribute("username", user.getUsername());
+                request.setAttribute("fullName", user.getFullname());
+                request.setAttribute("username", user.getUsername());
                 request.setAttribute("fullname", user.getFullname());
                 request.setAttribute("description", user.getDescription());
                 request.setAttribute("image", user.getImage());

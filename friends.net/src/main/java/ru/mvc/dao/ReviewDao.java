@@ -72,7 +72,6 @@ public class ReviewDao extends AbstractDao<ReviewDao> {
         Connection con = null;
 
         PreparedStatement preparedStatement = null;
-        Statement statement = null;
 
         try {
             con = DBConnection.createConnection();
@@ -91,12 +90,6 @@ public class ReviewDao extends AbstractDao<ReviewDao> {
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         } finally {
-            if (statement != null) {
-                try {
-                    statement.close();
-                } catch (SQLException ignore) {
-                }
-            }
             if (con != null) {
                 try {
                     con.close();

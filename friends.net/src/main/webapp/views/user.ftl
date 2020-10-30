@@ -98,39 +98,39 @@
         <br>
         <br><#if user.username==username>
         <H3>Предстоящие мероприятия</H3>
+        <#if list??>
+            <#list list as event>
 
-        <#list list as event>
-
-            <div class="mainEv">
-                <a class="nameEv" href="/Event?id=${event.id}">${event.name}</a>
-                <div class="eventEv">
-                    <div class="h_pEv">
-                        <div class="imgEv">
-                            <#if event.image??>
-                                <img class="photoEv" src="/img?id=${event.image.id}">
-                            </#if>
+                <div class="mainEv">
+                    <a class="nameEv" href="/Event?id=${event.id}">${event.name}</a>
+                    <div class="eventEv">
+                        <div class="h_pEv">
+                            <div class="imgEv">
+                                <#if event.image??>
+                                    <img class="photoEv" src="/img?id=${event.image.id}">
+                                </#if>
+                            </div>
                         </div>
-                    </div>
-                    <div class="descrEv">
-                        ${event.description}
-                    </div>
-                    <div class="descrEv">-->
-                        <p>${event.status}</p>
+                        <div class="descrEv">
+                            ${event.description}
+                        </div>
+                        <div class="descrEv">-->
+                            <p>${event.status}</p>
 
-                    </div>
-                    <div class="descrEv">-->
-                        <p>${event.date}</p>
+                        </div>
+                        <div class="descrEv">-->
+                            <p>${event.date}</p>
 
+                        </div>
+                        <form method="post" action="/Profile">
+                            <input type="hidden" name="event_id" value="${event.id}">
+                            <button type="submit" class="btn btn-secondary">
+                                Удалить
+                            </button>
+                        </form>
                     </div>
-                    <form method="post" action="/Profile">
-                        <input type="hidden" name="event_id" value="${event.id}">
-                        <button type="submit" class="btn btn-secondary">
-                            Удалить
-                        </button>
-                    </form>
                 </div>
-            </div>
-        </#list></#if>
+            </#list></#if></#if>
 
     </div>
 </@base.main>

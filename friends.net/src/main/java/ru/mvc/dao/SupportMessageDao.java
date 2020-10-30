@@ -28,6 +28,12 @@ public class SupportMessageDao extends AbstractDao<SupportMessage> {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException ignore) {
+                }
+            }
             if (con != null) {
                 try {
                     con.close();

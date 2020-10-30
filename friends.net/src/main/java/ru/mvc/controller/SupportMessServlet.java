@@ -43,7 +43,7 @@ public class SupportMessServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-       User user = (User) session.getAttribute("User");
+        User user = (User) session.getAttribute("User");
         request.setAttribute("user", user);
     }
 }

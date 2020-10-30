@@ -79,7 +79,7 @@ public class SearchServlet extends HttpServlet {
                 tags[i] = tags[i].replace("]", "");
             }
         }
-        if (!s.equals("[]") & date.length() > 1 & search.length() != 0) { //поиск по категориям, имени и дате или по категории и дате
+        if (!s.equals("[]") & date.length() > 1) { //поиск по категориям, имени и дате или по категории и дате
             for (String tag : tags) {
                 list.add(Integer.parseInt(tag));
             }
@@ -96,11 +96,9 @@ public class SearchServlet extends HttpServlet {
         } else if (s.equals("[]") & search.length() == 0 & date.length() > 1) {
             events = eventDao.findByDate(date);
         }
-        System.out.println(events.size());
         if (events.size() == 0) {
             request.setAttribute("message", "   К сожалению, таких мероприятий нет");
         }
-        System.out.println(events);
         response.setContentType("application/json");
         String json = new Gson().toJson(events);
         response.setCharacterEncoding("UTF-8");

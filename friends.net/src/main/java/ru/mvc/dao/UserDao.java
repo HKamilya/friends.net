@@ -54,14 +54,10 @@ public class UserDao extends AbstractDao<User> {
     }
 
     public User authenticateUser(User loginBean) {
-        String userName = loginBean.getUsername();
-        String password = loginBean.getPassword();
 
         Connection con = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        String userNameDB = "";
-        String passwordDB = "";
 
         try {
             con = DBConnection.createConnection();
@@ -115,7 +111,6 @@ public class UserDao extends AbstractDao<User> {
         User user = new User();
         Connection con = null;
         PreparedStatement ps = null;
-        Statement statement = null;
         ResultSet resultSet = null;
         try {
             con = DBConnection.createConnection();
@@ -132,6 +127,7 @@ public class UserDao extends AbstractDao<User> {
                 String description = resultSet.getString("description");
 
                 user.setId(user_id);
+                user.setUsername(username);
                 user.setEmail(email);
                 user.setFullname(fullname);
                 ImageDao imageDao = new ImageDao();
@@ -143,15 +139,15 @@ public class UserDao extends AbstractDao<User> {
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         } finally {
-            if (resultSet != null) {
+            if (ps != null) {
                 try {
-                    resultSet.close();
+                    ps.close();
                 } catch (SQLException ignore) {
                 }
             }
-            if (statement != null) {
+            if (resultSet != null) {
                 try {
-                    statement.close();
+                    resultSet.close();
                 } catch (SQLException ignore) {
                 }
             }
@@ -187,6 +183,12 @@ public class UserDao extends AbstractDao<User> {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException ignore) {
+                }
+            }
             if (con != null) {
                 try {
                     con.close();

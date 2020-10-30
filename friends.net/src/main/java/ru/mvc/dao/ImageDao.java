@@ -13,7 +13,6 @@ public class ImageDao extends AbstractDao<Image> {
         Connection con = null;
 
         PreparedStatement preparedStatement = null;
-        Statement statement = null;
         ResultSet resultSet = null;
         int id = 0;
 
@@ -32,12 +31,6 @@ public class ImageDao extends AbstractDao<Image> {
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         } finally {
-            if (statement != null) {
-                try {
-                    statement.close();
-                } catch (SQLException ignore) {
-                }
-            }
             if (con != null) {
                 try {
                     con.close();

@@ -12,13 +12,12 @@ public class CategoriesDao extends AbstractDao<Categories> {
     public List<Categories> findAll() {
         List<Categories> categories = new ArrayList<>();
         Connection con = null;
-        Statement statement = null;
+        PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
             con = DBConnection.createConnection();
-            String sql = "SELECT * FROM categories";
-            statement = con.createStatement();
-            resultSet = statement.executeQuery(sql);
+            preparedStatement = con.prepareStatement("SELECT * FROM categories ");
+            resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
@@ -43,9 +42,9 @@ public class CategoriesDao extends AbstractDao<Categories> {
                 } catch (SQLException ignore) {
                 }
             }
-            if (statement != null) {
+            if (preparedStatement != null) {
                 try {
-                    statement.close();
+                    preparedStatement.close();
                 } catch (SQLException ignore) {
                 }
             }

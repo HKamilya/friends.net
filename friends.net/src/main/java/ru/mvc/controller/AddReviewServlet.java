@@ -31,7 +31,6 @@ public class AddReviewServlet extends HttpServlet {
         review.setEvent_id(event);
         review.setText(rev);
         review.setUser_id(user);
-        System.out.println(user.getId() + " " + event_id);
         Date dateNow = new Date();
         SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy-MM-dd");
 

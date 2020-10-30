@@ -258,41 +258,24 @@ public class EventDao extends AbstractDao<Event> {
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                int user_id = resultSet.getInt("user_id");
-                String name = resultSet.getString("name");
-                String city = resultSet.getString("city");
-                String street = resultSet.getString("street");
-                String house = resultSet.getString("house");
-                int imageId = resultSet.getInt("image");
-                String description = resultSet.getString("description");
-                int category_id = resultSet.getInt("category_id");
-                String status = resultSet.getString("status");
-                String date = resultSet.getString("date");
-                String time = resultSet.getString("time");
-
-                CategoriesDao categoriesDao = new CategoriesDao();
-                Categories category = categoriesDao.findById(category_id);
-
-
+                event.setId(resultSet.getInt("id"));
                 UserDao userDao = new UserDao();
-                User user = userDao.findById(user_id);
-
-
-                event.setId(id);
+                User user = userDao.findById(resultSet.getInt("user_id"));
                 event.setUser_id(user);
-                event.setCategory_id(category);
-                event.setCity(city);
-                event.setHouse(house);
-                event.setStatus(status);
-                event.setDate(date);
-                event.setTime(time);
+                event.setName(resultSet.getString("name"));
+                event.setCity(resultSet.getString("city"));
+                event.setStreet(resultSet.getString("street"));
+                event.setStreet(resultSet.getString("house"));
                 ImageDao imageDao = new ImageDao();
-                Image image = imageDao.findById(imageId);
+                Image image = imageDao.findById(resultSet.getInt("image"));
                 event.setImage(image);
-                event.setImage(image);
-                event.setDescription(description);
-                event.setStreet(street);
-                event.setName(name);
+                event.setDescription(resultSet.getString("description"));
+                CategoriesDao categoriesDao = new CategoriesDao();
+                Categories category = categoriesDao.findById(resultSet.getInt("category_id"));
+                event.setCategory_id(category);
+                event.setStatus(resultSet.getString("status"));
+                event.setDate(resultSet.getString("date"));
+                event.setTime(resultSet.getString("time"));
             }
         } catch (SQLException e) {
             throw new IllegalStateException(e);
@@ -326,27 +309,34 @@ public class EventDao extends AbstractDao<Event> {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         String sql = null;
-        System.out.println(categories.size());
         try {
             con = DBConnection.createConnection();
             if (categories.size() > 0 & eventName.length() > 0) {
-                sql = "SELECT * FROM event where status='актуально' and name ILIKE  ? ";
-                sql += " and status='актуально' and (";
+                sql = "SELECT * FROM event where status='актуально' and name ILIKE ? and (";
                 for (int i = 0; i < categories.size() - 1; i++) {
-                    sql += "category_id=" + categories.get(i) + " or ";
+                    sql += "category_id=? or ";
                 }
-                sql += "category_id=" + categories.get(categories.size() - 1) + ");";
+                sql += "category_id=?);";
                 preparedStatement = con.prepareStatement(sql);
                 preparedStatement.setString(1, eventName + "%");
+                int j = 1;
+                for (int i = 0; i < categories.size(); i++) {
+                    j = j + 1;
+                    preparedStatement.setInt(j, categories.get(i));
+                }
                 resultSet = preparedStatement.executeQuery();
             } else if (categories.size() > 0) {
-                sql = "SELECT * FROM event where status='актуально' and ";
+                sql = "SELECT * FROM event where status='актуально' and (";
                 for (int i = 0; i < categories.size() - 1; i++) {
-                    sql += " category_id=" + categories.get(i) + " or ";
+                    sql += " category_id=? or ";
                 }
-                sql += "category_id=" + categories.get(categories.size() - 1) + ";";
+                sql += "category_id=?);";
+                int j = 0;
                 preparedStatement = con.prepareStatement(sql);
-                System.out.println(sql);
+                for (int i = 0; i < categories.size(); i++) {
+                    j = i + 1;
+                    preparedStatement.setInt(j, categories.get(i));
+                }
                 resultSet = preparedStatement.executeQuery();
             }
 
@@ -376,7 +366,6 @@ public class EventDao extends AbstractDao<Event> {
 
                     events.add(event);
                 }
-                System.out.println(events);
             }
         } catch (SQLException e) {
             throw new IllegalStateException(e);
@@ -410,28 +399,37 @@ public class EventDao extends AbstractDao<Event> {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         String sql = null;
-        System.out.println(categories.size());
         try {
             con = DBConnection.createConnection();
             if (categories.size() > 0 & eventName.length() > 0) {
-                sql = "SELECT * FROM event where status='актуально' and name ILIKE  ? and date =? ";
-                sql += " and status='актуально' and (";
+                sql = "SELECT * FROM event where status='актуально' and name ILIKE ? and date=? and (";
                 for (int i = 0; i < categories.size() - 1; i++) {
-                    sql += "category_id=" + categories.get(i) + " or ";
+                    sql += "category_id=? or ";
                 }
-                sql += "category_id=" + categories.get(categories.size() - 1) + ");";
+                sql += "category_id=?);";
                 preparedStatement = con.prepareStatement(sql);
                 preparedStatement.setString(1, eventName + "%");
                 preparedStatement.setString(2, date);
+                int j = 2;
+                for (int i = 0; i < categories.size(); i++) {
+                    j = j + 1;
+                    preparedStatement.setInt(j, categories.get(i));
+                }
                 resultSet = preparedStatement.executeQuery();
             } else if (categories.size() > 0) {
-                sql = "SELECT * FROM event where status='актуально' and date ILIKE ? ";
+                sql = "SELECT * FROM event where status='актуально' and date=? and (";
                 for (int i = 0; i < categories.size() - 1; i++) {
-                    sql += " category_id=" + categories.get(i) + " or ";
+                    sql += " category_id=? or ";
                 }
-                sql += "category_id=" + categories.get(categories.size() - 1) + ";";
+                sql += "category_id=?);";
                 preparedStatement = con.prepareStatement(sql);
                 preparedStatement.setString(1, date);
+                int j = 1;
+                for (int i = 0; i < categories.size(); i++) {
+                    j = j + 1;
+                    System.out.println(j + " " + categories.get(i));
+                    preparedStatement.setInt(j, categories.get(i));
+                }
                 resultSet = preparedStatement.executeQuery();
             }
 

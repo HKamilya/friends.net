@@ -20,17 +20,17 @@ public class RequestDao extends AbstractDao<Request> {
 
         Connection con = null;
         Connection con1 = null;
-        Statement statement = null;
         PreparedStatement preparedStatement = null;
+        PreparedStatement preparedStatement1 = null;
         ResultSet resultSet = null;
 
 
         try {
             con = DBConnection.createConnection();
             con1 = DBConnection.createConnection();
-            String sql = "SELECT * FROM request where event_id=" + event.getId();
-            statement = con1.createStatement();
-            resultSet = statement.executeQuery(sql);
+            preparedStatement1 = con1.prepareStatement("SELECT * FROM request where event_id=? ");
+            preparedStatement1.setInt(1, event.getId());
+            resultSet = preparedStatement1.executeQuery();
             while (resultSet.next()) {
                 int subscriber = resultSet.getInt("subscriber_id");
                 int event_id = resultSet.getInt("event_id");
@@ -51,20 +51,27 @@ public class RequestDao extends AbstractDao<Request> {
                 return "SUCCESS";
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-        if (con != null) {
-            try {
-                con.close();
-            } catch (SQLException ignore) {
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ignore) {
+                }
+            }
+            if (preparedStatement1 != null) {
+                try {
+                    preparedStatement1.close();
+                } catch (SQLException ignore) {
+                }
+            }
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException ignore) {
+                }
             }
         }
-        if (preparedStatement != null) {
-            try {
-                preparedStatement.close();
-            } catch (SQLException ignore) {
-            }
-        }
-        return "Something went wrong";
+        return "Что-то пошло не так";
     }
 
     @Override

@@ -40,7 +40,6 @@ public class AllEventsServlet extends HttpServlet {
         }
         events.sort(Comparator.comparing(Event::getDate));
         request.setAttribute("list", events);
-        System.out.println(events);
         getServletContext().getRequestDispatcher("/views/allEvents.ftl").forward(request, response);
     }
 }
