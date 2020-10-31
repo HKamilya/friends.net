@@ -37,7 +37,7 @@ public class HelloServlet extends HttpServlet {
             user.setPassword(password);
             user.setId(id);
             User user1 = userDao.authenticateUser(user);
-            if (user1!=null) {
+            if (user1 != null) {
                 request.getSession().setAttribute("User", user1);
                 request.setAttribute("user", user1);
             }

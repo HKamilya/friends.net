@@ -18,7 +18,7 @@ public class SendRequestServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
-       User user = (User) session.getAttribute("User");
+        User user = (User) session.getAttribute("User");
         String comment = request.getParameter("comment");
         int event_id = Integer.parseInt(request.getParameter("event_id"));
         Request req = new Request();

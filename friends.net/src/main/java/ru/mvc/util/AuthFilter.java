@@ -25,7 +25,7 @@ public class AuthFilter implements Filter {
 
 
         Hashing hashing = new Hashing();
-        String hashPass = hashing.hasing(password);
+        String hashPass = hashing.hashing(password);
         loginBean.setUsername(username);
         loginBean.setPassword(hashPass);
         UserDao loginDao = new UserDao();

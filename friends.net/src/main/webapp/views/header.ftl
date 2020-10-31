@@ -77,9 +77,9 @@
                     <div class="modal-body">
                         <form style="text-align: center" action="/SupportMess"
                               method="post">
-                            <div class="form-group">
+                            <div class="form-group1">
                                 <#if !user??>
-                                    <input type="text" name="email" class="form-control"
+                                    <input type="email" name="email" class="form-control"
                                            placeholder="введите почту, на котрую хотите получить ответ"
                                            required>
                                 <#else>
@@ -87,12 +87,12 @@
                                 </#if>
                             </div>
                             <br>
-                            <div class="form-group">
+                            <div class="form-group1">
                                 <input type="text" class="form-control" placeholder="тема" name="title" required>
                             </div>
                             <br>
                             </label></td>
-                            <div class="form-group">
+                            <div class="form-group1">
                             <textarea class="form-control" placeholder="опишите, пожалуйста, проблему"
                                       name="text" required></textarea>
                             </div>

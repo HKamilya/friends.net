@@ -9,10 +9,10 @@ import ru.kpfu.itis.orm.annotation.Table;
 
 @Getter
 @Setter
-//
+
 @Table(name = "supportMessage")
 public class SupportMessage {
-    @Constraint( pk = true)
+    @Constraint(pk = true)
     private Integer id;
     @Constraint(notNull = true)
     private String email;

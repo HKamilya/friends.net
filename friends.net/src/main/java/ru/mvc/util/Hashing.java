@@ -4,7 +4,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class Hashing {
-    public String hasing(String password) {
+    public String hashing(String password) {
         MessageDigest md5 = null;
         try {
             md5 = MessageDigest.getInstance("MD5");

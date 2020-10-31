@@ -40,7 +40,8 @@ public class RegisterServlet extends HttpServlet {
             request.getRequestDispatcher("/views/register.ftl").forward(request, response);
         } else {
             Hashing hashing = new Hashing();
-            String hashPass = hashing.hasing(password);
+            String hashPass = hashing.
+                    hashing(password);
 
             User users = new User();
 
@@ -48,7 +49,6 @@ public class RegisterServlet extends HttpServlet {
             users.setEmail(email);
             users.setUsername(username);
             users.setPassword(hashPass);
-            System.out.println(username);
 
             UserDao registerDao = new UserDao();
 

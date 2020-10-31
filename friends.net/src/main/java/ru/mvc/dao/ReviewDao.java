@@ -51,7 +51,7 @@ public class ReviewDao extends AbstractDao<ReviewDao> {
             }
             if (preparedStatement != null) {
                 try {
-                   preparedStatement.close();
+                    preparedStatement.close();
                 } catch (SQLException ignore) {
                 }
             }
