@@ -46,7 +46,7 @@ public class AuthFilter implements Filter {
                 }
 
                 HttpSession session = request.getSession();
-                session.setMaxInactiveInterval(10 * 60);
+                session.setMaxInactiveInterval(60 * 60);
                 session.setAttribute("User", user);
                 request.setAttribute("username", username);
                 request.setAttribute("user", user);
