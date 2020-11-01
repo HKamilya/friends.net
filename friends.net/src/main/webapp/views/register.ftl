@@ -57,7 +57,7 @@
                                pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"/>
                         <span class="form-error">Неправильная форма пароля</span>
                         <br>
-                        <span>Пароль должен содержать cтрочные и прописные латинские буквы, цифры</span>
+                        <span style="color: white">Пароль должен содержать cтрочные и прописные латинские буквы, цифры</span>
                     </div>
                     <label class="txt" for="confPass"><b>Повторите пароль</b></label>
                     <div class="register_line">

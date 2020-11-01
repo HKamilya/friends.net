@@ -90,9 +90,9 @@
                             <br>
                             Пожалуйста, зарегистрируйтесь или авторизуйтесь, если у вас уже есть аккаунт на этом сайте
                         </label>
-                        <input type="submit" class="btn btn-dark" onclick="location.href='login.ftl'" value="Войти"/>
+                        <input type="submit" class="btn btn-dark" onclick="location.href='/Login'" value="Войти"/>
                         <input
-                                class="btn btn-dark" type="reset" onclick="location.href='register.ftl'"
+                                class="btn btn-dark" type="reset" onclick="location.href='/Registration'"
                                 value="Зарегистрироваться"/>
                     </#if>
                 </div>
