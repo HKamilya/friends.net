@@ -38,6 +38,7 @@ public class EventServlet extends HttpServlet {
 
         List<Request> requests = requestDao.findAllByEventId(id);
         req.setAttribute("event", event);
+        System.out.println(event.getHouse());
         req.setAttribute("numOfReq", requests.size());
         req.setAttribute("currDate", currDate);
 

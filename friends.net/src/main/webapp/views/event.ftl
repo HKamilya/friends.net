@@ -25,7 +25,10 @@
                     </div>
                     <div class="where_when">
                         <div class="where">
-                            <p>${event.city}<#if event.street??> ${event.street}<#if event.house??> ${event.house}</#if></#if>
+                            <p>${event.city}
+                                <br>
+                                <#if event.street??> ${event.street}</#if>
+                                    <#if event.house??> ${event.house}</#if>
                             </p></div>
                         <div class="when">
                             <p>
@@ -42,7 +45,7 @@
                         <a href="/AnProfile?username=${event.user_id.username}">${event.user_id.username}</a>
                     </div>
                     <div class="tags">
-                      </div>
+                    </div>
                 </div>
                 <div class="but" style="text-align: center">
                     <#if (diff >= 0)>
