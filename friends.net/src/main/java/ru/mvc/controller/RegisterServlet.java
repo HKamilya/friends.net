@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import ru.mvc.dao.ImageDao;
+import ru.mvc.model.Image;
 import ru.mvc.model.User;
 import ru.mvc.dao.UserDao;
 import ru.mvc.util.Hashing;
@@ -49,7 +51,15 @@ public class RegisterServlet extends HttpServlet {
             users.setEmail(email);
             users.setUsername(username);
             users.setPassword(hashPass);
+            ImageDao imageDao = new ImageDao();
+            Image image = new Image();
+            image.setType("image/png");
+            image.setAddress("man.png");
+            imageDao.insert(image);
+            String v = imageDao.insert(image);
+            image.setId(Integer.parseInt(v));
 
+            users.setImage(image);
             UserDao registerDao = new UserDao();
 
             String userRegistered = registerDao.insert(users);

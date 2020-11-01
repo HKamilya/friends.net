@@ -50,6 +50,7 @@ public class UpdateProfileServlet extends HttpServlet {
             imageDao.update(image);
             String v = imageDao.insert(image);
             image.setId(Integer.parseInt(v));
+
             user.setImage(image);
         }
 

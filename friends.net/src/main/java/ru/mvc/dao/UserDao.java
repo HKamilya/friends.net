@@ -22,12 +22,13 @@ public class UserDao extends AbstractDao<User> {
 
         try {
             con = DBConnection.createConnection();
-            String query = "insert into \"user\"(fullname,email,username,password) values (?,?,?,?)";
+            String query = "insert into \"user\"(fullname,email,username,password,image) values (?,?,?,?,?)";
             preparedStatement = con.prepareStatement(query);
             preparedStatement.setString(1, fullName);
             preparedStatement.setString(2, email);
             preparedStatement.setString(3, userName);
             preparedStatement.setString(4, password);
+            preparedStatement.setInt(5,user.getImage().getId());
 
             int i = preparedStatement.executeUpdate();
 
@@ -174,6 +175,7 @@ public class UserDao extends AbstractDao<User> {
             preparedStatement = con.prepareStatement("update \"user\" set fullname=?, description=?, image=? where username=?");
             preparedStatement.setString(1, fullName);
             preparedStatement.setString(2, description);
+
             preparedStatement.setInt(3, user.getImage().getId());
             preparedStatement.setString(4, user.getUsername());
 
