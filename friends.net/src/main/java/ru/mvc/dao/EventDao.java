@@ -192,7 +192,7 @@ public class EventDao extends AbstractDao<Event> {
         PreparedStatement preparedStatement = null;
         try {
             con = DBConnection.createConnection();
-            preparedStatement = con.prepareStatement("SELECT * FROM event where user_id=?");
+            preparedStatement = con.prepareStatement("SELECT * FROM event where user_id=? order by date desc ");
             preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
 

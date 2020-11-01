@@ -100,7 +100,7 @@ public class AddEventServlet extends HttpServlet {
         String eventAdded = eventDao.insert(event);
 
         if (eventAdded.equals("SUCCESS")) {
-            response.sendRedirect(request.getContextPath() + "/AddEvent");
+            response.sendRedirect(request.getContextPath() + "/AllEvents");
         } else {
             request.setAttribute("errMessage", eventAdded);
             response.sendRedirect(request.getContextPath() + "/AddEvent");

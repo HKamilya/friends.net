@@ -38,7 +38,6 @@ public class AllEventsServlet extends HttpServlet {
                 events.add(event);
             }
         }
-        events.sort(Comparator.comparing(Event::getDate));
         request.setAttribute("list", events);
         getServletContext().getRequestDispatcher("/views/allEvents.ftl").forward(request, response);
     }
